@@ -9,8 +9,6 @@ import java.util.ArrayList;
 
 import com.entidades.Solicitud;
 
-
-
 public class ConexionSolicitud {
 	private final String url = "jdbc:mysql://localhost/vidadeestudiante?useUnicode=true&use"
 			+ "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
@@ -47,17 +45,43 @@ public class ConexionSolicitud {
 	// Metodos sql
 
 	// Añadir solicitud nueva
-	
+
 	public void solicitudNueva(Solicitud solicitud) {
 		conexion();
 		try (PreparedStatement stmt = con.prepareStatement(
 
-				"INSERT INTO solicitud VALUES (null,'" + solicitud.getNombre() + "','" + solicitud.getCantidad()
-				+ "','" + solicitud.getFecha()+ "','" + solicitud.getIdEntregable()+ "','" + solicitud.getIdEjecucion()+ "','" 
-				+ solicitud.getIdSponsor()+ "','" + solicitud.getIdService()+"','" + solicitud.getIdCuentaCobro()+"')")) {
+				"INSERT INTO solicitud VALUES (null,'" + solicitud.getNombre() + "','" + solicitud.getCantidad() + "','"
+						+ solicitud.getFecha() + "','" + solicitud.getIdEntregable() + "','"
+						+ solicitud.getIdEjecucion() + "','" + solicitud.getIdSponsor() + "','"
+						+ solicitud.getIdService() + "','" + solicitud.getIdCuentaCobro() + "')")) {
 			stmt.executeUpdate();
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
 		}
+	}
+
+	// Solicitudes
+
+	public ArrayList<Solicitud> solicitudes(int idCuentaCobro) {
+
+		conexion();
+
+		ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>();
+
+		try (PreparedStatement stmt = con.prepareStatement(
+				"SELECT idSolicitud, nombre, idEntregable,idEjecucion, idSponsor, idServicio, cantidad, fecha FROM Solicitud WHERE idCuentaCobro = "
+						+ idCuentaCobro)) {
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				Solicitud soli = new Solicitud(rs.getInt("idSolicitud"), rs.getString("nombre"), rs.getInt("cantidad"),
+						rs.getString("fecha"), rs.getInt("idEntregable"), rs.getInt("idEjecucion"),
+						rs.getInt("idSponsor"), rs.getInt("idServicio"), idCuentaCobro);
+				solicitudes.add(soli);
+			}
+		} catch (SQLException sqle) {
+			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+		}
+		System.out.println(solicitudes);
+		return solicitudes;
 	}
 }

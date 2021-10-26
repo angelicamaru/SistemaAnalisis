@@ -5,7 +5,7 @@ public class Solicitud {
 
 	private int idSolicitud;
 	private String nombre;
-	private String cantidad;
+	private int cantidad;
 	private String fecha;
 	private int idEntregable;
 	private int idEjecucion;
@@ -19,7 +19,7 @@ public class Solicitud {
 	}
 
 
-	public Solicitud(int idSolicitud, String nombre, String cantidad, String fecha) {
+	public Solicitud(int idSolicitud, String nombre, int cantidad, String fecha) {
 		this.idSolicitud = idSolicitud;
 		this.nombre = nombre;
 		this.cantidad = cantidad;
@@ -27,7 +27,7 @@ public class Solicitud {
 	}
 
 
-	public Solicitud(int idSolicitud, String nombre, String cantidad, String fecha, int idEntregable, int idEjecucion, int idSponsor,
+	public Solicitud(int idSolicitud, String nombre, int cantidad, String fecha, int idEntregable, int idEjecucion, int idSponsor,
 			int idService,int idCuentaCobro) {
 	
 		this.idSolicitud = idSolicitud;
@@ -66,12 +66,12 @@ public class Solicitud {
 	}
 
 
-	public String getCantidad() {
+	public int getCantidad() {
 		return cantidad;
 	}
 
 
-	public void setCantidad(String cantidad) {
+	public void setCantidad(int cantidad) {
 		this.cantidad = cantidad;
 	}
 

@@ -25,6 +25,7 @@ body {
     font-size: 12px;
     color: rgb(255, 255, 255);
     padding-left: 10px;
+
 }
 
 .grid-info{
@@ -70,7 +71,7 @@ h1{
     font-size: 36px;
     color: #415a5a;
     margin: 0 auto;
-    margin-top: 65%;
+    margin-top: 60%;
     text-shadow: 2px 2px;
 }
 
@@ -80,11 +81,34 @@ h1{
     width: 100%;
     margin: auto;
     margin-top: 10%;
+    margin-bottom: 10%;
     padding: 30px;
     padding-right: 40px;
     border-radius: 30px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 
+}
+.check-field {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+}
+.select-field {
+    max-width: 380px;
+    width: 100%;
+    background-color:  #f0f0f0 ;
+    margin: 20px 0;
+    margin-top: 5px;
+    height: 55px;
+    border-radius: 55px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 .input-field {
@@ -101,13 +125,40 @@ h1{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
-.input-field i {
+.input-field i{
     text-align: center;
     line-height: 55px;
     color: #acacac;
     transition: 0.5s;
     font-size: 1.1rem;
 }
+
+.select-field i{
+    text-align: center;
+    line-height: 55px;
+    color: #acacac;
+    transition: 0.5s;
+    font-size: 1.1rem;
+}
+
+.check-field i{
+    text-align: center;
+    line-height: 55px;
+    color: #acacac;
+    transition: 0.5s;
+    font-size: 1.1rem;
+}
+
+.select-field select {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+}
+
 
 .input-field input {
     background: none;
@@ -153,13 +204,16 @@ h1{
 }
 
 .circle{
-    margin: auto;
+    margin: 0;
+    position:fixed;
+    right: 0px;
+    object-position: right;
     background-color: #cfa022;
-    width: 100%;
-    height: 120%;
+    width: 33%;
+    top: 0px;
+    bottom: 0px;
     border-top-left-radius: 1000px;
     border-bottom-left-radius: 1000px;
-    border-top-right-radius: 50px;
-    border-bottom-right-radius: 50px;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow:  0 6px 20px 0 rgba(0, 0, 0, 0.19),0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    
 }

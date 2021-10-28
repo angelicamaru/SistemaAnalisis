@@ -43,19 +43,19 @@
                             <div class = "form-text">Nombre</div>
                             <div class="input-field">
                                 <i class="fas fa-user"></i>
-                                <input type="text" placeholder="Nombre">
+                                <input type="text" placeholder="Nombre" id="Nombre">
                             </div>
                             <div class = "form-text">Telefono</div>
                             <div class="input-field">
                                 <i class="fas fa-mobile"></i>
-                                <input type="number" placeholder="Telefono">
+                                <input type="number" placeholder="Telefono" id="Telefono">
                             </div>
                             <div class = "form-text">Correo</div>
                             <div class="input-field">
                                 <i class="fas fa-envelope"></i>
-                                <input type="text" placeholder="Correo">
+                                <input type="text" placeholder="Correo" id="Correo">
                             </div>
-                            <input type="submit" value="Agregar" class="btn solid">
+                            <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()">
                         </div>
                     <div class="circle" style="height: 100%;"><h1>INGRESAR<br> PROVEEDOR</h1></div>
                     
@@ -63,5 +63,16 @@
                 
             </div>
           </div>
+          <script>
+            function agregarRegistro(){
+                const name = document.getElementById("Nombre").value
+                const telefono = document.getElementById("Telefono").value
+                const correo = document.getElementById("Correo").value
+                document.getElementById("Nombre").value = ""
+                document.getElementById("Telefono").value = ""
+                document.getElementById("Correo").value = ""
+                alert("Registro agregado")
+            }
+          </script>
     </body>
 </html>

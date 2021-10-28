@@ -250,4 +250,14 @@ h1{
     font-size: 50px;
     margin-top: 10px;
     
+    
+}
+
+.arrow i{
+    padding: 20px; font-size: 30px; color: #cfa022;
+    cursor: pointer;
+}
+
+.arrow i:hover {
+    color: #415a5a;
 }

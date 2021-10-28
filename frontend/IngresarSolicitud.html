@@ -43,7 +43,7 @@
                         <div class = "form-text">Nombre</div>
                         <div class="input-field">
                             <i class="fas fa-user"></i>
-                            <input type="text" placeholder="Nombre">
+                            <input type="text" placeholder="Nombre" id = "nombre">
                         </div>
                         <div class = "form-text">Entregable</div>
                         <div class="select-field">
@@ -56,7 +56,7 @@
                         <div class="select-field">
                             <i class="fas fa-file"></i>
                             <select name="ejecucion" id="ejecucion">
-                                <option value="Seleccione ejecución" style="color: #aaa; font-weight: 500;">Seleccione ejecución</option>
+                                <option value="Seleccione ejecución" style="color: #aaa; font-weight: 500;" >Seleccione ejecución</option>
                             </select>
                         </div>
                         <div class = "form-text">Sponsor</div>
@@ -76,14 +76,14 @@
                         <div class = "form-text">Cantidad</div>
                         <div class="input-field">
                             <i class="fas fa-calculator"></i>
-                            <input type="number" placeholder="Cantidad">
+                            <input type="number" placeholder="Cantidad" id="cantidad">
                         </div>
                         <div class = "form-text">Fecha</div>
                         <div class="input-field">
                             <i class="fas fa-user"></i>
-                            <input type="date" placeholder="Fecha">
+                            <input type="date" placeholder="Fecha" id="fecha">
                         </div>
-                        <input type="submit" value="Agregar" class="btn solid">
+                        <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()">
                     </div>
                     <div class="circle"><h1>INGRESAR<br>SOLICITUD</h1></div>
                                     
@@ -91,5 +91,41 @@
                                 
             </div>
         </div>
+        <script>
+            for (var x = 0; x<1; x++)
+                agregar(document.getElementById("entregable"),"opcion1")    
+            for (var x = 0; x<1; x++)
+                agregar(document.getElementById("ejecucion"),"opcion1")
+            for (var x = 0; x<1; x++)
+                agregar(document.getElementById("sponsor"),"opcion1")
+            for (var x = 0; x<1; x++)
+                agregar(document.getElementById("servicio"),"opcion1")
+
+            function agregar (select, val){
+                const option = document.createElement('option');
+                const valor = val;
+                option.value = valor;
+                option.text = valor;
+                select.appendChild(option);
+            };
+
+            function agregarRegistro(){
+                const name = document.getElementById("nombre").value
+                const entregable = document.getElementById("entregable").value
+                const ejecucion = document.getElementById("ejecucion").value
+                const sponsor = document.getElementById("sponsor").value
+                const servicio = document.getElementById("servicio").value
+                const cantidad = document.getElementById("cantidad").value
+                const fecha = document.getElementById("fecha").value
+                document.getElementById("nombre").value = ""
+                document.getElementById("entregable").value = "Seleccione entregable"
+                document.getElementById("ejecucion").value = "Seleccione ejecución"
+                document.getElementById("sponsor").value = "Seleccione sponsor"
+                document.getElementById("servicio").value = "Seleccione servicio"
+                document.getElementById("cantidad").value = ""
+                document.getElementById("fecha").value = ""
+                alert("Registro agregado")
+            }
+        </script>
     </body>
 </html>

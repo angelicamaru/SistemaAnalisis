@@ -12,7 +12,7 @@
         ></script>
         <link rel="stylesheet" href="style.css">
         <title>
-            Ingresar Sponsor
+            Ver Sponsor
         </title>
     </head>
     <body>
@@ -40,25 +40,59 @@
             <div class="grid-item">
                 <div class="grid-info" style="margin-top: 10%;">
                         <div class= "form">
-                            <div class = "form-text">Nombre</div>
+                            <div class = "form-text" >Nombre</div>
                             <div class="input-field">
                                 <i class="fas fa-user"></i>
-                                <input type="text" placeholder="Nombre" id="Nombre">
+                                <input type="text" placeholder="Nombre" id="nombre" desabled>
                             </div>
                             
-                            <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()">
+                            <div class="arrow">
+                                <i class="fas fa-caret-left" onclick="lastRegister()"></i>
+                                <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()">
+                                <i class="fas fa-caret-right" onclick="nextRegister()"></i>
+                            </div>
                         </div>
-                    <div class="circle"><h1>INGRESAR<br>SPONSOR</h1></div>
+                    <div class="circle"><h1 id="title">INGRESAR<br>SPONSOR</h1></div>
                     
                 </div>
                 
             </div>
           </div>
           <script>
-              function agregarRegistro(){
-                const name = document.getElementById("Nombre").value
-                document.getElementById("Nombre").value = ""
-                alert("Registro agregado")
+              var registerPosition = 0;
+              cargarDatos()
+
+              function cargarDatos(){
+                document.getElementById("nombre").value = "nombre1"
+            }
+            function change(){
+                valor = document.getElementById("boton").value;
+                if (valor == "Modificar"){
+                    document.getElementById("boton").value = "Aceptar"
+                    document.getElementById("title").innerHTML= "MODIFICAR<br>SPONSOR"
+                    document.getElementById("nombre").disabled = false
+                }else{
+                    document.getElementById("boton").value = "Modificar"
+                    document.getElementById("title").innerHTML= "VER<br>SPONSOR"
+                    document.getElementById("nombre").disabled = true
+                    if(document.getElementById("nombre").value != "posicion"){
+                        const name = document.getElementById("nombre").value
+                    }
+                }
+            }
+
+            function lastRegister(){
+                if (registerPosition!=0){
+                    registerPosition--
+                    cargarDatos()
+                }
+            }
+
+            function nextRegister(){
+                if (registerPosition!=10){
+                    registerPosition++
+                    cargarDatos()
+                }
             }
           </script>
     </body>

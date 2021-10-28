@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet"
+            href="https://fonts.googleapis.com/css?family=Poppins">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script 
+            src = "https://kit.fontawesome.com/64d58efce2.js"
+            crossorigin = "anonymous"
+        ></script>
+        <link rel="stylesheet" href="style.css">
+        <title>
+            Ver Solicitud
+        </title>
+    </head>
+    <body>
+        <div class="grid-container">
+            <div class="grid-item-menu">
+                <p></p>
+                <a href="Index.html"><p>HOME</p></a>
+                <p></p>
+                <div class = "selected">INGESAR SOLICITUD </div>
+                <a href="VerCuentaDeCobro.html"><p>VER CUENTA DE COBRO </p></a>
+                <a href="VerOrdenDeServicio.html"><p>VER ORDEN DE SERVICIO </p></a>
+                <a href="IngresarProveedor.html"><p>INGRESAR PROVEEDOR</p></a> 
+                <a href="IngresarCliente.html"><p>INGRESAR CLIENTE </p></a>
+                <a href="IngresarSponsor.html"><p>INGRESAR SPONSOR </p></a>
+                <a href="IngresarTarifas.html"><p>INGRESAR TARIFAS </p></a>
+                <a href="IngresarServicios.html"><p>INGRESAR SERVICIOS </p></a>
+                <a href="VerProveedores.html"><p>VER PROVEEDORES</p></a>
+                <a href="VerClientes.html"><p>VER CLIENTES</p></a>
+                <a href="VerTarifas.html"><p>VER TARIFAS</p></a>
+                <a href="Comparar.html"><p>COMPARAR </p></a>
+                <p></p>
+                <p>SALIR </p>
+            </div>
+                            
+            <div class="grid-item">
+                <div class="grid-info">
+                    <div class= "form">
+                        <div class = "form-text">Nombre</div>
+                        <div class="input-field">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Nombre" id="nombre" disabled>
+                        </div>
+                        <div class = "form-text">Entregable</div>
+                        <div class="select-field">
+                            <i class="fas fa-hammer"></i>
+                            <select name="entregable" id="entregable" disabled>
+                                <option value="Seleccione entregable" style="color: #aaa; font-weight: 500;">Seleccione entregable</option>
+                                
+                            </select>
+                        </div>
+                        <div class = "form-text">Ejecución</div>
+                        <div class="select-field">
+                            <i class="fas fa-file"></i>
+                            <select name="ejecucion" id="ejecucion"  disabled>
+                                <option value="Seleccione ejecución" style="color: #aaa; font-weight: 500;">Seleccione ejecución</option>
+                            </select>
+                        </div>
+                        <div class = "form-text">Sponsor</div>
+                        <div class="select-field">
+                            <i class="fas fa-user-tie"></i>
+                            <select name="sponsor" id="sponsor"  disabled >
+                                <option value="Seleccione sponsor" style="color: #aaa; font-weight: 500;">Seleccione sponsor</option>
+                            </select>
+                        </div>
+                        <div class = "form-text">Servicio</div>
+                        <div class="select-field">
+                            <i class="fas  fa-swatchbook"></i>
+                            <select name="servicio" id="servicio"  disabled>
+                                <option value="Seleccione servicio" style="color: #aaa; font-weight: 500;">Seleccione servicio</option>
+                            </select>
+                        </div>
+                        <div class = "form-text">Cantidad</div>
+                        <div class="input-field">
+                            <i class="fas fa-calculator"></i>
+                            <input type="number" placeholder="Cantidad"  id="cantidad"disabled>
+                        </div>
+                        <div class = "form-text">Fecha</div>
+                        <div class="input-field">
+                            <i class="fas fa-user"></i>
+                            <input type="date" placeholder="Fecha" id="fecha" disabled>
+                        </div>
+                        <div class="arrow">
+                            <i class="fas fa-caret-left" onclick="lastRegister()"></i>
+                            <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()">
+                            <i class="fas fa-caret-right" onclick="nextRegister()"></i>
+                        </div>
+                        
+                    </div>
+                    <div class="circle" ><h1 id = "title">VER<br>SOLICITUD</h1></div>
+                                    
+                </div>
+                                
+            </div>
+        </div>
+        <script>
+            var registerPosition = 0;
+            for (var x = 0; x<1; x++)
+                agregar(document.getElementById("entregable"),"opcion1")    
+            for (var x = 0; x<1; x++)
+                agregar(document.getElementById("ejecucion"),"opcion1")
+            for (var x = 0; x<1; x++)
+                agregar(document.getElementById("sponsor"),"opcion1")
+            for (var x = 0; x<1; x++)
+                agregar(document.getElementById("servicio"),"opcion1")
+            cargarDatos()
+
+            function agregar (select, val){
+                const option = document.createElement('option');
+                const valor = val;
+                option.value = valor;
+                option.text = valor;
+                select.appendChild(option);
+            };
+            
+            function cargarDatos(){
+                document.getElementById("nombre").value = "nombre1"
+                document.getElementById("entregable").value = "opcion1"
+                document.getElementById("ejecucion").value = "opcion1"
+                document.getElementById("sponsor").value = "opcion1"
+                document.getElementById("servicio").value = "opcion1"
+                document.getElementById("cantidad").value = 1
+                document.getElementById("fecha").value = "2010-10-10"
+            }
+            
+
+            function change(){
+                valor = document.getElementById("boton").value;
+                if (valor == "Modificar"){
+                    document.getElementById("boton").value = "Aceptar"
+                    document.getElementById("title").innerHTML= "MODIFICAR<br>SOLICITUD"
+                    document.getElementById("nombre").disabled = false
+                    document.getElementById("entregable").disabled = false
+                    document.getElementById("ejecucion").disabled = false
+                    document.getElementById("sponsor").disabled = false
+                    document.getElementById("servicio").disabled = false
+                    document.getElementById("cantidad").disabled = false
+                    document.getElementById("fecha").disabled = false
+                }else{
+                    document.getElementById("boton").value = "Modificar"
+                    document.getElementById("title").innerHTML= "VER<br>SOLICITUD"
+                    document.getElementById("nombre").disabled = true
+                    document.getElementById("entregable").disabled = true
+                    document.getElementById("ejecucion").disabled = true
+                    document.getElementById("sponsor").disabled = true
+                    document.getElementById("servicio").disabled = true
+                    document.getElementById("cantidad").disabled = true
+                    document.getElementById("fecha").disabled = true
+                    var modificado =[]
+                    if(document.getElementById("nombre").value != "posicion"){
+                        modificado.append(document.getElementById("nombre").value)
+                    }
+                    if(document.getElementById("entregable").value != "posicion"){
+                        modificado.append(document.getElementById("entregable").value)
+                    }
+                    if(document.getElementById("ejecucion").value != "posicion"){
+                        modificado.append(document.getElementById("ejecucion").value)
+                    }
+                    if(document.getElementById("sponsor").value != "posicion"){
+                        modificado.append(document.getElementById("sponsor").value)
+                    }
+                    if(document.getElementById("servicio").value != "posicion"){
+                        modificado.append(document.getElementById("servicio").value)
+                    }
+                    if(document.getElementById("cantidad").value != "posicion"){
+                        modificado.append(document.getElementById("cantidad").value)
+                    }
+                    if(document.getElementById("fecha").value != "posicion"){
+                        modificado.append(document.getElementById("fecha").value)
+                    }
+                }
+            }
+
+            function lastRegister(){
+                if (registerPosition!=0){
+                    registerPosition--
+                    cargarDatos()
+                }
+            }
+
+            function nextRegister(){
+                if (registerPosition!=10){
+                    registerPosition++
+                    cargarDatos()
+                }
+            }
+
+        </script>
+    </body>
+</html>

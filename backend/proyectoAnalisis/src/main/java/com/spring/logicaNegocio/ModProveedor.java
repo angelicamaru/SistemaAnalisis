@@ -31,9 +31,9 @@ public class ModProveedor {
 	}
 
 	// Retorna el id de proveedor
-	public String id(String nombre) {
+	public int id(String nombre) {
 		con = new ConexionProveedor();
-		String id = con.id(nombre);
+		int id = con.id(nombre);
 		con.desconectar();
 		return id;
 

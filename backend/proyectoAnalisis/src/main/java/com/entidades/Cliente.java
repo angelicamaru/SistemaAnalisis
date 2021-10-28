@@ -4,7 +4,7 @@ public class Cliente {
 
 	private int idCliente;
 	private String nombre;
-	private boolean empresa;
+	private int empresa;
 	private String direccion;
 	private String telefono;
 	private String correo;
@@ -12,8 +12,20 @@ public class Cliente {
 	public Cliente() {
 		
 	}
+	
+public Cliente(String nombre) {
+	this.nombre = nombre;
+	}
 
-	public Cliente(int idCliente, String nombre, boolean empresa, String direccion, String telefono, String correo) {
+	public Cliente(String nombre, int empresa, String direccion, String telefono, String correo) {
+		this.nombre = nombre;
+		this.empresa = empresa;
+		this.direccion = direccion;
+		this.telefono = telefono;
+		this.correo = correo;
+	}
+	
+	public Cliente(int idCliente, String nombre, int empresa, String direccion, String telefono, String correo) {
 		this.idCliente = idCliente;
 		this.nombre = nombre;
 		this.empresa = empresa;
@@ -38,11 +50,11 @@ public class Cliente {
 		this.nombre = nombre;
 	}
 
-	public boolean isEmpresa() {
+	public int isEmpresa() {
 		return empresa;
 	}
 
-	public void setEmpresa(boolean empresa) {
+	public void setEmpresa(int empresa) {
 		this.empresa = empresa;
 	}
 

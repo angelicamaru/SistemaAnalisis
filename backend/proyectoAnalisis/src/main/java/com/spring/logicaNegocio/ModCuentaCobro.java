@@ -16,7 +16,7 @@ public class ModCuentaCobro {
 	// Metodos
 
 	// Validar existencia CuentaCobro
-	public Boolean existe(String idProveedor, String mes) {
+	public Boolean existe(int idProveedor, String mes) {
 		con = new ConexionCuentaCobro();
 		boolean existe = con.existe(idProveedor, mes);
 		con.desconectar();
@@ -25,7 +25,7 @@ public class ModCuentaCobro {
 	}
 
 	// Retorna el nombre de CuentaCobro
-	public String nombre(String idProveedor, String mes) {
+	public String nombre(int idProveedor, String mes) {
 		con = new ConexionCuentaCobro();
 		String nombre = con.nombre(idProveedor, mes);
 		con.desconectar();
@@ -34,16 +34,16 @@ public class ModCuentaCobro {
 	}
 
 	// Retorna el id de CuentaCobro
-	public String id(String idProveedor, String mes) {
+	public int id(int idProveedor, String mes) {
 		con = new ConexionCuentaCobro();
-		String id = con.id(idProveedor, mes);
+		int id = con.id(idProveedor, mes);
 		con.desconectar();
 		return id;
 
 	}
 
 	// Crear nueva Cuenta de Cobro
-	public void añadirCuentaCobro(String idProveedor, String mes, String nombre) {
+	public void añadirCuentaCobro(int idProveedor, String mes, String nombre) {
 		con = new ConexionCuentaCobro();
 		con.nuevaCuentaCobro(idProveedor, mes, nombre);
 		con.desconectar();

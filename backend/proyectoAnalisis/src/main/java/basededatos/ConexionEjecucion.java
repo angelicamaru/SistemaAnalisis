@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 
 public class ConexionEjecucion {
-	private final String url = "jdbc:mysql://localhost/vidadeestudiante?useUnicode=true&use"
+	private final String url = "jdbc:mysql://localhost:3306/analisisproyecto?useUnicode=true&use"
 			+ "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	PreparedStatement psPrepararSentencia;
 	Connection con = null;
@@ -17,7 +17,7 @@ public class ConexionEjecucion {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(url, "root", "Milonga");
+			con = DriverManager.getConnection(url, "root", "analisis2021");
 
 			if (con != null) {
 				System.out.println("ConexiÃ³n a base de datos funcionando");
@@ -44,16 +44,16 @@ public class ConexionEjecucion {
 
 	// Validar existencia
 
-	public Boolean existe(String idCliente, String mes) {
+	public Boolean existe(int idCliente, String mes) {
 		conexion();
-		Boolean existeC = true;
+		Boolean existeC = false;
 
 		try (PreparedStatement stmt = con.prepareStatement(
-				"SELECT 1 FROM Ejecucion WHERE idCliente= " + idCliente + "AND" + "mes=" + mes)) {
+				"SELECT * FROM Ejecucion WHERE idCliente= '" + idCliente + "' AND " + "mes='" + mes+"'")) {
 			ResultSet rs = stmt.executeQuery();
-			System.out.println(rs);
-			if (rs == null) { // NOTA: Puede no funcionar este rs con null :(
-				existeC = false;
+			
+			while (rs.next()) {
+				existeC = true;			
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
@@ -63,15 +63,17 @@ public class ConexionEjecucion {
 	}
 
 	// Traer descripcion
-	public String descripcion(String idCliente, String mes) {
+	public String descripcion(int idCliente, String mes) {
 		conexion();
 		String descripcion = "";
 
 		try (PreparedStatement stmt = con.prepareStatement(
-				"SELECT descripcion FROM Ejecucion WHERE idCliente= " + idCliente + "AND" + "mes=" + mes)) {
+				"SELECT descripcion FROM Ejecucion WHERE idCliente= '" + idCliente + "' AND " + "mes='" + mes+"'")) {
 			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
 			System.out.println(rs);
 			descripcion = rs.getString("descripcion");
+			}
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
 		}
@@ -81,15 +83,17 @@ public class ConexionEjecucion {
 	
 	
 	// Traer id
-		public String id(String idCliente, String mes) {
+		public int id(int idCliente, String mes) {
 			conexion();
-			String id = "";
+			int id = 0;
 
 			try (PreparedStatement stmt = con.prepareStatement(
-					"SELECT idEjecucion FROM Ejecucion WHERE idCliente= " + idCliente + "AND" + "mes=" + mes)) {
+					"SELECT idEjecucion FROM Ejecucion WHERE idCliente= '" + idCliente + "' AND " + "mes='" + mes+"'")) {
 				ResultSet rs = stmt.executeQuery();
 				System.out.println(rs);
-				id = rs.getString("idEjecucion");
+				while (rs.next()) {
+				id = rs.getInt("idEjecucion");
+				}
 			} catch (SQLException sqle) {
 				System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
 			}
@@ -100,7 +104,7 @@ public class ConexionEjecucion {
 		
 
 	// Añadir nueva ejecucion
-	public void nuevaEjecucion(String idCliente, String mes, String descripcion) {
+	public void nuevaEjecucion(int idCliente, String mes, String descripcion) {
 		conexion();
 		try (PreparedStatement stmt = con.prepareStatement(
 

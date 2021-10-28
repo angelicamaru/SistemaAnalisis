@@ -79,14 +79,16 @@ public class ConexionSponsor {
 	}
 
 	// Traer id
-	public String id(String nombre) {
+	public int id(String nombre) {
 		conexion();
-		String id = "";
+		int id = 0;
 
-		try (PreparedStatement stmt = con.prepareStatement("SELECT idSponsor FROM Sponsor WHERE nombre= " + nombre)) {
+		try (PreparedStatement stmt = con.prepareStatement("SELECT idSponsor FROM Sponsor WHERE nombre= '" + nombre+"'")) {
 			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
 			System.out.println(rs);
-			id = rs.getString("idSponsor");
+			id = rs.getInt("idSponsor");
+			}
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
 		}

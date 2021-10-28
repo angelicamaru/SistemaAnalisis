@@ -30,9 +30,9 @@ public class ModSponsor {
 	}
 
 	// Retorna el id de Sponsor
-	public String id(String nombre) {
+	public int id(String nombre) {
 		con = new ConexionSponsor();
-		String id = con.id(nombre);
+		int id = con.id(nombre);
 		con.desconectar();
 		return id;
 

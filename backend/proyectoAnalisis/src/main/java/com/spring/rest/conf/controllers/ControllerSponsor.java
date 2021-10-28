@@ -32,9 +32,9 @@ public class ControllerSponsor {
 	}
 
 	// Traer id del sponsor
-	@PostMapping("/traerId")
-	String traerId(@RequestBody String nombre) {
-		String id = sponsor.id(nombre);
+	@PostMapping("/traerIdSponsor")
+	int traerId(@RequestBody Sponsor spons) {
+		int id = sponsor.id(spons.getNombre());
 		return id;
 	}
 

@@ -12,6 +12,17 @@ public class Ejecucion {
 
 	}
 
+	public Ejecucion(String mes, int idCliente) {
+		this.mes = mes;
+		this.idCliente = idCliente;
+	}
+	
+	public Ejecucion(String descripcion, String mes, int idCliente) {
+		this.descripcion = descripcion;
+		this.mes = mes;
+		this.idCliente = idCliente;
+	}
+	
 	public Ejecucion(int idEjecucion, String descripcion, String mes, int idCliente) {
 		this.idEjecucion = idEjecucion;
 		this.descripcion = descripcion;

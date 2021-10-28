@@ -29,9 +29,9 @@ public class ModCliente {
 	}
 
 	// Retorna el id de cliente
-	public String id(String nombre) {
+	public int id(String nombre) {
 		con = new ConexionCliente();
-		String id = con.id(nombre);
+		int id = con.id(nombre);
 		con.desconectar();
 		return id;
 

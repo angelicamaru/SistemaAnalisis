@@ -9,6 +9,10 @@ public class Sponsor {
 	public Sponsor() {
 
 	}
+	
+	public Sponsor(String nombre) {
+		this.nombre = nombre;
+	}
 
 	public Sponsor(int idSponsor, String nombre) {
 		this.idSponsor = idSponsor;

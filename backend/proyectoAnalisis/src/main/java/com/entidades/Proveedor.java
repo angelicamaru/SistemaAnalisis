@@ -6,12 +6,15 @@ public class Proveedor {
 	private String nombre;
 	private String telefono;
 	private String correo;
-	
-	
+
 	public Proveedor() {
 
 	}
-	
+
+	public Proveedor(String nombre) {
+		this.nombre = nombre;
+	}
+
 	public Proveedor(int idProveedor, String nombre, String telefono, String correo) {
 		this.idProveedor = idProveedor;
 		this.nombre = nombre;
@@ -50,8 +53,5 @@ public class Proveedor {
 	public void setCorreo(String correo) {
 		this.correo = correo;
 	}
-	
-	
-	
-	
+
 }

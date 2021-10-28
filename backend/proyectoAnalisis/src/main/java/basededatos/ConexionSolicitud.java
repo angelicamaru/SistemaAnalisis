@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import com.entidades.Solicitud;
 
 public class ConexionSolicitud {
-	private final String url = "jdbc:mysql://localhost/vidadeestudiante?useUnicode=true&use"
+	private final String url = "jdbc:mysql://localhost:3306/analisisproyecto?useUnicode=true&use"
 			+ "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	PreparedStatement psPrepararSentencia;
 	Connection con = null;
@@ -19,7 +19,7 @@ public class ConexionSolicitud {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(url, "root", "Milonga");
+			con = DriverManager.getConnection(url, "root", "analisis2021");
 
 			if (con != null) {
 				System.out.println("ConexiÃ³n a base de datos funcionando");

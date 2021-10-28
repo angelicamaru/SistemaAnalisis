@@ -33,9 +33,9 @@ public class ControllerProveedor {
 	}
 
 	// Traer id del proveedor
-	@PostMapping("/traerId")
-	String traerId(@RequestBody String nombre) {
-		String id = proveedor.id(nombre);
+	@PostMapping("/traerIdProveedor")
+	int traerId(@RequestBody Proveedor proo) {
+		int id = proveedor.id(proo.getNombre());
 		return id;
 	}
 

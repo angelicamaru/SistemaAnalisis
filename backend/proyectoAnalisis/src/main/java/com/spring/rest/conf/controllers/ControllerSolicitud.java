@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.entidades.CuentaCobro;
 import com.entidades.Solicitud;
 import com.spring.logicaNegocio.ModSolicitud;
 
@@ -23,8 +24,8 @@ public class ControllerSolicitud {
 
 	// Traer solicitudes
 	@PostMapping("/traerSolicitudes")
-	ArrayList<Solicitud> traerSolicitudes(@RequestBody int idCuentaCobro) {
-		ArrayList<Solicitud> solicitudes = solicitud.traerSolicitudes(idCuentaCobro);
+	ArrayList<Solicitud> traerSolicitudes(@RequestBody CuentaCobro cuentaC) {
+		ArrayList<Solicitud> solicitudes = solicitud.traerSolicitudes(cuentaC.getIdCuentaCobro());		
 		return solicitudes;
 	}
 

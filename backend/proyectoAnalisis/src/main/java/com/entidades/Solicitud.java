@@ -19,6 +19,12 @@ public class Solicitud {
 	}
 
 
+	public Solicitud( String nombre, int cantidad, String fecha) {
+		this.nombre = nombre;
+		this.cantidad = cantidad;
+		this.fecha = fecha;
+	}
+
 	public Solicitud(int idSolicitud, String nombre, int cantidad, String fecha) {
 		this.idSolicitud = idSolicitud;
 		this.nombre = nombre;
@@ -26,7 +32,18 @@ public class Solicitud {
 		this.fecha = fecha;
 	}
 
-
+	public Solicitud( String nombre, int cantidad, String fecha, int idEntregable, int idEjecucion, int idSponsor,
+			int idService,int idCuentaCobro) {
+	
+		this.nombre = nombre;
+		this.cantidad = cantidad;
+		this.fecha = fecha;
+		this.idEntregable =idEntregable;
+		this.idEjecucion = idEjecucion;
+		this.idSponsor = idSponsor;
+		this.idService = idService;
+		this.idCuentaCobro = idCuentaCobro;
+	}
 	public Solicitud(int idSolicitud, String nombre, int cantidad, String fecha, int idEntregable, int idEjecucion, int idSponsor,
 			int idService,int idCuentaCobro) {
 	

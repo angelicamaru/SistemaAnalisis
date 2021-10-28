@@ -11,7 +11,7 @@ import com.entidades.Cliente;
 import com.entidades.Solicitud;
 
 public class ConexionCliente {
-	private final String url = "jdbc:mysql://localhost/vidadeestudiante?useUnicode=true&use"
+	private final String url = "jdbc:mysql://localhost:3306/analisisproyecto?useUnicode=true&use"
 			+ "JDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
 	PreparedStatement psPrepararSentencia;
 	Connection con = null;
@@ -20,7 +20,7 @@ public class ConexionCliente {
 
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			con = DriverManager.getConnection(url, "root", "Milonga");
+			con = DriverManager.getConnection(url, "root", "analisis2021");
 
 			if (con != null) {
 				System.out.println("ConexiÃ³n a base de datos funcionando");
@@ -48,6 +48,7 @@ public class ConexionCliente {
 	// Añadir nuevo cliente
 	public void nuevoCliente(Cliente nuevoCliente) {
 		conexion();
+		System.out.println(nuevoCliente.isEmpresa());
 		try (PreparedStatement stmt = con.prepareStatement(
 
 				"INSERT INTO Cliente VALUES (null,'" + nuevoCliente.getNombre() + "','" + nuevoCliente.isEmpresa()
@@ -57,6 +58,8 @@ public class ConexionCliente {
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
 		}
+		
+		
 
 	}
 
@@ -82,15 +85,17 @@ public class ConexionCliente {
 	}
 
 	// Traer id
-	public String id(String nombre) {
+	public int id(String nombre) {
 		conexion();
-		String id = "";
-
+		int id = 0;
+		
 		try (PreparedStatement stmt = con.prepareStatement(
-				"SELECT idCliente FROM Cliente WHERE nombre= " + nombre)) {
+				"SELECT idCliente FROM Cliente WHERE nombre='" + nombre+"'")) {
 			ResultSet rs = stmt.executeQuery();
-			System.out.println(rs);
-			id = rs.getString("idCliente");
+			while (rs.next()) {
+			System.out.println(rs.getInt("idCliente"));
+			id = rs.getInt("idCliente");
+			}
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
 		}

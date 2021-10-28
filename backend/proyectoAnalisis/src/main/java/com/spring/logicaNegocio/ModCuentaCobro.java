@@ -32,22 +32,21 @@ public class ModCuentaCobro {
 		return nombre;
 
 	}
-	
-	// Retorna el id de CuentaCobro
-		public String id(String idProveedor, String mes) {
-			con = new ConexionCuentaCobro();
-			String id = con.id(idProveedor, mes);
-			con.desconectar();
-			return id;
 
-		}
+	// Retorna el id de CuentaCobro
+	public String id(String idProveedor, String mes) {
+		con = new ConexionCuentaCobro();
+		String id = con.id(idProveedor, mes);
+		con.desconectar();
+		return id;
+
+	}
 
 	// Crear nueva Cuenta de Cobro
 	public void añadirCuentaCobro(String idProveedor, String mes, String nombre) {
 		con = new ConexionCuentaCobro();
-		con.nuevaCuentaCobro(idProveedor, mes,nombre);
+		con.nuevaCuentaCobro(idProveedor, mes, nombre);
 		con.desconectar();
-		
 
 	}
 

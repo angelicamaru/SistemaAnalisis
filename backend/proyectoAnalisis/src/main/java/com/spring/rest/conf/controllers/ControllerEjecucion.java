@@ -17,21 +17,21 @@ public class ControllerEjecucion {
 			return existe;
 		}
 
-		// Traer nombre de cuenta de cobro
+		// Traer nombre de ejecucion
 		@PostMapping("/traerNombre")
 		String traerDescripcion(@RequestBody String idCliente, String mes) {
 			String descripcion = ejecucion.descripcion(idCliente, mes);
 			return descripcion;
 		}
 
-		// Traer id de cuenta de cobro
+		// Traer id de ejecucion
 		@PostMapping("/traerId")
 		String traerId(@RequestBody String idCliente, String mes) {
 			String id = ejecucion.id(idCliente, mes);
 			return id;
 		}
 
-		// Añadir nueva cuenta de cobro
+		// Añadir nueva ejecucion
 		@PostMapping("/añadirEjecucion")
 		void añadirEjecucion(@RequestBody String idCliente, String mes, String descripcion) {
 			ejecucion.añadirEjecucion(idCliente, mes, descripcion);

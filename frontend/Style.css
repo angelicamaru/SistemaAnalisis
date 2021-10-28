@@ -12,6 +12,13 @@ body {
     
 }
 
+.cuentas{
+    display: grid;
+    grid-template-columns: auto auto ;
+    text-align: center;
+    padding-left: 15%;
+}
+
 .grid-index{
     display: grid;
     grid-template-columns: auto auto auto auto;
@@ -254,10 +261,87 @@ h1{
 }
 
 .arrow i{
-    padding: 20px; font-size: 30px; color: #cfa022;
+    padding: 20px; 
+    font-size: 30px; 
+    color: #cfa022;
     cursor: pointer;
 }
 
 .arrow i:hover {
     color: #415a5a;
+}
+
+iframe{
+    width:80%; 
+    height:70%; 
+    padding-left: 10%;
+}
+
+.titleContent{
+    margin: 0px;
+    text-align: center;
+    padding: 20px;
+
+}
+
+.cuentas-select-field{
+    max-width: 300px;
+    width: 100%;
+    background-color:  #f0f0f0 ;
+    margin: 20px 0;
+    margin-top: 5px;
+    height: 40px;
+    border-radius: 55px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cuentas-select-field i{
+    text-align: center;
+    line-height: 40px;
+    color: #acacac;
+    font-size: 1.1rem;
+}
+
+.cuentas-select-field select {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.cuentas-input-field{
+    max-width: 300px;
+    width: 100%;
+    background-color:  #f0f0f0 ;
+    margin: 20px 0;
+    margin-top: 5px;
+    height: 40px;
+    border-radius: 55px;
+    display: grid;
+    grid-template-columns: 15% 85%;
+    padding: 0 0.4rem;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.cuentas-input-field input {
+    background: none;
+    outline: none;
+    border: none;
+    line-height: 1;
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.cuentas-input-field i{
+    text-align: center;
+    line-height: 40px;
+    color: #acacac;
+    font-size: 1.1rem;
 }

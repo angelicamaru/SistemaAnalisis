@@ -194,7 +194,7 @@ h1{
 }
 
 .btn {
-    width: 150px;
+    width: 130px;
     background-color: #cfa022;
     border: none;
     outline: none;
@@ -344,4 +344,10 @@ iframe{
     line-height: 40px;
     color: #acacac;
     font-size: 1.1rem;
+}
+
+.error-text{
+    text-align: left;
+    margin-left: 20px;
+    color: red;
 }

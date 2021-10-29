@@ -41,47 +41,54 @@
                 <div class="grid-info">
                     <div class= "form">
                         <div class = "form-text">Nombre</div>
+                        <div id="errorNombre" class="error-text"></div>
                         <div class="input-field">
                             <i class="fas fa-user"></i>
-                            <input type="text" placeholder="Nombre" id = "nombre">
+                            <input type="text" placeholder="Nombre" id = "nombre" onchange="nameValidation()">
                         </div>
                         <div class = "form-text">Entregable</div>
+                        <div id="errorEntregable" class="error-text"></div>
                         <div class="select-field">
                             <i class="fas fa-hammer"></i>
-                            <select name="entregable" id="entregable">
+                            <select name="entregable" id="entregable" onchange="entregableValidation()">
                                 <option value="Seleccione entregable" style="color: #aaa; font-weight: 500;">Seleccione entregable</option>
                             </select>
                         </div>
                         <div class = "form-text">Ejecución</div>
+                        <div id="errorEjecucion" class="error-text"></div>
                         <div class="select-field">
                             <i class="fas fa-file"></i>
-                            <select name="ejecucion" id="ejecucion">
+                            <select name="ejecucion" id="ejecucion" onchange="ejecucionValidation()">
                                 <option value="Seleccione ejecución" style="color: #aaa; font-weight: 500;" >Seleccione ejecución</option>
                             </select>
                         </div>
                         <div class = "form-text">Sponsor</div>
+                        <div id="errorSponsor" class="error-text"></div>
                         <div class="select-field">
                             <i class="fas fa-user-tie"></i>
-                            <select name="sponsor" id="sponsor" >
+                            <select name="sponsor" id="sponsor" onchange="sponsorValidation()">
                                 <option value="Seleccione sponsor" style="color: #aaa; font-weight: 500;">Seleccione sponsor</option>
                             </select>
                         </div>
                         <div class = "form-text">Servicio</div>
+                        <div id="errorServicio" class="error-text"></div>
                         <div class="select-field">
                             <i class="fas  fa-swatchbook"></i>
-                            <select name="servicio" id="servicio" >
+                            <select name="servicio" id="servicio" onchange="servicioValidation()">
                                 <option value="Seleccione servicio" style="color: #aaa; font-weight: 500;">Seleccione servicio</option>
                             </select>
                         </div>
                         <div class = "form-text">Cantidad</div>
+                        <div id="errorCantidad" class="error-text"></div>
                         <div class="input-field">
                             <i class="fas fa-calculator"></i>
-                            <input type="number" placeholder="Cantidad" id="cantidad">
+                            <input type="number" placeholder="Cantidad" id="cantidad" onchange="cantidadValidation()">
                         </div>
                         <div class = "form-text">Fecha</div>
+                        <div id="errorFecha" class="error-text"></div>
                         <div class="input-field">
                             <i class="far fa-calendar"></i>
-                            <input type="date" placeholder="Fecha" id="fecha">
+                            <input type="date" placeholder="Fecha" id="fecha" onchange="fechaValidation()">
                         </div>
                         <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()">
                     </div>
@@ -110,6 +117,13 @@
             };
 
             function agregarRegistro(){
+                const nameValidatio = nameValidation()
+                const entregableValidatio = entregableValidation()
+                const ejecucionValidatio = ejecucionValidation()
+                const fechaValidatio = fechaValidation()
+                const sponsorValidatio = sponsorValidation()
+                const servicioValidatio = servicioValidation()
+                const cantidadValidatio = cantidadValidation()
                 const name = document.getElementById("nombre").value
                 const entregable = document.getElementById("entregable").value
                 const ejecucion = document.getElementById("ejecucion").value
@@ -117,14 +131,96 @@
                 const servicio = document.getElementById("servicio").value
                 const cantidad = document.getElementById("cantidad").value
                 const fecha = document.getElementById("fecha").value
-                document.getElementById("nombre").value = ""
-                document.getElementById("entregable").value = "Seleccione entregable"
-                document.getElementById("ejecucion").value = "Seleccione ejecución"
-                document.getElementById("sponsor").value = "Seleccione sponsor"
-                document.getElementById("servicio").value = "Seleccione servicio"
-                document.getElementById("cantidad").value = ""
-                document.getElementById("fecha").value = ""
-                alert("Registro agregado")
+                if (nameValidatio && entregableValidatio && ejecucionValidatio && fechaValidatio && servicioValidatio && sponsorValidatio && cantidadValidatio) {
+                    document.getElementById("nombre").value = ""
+                    document.getElementById("entregable").value = "Seleccione entregable"
+                    document.getElementById("ejecucion").value = "Seleccione ejecución"
+                    document.getElementById("sponsor").value = "Seleccione sponsor"
+                    document.getElementById("servicio").value = "Seleccione servicio"
+                    document.getElementById("cantidad").value = ""
+                    document.getElementById("fecha").value = ""
+                    alert("Registro agregado")
+                } else {
+                    alert("Por favor llene todos los campos")
+                }
+                
+            }
+
+            function nameValidation(){
+                const name = document.getElementById("nombre").value
+                if (name == "") {
+                    document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
+                    return false
+                }else{
+                    document.getElementById("errorNombre").innerHTML = ""
+                    return true
+                }
+            }
+
+            function entregableValidation(){
+                const name = document.getElementById("entregable").value
+                if (name == "Seleccione entregable") {
+                    document.getElementById("errorEntregable").innerHTML = "Por favor seleccione un entregable"
+                    return false
+                }else{
+                    document.getElementById("errorEntregable").innerHTML = ""
+                    return true
+                }
+            }
+
+            function ejecucionValidation(){
+                const name = document.getElementById("ejecucion").value
+                if (name == "Seleccione ejecución") {
+                    document.getElementById("errorEjecucion").innerHTML = "Por favor seleccione una ejecución"
+                    return false
+                }else{
+                    document.getElementById("errorEjecucion").innerHTML = ""
+                    return true
+                }
+            }
+
+            function sponsorValidation(){
+                const name = document.getElementById("sponsor").value
+                if (name == "Seleccione sponsor") {
+                    document.getElementById("errorSponsor").innerHTML = "Por favor seleccione un sponsor"
+                    return false
+                }else{
+                    document.getElementById("errorSponsor").innerHTML = ""
+                    return true
+                }
+            }
+
+            function servicioValidation(){
+                const name = document.getElementById("servicio").value
+                if (name == "Seleccione servicio") {
+                    document.getElementById("errorServicio").innerHTML = "Por favor seleccione un servicio"
+                    return false
+                }else{
+                    document.getElementById("errorServicio").innerHTML = ""
+                    return true
+                }
+            }
+
+            function cantidadValidation(){
+                const name = document.getElementById("cantidad").value
+                if (name == "") {
+                    document.getElementById("errorCantidad").innerHTML = "Por favor ingrese una cantidad"
+                    return false
+                }else{
+                    document.getElementById("errorCantidad").innerHTML = ""
+                    return true
+                }
+            }
+
+            function fechaValidation(){
+                const name = document.getElementById("fecha").value
+                if (name == "") {
+                    document.getElementById("errorFecha").innerHTML = "Por favor ingrese una fecha"
+                    return false
+                }else{
+                    document.getElementById("errorFecha").innerHTML = ""
+                    return true
+                }
             }
         </script>
     </body>

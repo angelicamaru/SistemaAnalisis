@@ -41,9 +41,10 @@
                 <div class="grid-info" style="margin-top: 10%;">
                         <div class= "form">
                             <div class = "form-text">Nombre</div>
+                            <div id="errorNombre" class="error-text"></div>
                             <div class="input-field">
                                 <i class="fas fa-user"></i>
-                                <input type="text" placeholder="Nombre" id="Nombre">
+                                <input type="text" placeholder="Nombre" id="Nombre" onchange="nameValidation()">
                             </div>
                             
                             <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()">
@@ -55,10 +56,27 @@
             </div>
           </div>
           <script>
-              function agregarRegistro(){
+
+            function nameValidation(){
                 const name = document.getElementById("Nombre").value
-                document.getElementById("Nombre").value = ""
-                alert("Registro agregado")
+                if (name == "") {
+                    document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
+                    return false
+                }else{
+                    document.getElementById("errorNombre").innerHTML = ""
+                    return true
+                }
+            }
+
+              function agregarRegistro(){
+                const nameValidatio = nameValidation()
+                const name = document.getElementById("Nombre").value
+                if (nameValidatio) {
+                    document.getElementById("Nombre").value = ""
+                    alert("Registro agregado")
+                }  else {
+                    alert("Por favor llene todos los campos")
+                }
             }
           </script>
     </body>

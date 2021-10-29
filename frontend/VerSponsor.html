@@ -40,16 +40,18 @@
             <div class="grid-item">
                 <div class="grid-info" style="margin-top: 10%;">
                         <div class= "form">
-                            <div class = "form-text" >Nombre</div>
+                            <div class = "form-text">Nombre</div>
+                            <div id="errorNombre" class="error-text"></div>
                             <div class="input-field">
                                 <i class="fas fa-user"></i>
-                                <input type="text" placeholder="Nombre" id="nombre" desabled>
+                                <input type="text" placeholder="Nombre" id="nombre" onchange="nameValidation()" disabled>
                             </div>
                             
                             <div class="arrow">
-                                <i class="fas fa-caret-left" onclick="lastRegister()"></i>
-                                <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()">
-                                <i class="fas fa-caret-right" onclick="nextRegister()"></i>
+                                <i class="fas fa-caret-left" onclick="lastRegister()" style="display:none;" id="left"></i>
+                                <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()" style="margin-right: 3px;">
+                                <input type="submit" value="Eliminar" class="btn solid" id="botonEliminar" onclick="eliminar()" style="margin-left: 3px;">
+                                <i class="fas fa-caret-right" onclick="nextRegister()" id="right"></i>
                             </div>
                         </div>
                     <div class="circle"><h1 id="title">INGRESAR<br>SPONSOR</h1></div>
@@ -62,9 +64,10 @@
               var registerPosition = 0;
               cargarDatos()
 
-              function cargarDatos(){
+            function cargarDatos(){
                 document.getElementById("nombre").value = "nombre1"
             }
+
             function change(){
                 valor = document.getElementById("boton").value;
                 if (valor == "Modificar"){
@@ -72,26 +75,56 @@
                     document.getElementById("title").innerHTML= "MODIFICAR<br>SPONSOR"
                     document.getElementById("nombre").disabled = false
                 }else{
-                    document.getElementById("boton").value = "Modificar"
-                    document.getElementById("title").innerHTML= "VER<br>SPONSOR"
-                    document.getElementById("nombre").disabled = true
-                    if(document.getElementById("nombre").value != "posicion"){
-                        const name = document.getElementById("nombre").value
+                    const nameValidatio = nameValidation()
+                    if (nameValidatio) {
+                        document.getElementById("boton").value = "Modificar"
+                        document.getElementById("title").innerHTML= "VER<br>SPONSOR"
+                        document.getElementById("nombre").disabled = true
+                        if(document.getElementById("nombre").value != "posicion"){
+                            const name = document.getElementById("nombre").value
+                        }
+                        alert("Elemento modificado")
+                    } else {
+                        alert("Por favor llene todos los campos")
                     }
+                    
                 }
             }
 
             function lastRegister(){
-                if (registerPosition!=0){
-                    registerPosition--
-                    cargarDatos()
+                registerPosition--
+                document.getElementById("right").style.display = "inline";
+                cargarDatos()
+                if (registerPosition==0){
+                    document.getElementById("left").style.display = "none";
                 }
             }
 
             function nextRegister(){
-                if (registerPosition!=10){
-                    registerPosition++
-                    cargarDatos()
+                registerPosition++
+                document.getElementById("left").style.display = "inline";
+                cargarDatos()
+                if (registerPosition==10){
+                    document.getElementById("right").style.display = "none";
+                }
+            }
+
+            function eliminar() {
+                if (registerPosition==10) {
+                    registerPosition--
+                }
+                cargarDatos()
+                alert("Elemento eliminado")
+            }
+
+            function nameValidation(){
+                const name = document.getElementById("nombre").value
+                if (name == "") {
+                    document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
+                    return false
+                }else{
+                    document.getElementById("errorNombre").innerHTML = ""
+                    return true
                 }
             }
           </script>

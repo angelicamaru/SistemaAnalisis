@@ -41,53 +41,61 @@
                 <div class="grid-info">
                     <div class= "form">
                         <div class = "form-text">Nombre</div>
+                        <div id="errorNombre" class="error-text"></div>
                         <div class="input-field">
                             <i class="fas fa-user"></i>
-                            <input type="text" placeholder="Nombre" id="nombre" disabled>
+                            <input type="text" placeholder="Nombre" id="nombre"  onchange="nameValidation()" disabled>
                         </div>
                         <div class = "form-text">Entregable</div>
+                        <div id="errorEntregable" class="error-text"></div>
                         <div class="select-field">
                             <i class="fas fa-hammer"></i>
-                            <select name="entregable" id="entregable" disabled>
+                            <select name="entregable" id="entregable" onchange="entregableValidation()" disabled>
                                 <option value="Seleccione entregable" style="color: #aaa; font-weight: 500;">Seleccione entregable</option>
                                 
                             </select>
                         </div>
                         <div class = "form-text">Ejecución</div>
+                        <div id="errorEjecucion" class="error-text"></div>
                         <div class="select-field">
                             <i class="fas fa-file"></i>
-                            <select name="ejecucion" id="ejecucion"  disabled>
+                            <select name="ejecucion" id="ejecucion"  onchange="ejecucionValidation()" disabled>
                                 <option value="Seleccione ejecución" style="color: #aaa; font-weight: 500;">Seleccione ejecución</option>
                             </select>
                         </div>
                         <div class = "form-text">Sponsor</div>
+                        <div id="errorSponsor" class="error-text"></div>
                         <div class="select-field">
                             <i class="fas fa-user-tie"></i>
-                            <select name="sponsor" id="sponsor"  disabled >
+                            <select name="sponsor" id="sponsor" onchange="sponsorValidation()" disabled >
                                 <option value="Seleccione sponsor" style="color: #aaa; font-weight: 500;">Seleccione sponsor</option>
                             </select>
                         </div>
                         <div class = "form-text">Servicio</div>
+                        <div id="errorServicio" class="error-text"></div>
                         <div class="select-field">
                             <i class="fas  fa-swatchbook"></i>
-                            <select name="servicio" id="servicio"  disabled>
+                            <select name="servicio" id="servicio" onchange="servicioValidation()" disabled>
                                 <option value="Seleccione servicio" style="color: #aaa; font-weight: 500;">Seleccione servicio</option>
                             </select>
                         </div>
                         <div class = "form-text">Cantidad</div>
+                        <div id="errorCantidad" class="error-text"></div>
                         <div class="input-field">
                             <i class="fas fa-calculator"></i>
-                            <input type="number" placeholder="Cantidad"  id="cantidad"disabled>
+                            <input type="number" placeholder="Cantidad"  id="cantidad" onchange="cantidadValidation()" disabled>
                         </div>
                         <div class = "form-text">Fecha</div>
+                        <div id="errorFecha" class="error-text"></div>
                         <div class="input-field">
                             <i class="fas fa-user"></i>
-                            <input type="date" placeholder="Fecha" id="fecha" disabled>
+                            <input type="date" placeholder="Fecha" id="fecha" onchange="fechaValidation()"> disabled>
                         </div>
                         <div class="arrow">
-                            <i class="fas fa-caret-left" onclick="lastRegister()"></i>
-                            <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()">
-                            <i class="fas fa-caret-right" onclick="nextRegister()"></i>
+                            <i class="fas fa-caret-left" onclick="lastRegister()" style="display:none;" id="left"></i>
+                            <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()" style="margin-right: 3px;">
+                            <input type="submit" value="Eliminar" class="btn solid" id="botonEliminar" onclick="eliminar()" style="margin-left: 3px;">
+                            <i class="fas fa-caret-right" onclick="nextRegister()" id="right"></i>
                         </div>
                         
                     </div>
@@ -141,51 +149,152 @@
                     document.getElementById("cantidad").disabled = false
                     document.getElementById("fecha").disabled = false
                 }else{
-                    document.getElementById("boton").value = "Modificar"
-                    document.getElementById("title").innerHTML= "VER<br>SOLICITUD"
-                    document.getElementById("nombre").disabled = true
-                    document.getElementById("entregable").disabled = true
-                    document.getElementById("ejecucion").disabled = true
-                    document.getElementById("sponsor").disabled = true
-                    document.getElementById("servicio").disabled = true
-                    document.getElementById("cantidad").disabled = true
-                    document.getElementById("fecha").disabled = true
-                    var modificado =[]
-                    if(document.getElementById("nombre").value != "posicion"){
-                        modificado.append(document.getElementById("nombre").value)
-                    }
-                    if(document.getElementById("entregable").value != "posicion"){
-                        modificado.append(document.getElementById("entregable").value)
-                    }
-                    if(document.getElementById("ejecucion").value != "posicion"){
-                        modificado.append(document.getElementById("ejecucion").value)
-                    }
-                    if(document.getElementById("sponsor").value != "posicion"){
-                        modificado.append(document.getElementById("sponsor").value)
-                    }
-                    if(document.getElementById("servicio").value != "posicion"){
-                        modificado.append(document.getElementById("servicio").value)
-                    }
-                    if(document.getElementById("cantidad").value != "posicion"){
-                        modificado.append(document.getElementById("cantidad").value)
-                    }
-                    if(document.getElementById("fecha").value != "posicion"){
-                        modificado.append(document.getElementById("fecha").value)
+                    const nameValidatio = nameValidation()
+                    const entregableValidatio = entregableValidation()
+                    const ejecucionValidatio = ejecucionValidation()
+                    const fechaValidatio = fechaValidation()
+                    const sponsorValidatio = sponsorValidation()
+                    const servicioValidatio = servicioValidation()
+                    const cantidadValidatio = cantidadValidation()
+                    if (nameValidatio && entregableValidatio && ejecucionValidatio && fechaValidatio && servicioValidatio && sponsorValidatio && cantidadValidatio) {
+                        document.getElementById("boton").value = "Modificar"
+                        document.getElementById("title").innerHTML= "VER<br>SOLICITUD"
+                        document.getElementById("nombre").disabled = true
+                        document.getElementById("entregable").disabled = true
+                        document.getElementById("ejecucion").disabled = true
+                        document.getElementById("sponsor").disabled = true
+                        document.getElementById("servicio").disabled = true
+                        document.getElementById("cantidad").disabled = true
+                        document.getElementById("fecha").disabled = true
+                        const modificado = []
+                        if(document.getElementById("nombre").value != "posicion"){
+                            modificado.push([document.getElementById("nombre").value, "nombre"])
+                        }
+                        if(document.getElementById("entregable").value != "posicion"){
+                            modificado.push([document.getElementById("entregable").value, "entregable"])
+                        }
+                        if(document.getElementById("ejecucion").value != "posicion"){
+                            modificado.push([document.getElementById("ejecucion").value, "ejecucion"])
+                        }
+                        if(document.getElementById("sponsor").value != "posicion"){
+                            modificado.push([document.getElementById("sponsor").value, "sponsor"])
+                        }
+                        if(document.getElementById("servicio").value != "posicion"){
+                            modificado.push([document.getElementById("servicio").value, "servivio"])
+                        }
+                        if(document.getElementById("cantidad").value != "posicion"){
+                            modificado.push([document.getElementById("cantidad").value, "cantidad"])
+                        }
+                        if(document.getElementById("fecha").value != "posicion"){
+                            modificado.push([document.getElementById("fecha").value, "fecha"])
+                        }
+                        alert("Elemento modificado")
+                    }else {
+                        alert("Por favor llene todos los campos")
                     }
                 }
             }
 
             function lastRegister(){
-                if (registerPosition!=0){
-                    registerPosition--
-                    cargarDatos()
+                registerPosition--
+                document.getElementById("right").style.display = "inline";
+                cargarDatos()
+                if (registerPosition==0){
+                    document.getElementById("left").style.display = "none";
                 }
             }
 
             function nextRegister(){
-                if (registerPosition!=10){
-                    registerPosition++
-                    cargarDatos()
+                registerPosition++
+                document.getElementById("left").style.display = "inline";
+                cargarDatos()
+                if (registerPosition==10){
+                    document.getElementById("right").style.display = "none";
+                }
+            }
+
+            function eliminar() {
+                if (registerPosition==10) {
+                    registerPosition--
+                }
+                cargarDatos()
+                alert("Elemento eliminado")
+            }
+
+            function nameValidation(){
+                const name = document.getElementById("nombre").value
+                if (name == "") {
+                    document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
+                    return false
+                }else{
+                    document.getElementById("errorNombre").innerHTML = ""
+                    return true
+                }
+            }
+
+            function entregableValidation(){
+                const name = document.getElementById("entregable").value
+                if (name == "Seleccione entregable") {
+                    document.getElementById("errorEntregable").innerHTML = "Por favor seleccione un entregable"
+                    return false
+                }else{
+                    document.getElementById("errorEntregable").innerHTML = ""
+                    return true
+                }
+            }
+
+            function ejecucionValidation(){
+                const name = document.getElementById("ejecucion").value
+                if (name == "Seleccione ejecución") {
+                    document.getElementById("errorEjecucion").innerHTML = "Por favor seleccione una ejecución"
+                    return false
+                }else{
+                    document.getElementById("errorEjecucion").innerHTML = ""
+                    return true
+                }
+            }
+
+            function sponsorValidation(){
+                const name = document.getElementById("sponsor").value
+                if (name == "Seleccione sponsor") {
+                    document.getElementById("errorSponsor").innerHTML = "Por favor seleccione un sponsor"
+                    return false
+                }else{
+                    document.getElementById("errorSponsor").innerHTML = ""
+                    return true
+                }
+            }
+
+            function servicioValidation(){
+                const name = document.getElementById("servicio").value
+                if (name == "Seleccione servicio") {
+                    document.getElementById("errorServicio").innerHTML = "Por favor seleccione un servicio"
+                    return false
+                }else{
+                    document.getElementById("errorServicio").innerHTML = ""
+                    return true
+                }
+            }
+
+            function cantidadValidation(){
+                const name = document.getElementById("cantidad").value
+                if (name == "") {
+                    document.getElementById("errorCantidad").innerHTML = "Por favor ingrese una cantidad"
+                    return false
+                }else{
+                    document.getElementById("errorCantidad").innerHTML = ""
+                    return true
+                }
+            }
+
+            function fechaValidation(){
+                const name = document.getElementById("fecha").value
+                if (name == "") {
+                    document.getElementById("errorFecha").innerHTML = "Por favor ingrese una fecha"
+                    return false
+                }else{
+                    document.getElementById("errorFecha").innerHTML = ""
+                    return true
                 }
             }
 

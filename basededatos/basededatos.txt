@@ -1,0 +1,72 @@
+CREATE TABLE `Cliente`(
+    `idCliente` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `nombre` VARCHAR(30) NOT NULL,
+    `empresa` TINYINT NOT NULL,
+    `direccion` VARCHAR(30) NOT NULL,
+    `telefono` VARCHAR(20) NOT NULL,
+    `correo` VARCHAR(30) NOT NULL
+);
+CREATE TABLE `Ejecucion`(
+    `idEjecucion` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `descripcion` VARCHAR(50) NOT NULL,
+    `mes` VARCHAR(20) NOT NULL,
+    `idCliente` INT UNSIGNED NOT NULL
+);
+
+CREATE TABLE `Entregable`(
+    `idEntregable` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `entregable` VARCHAR(30) NOT NULL,
+    `precioProveedor` DOUBLE NOT NULL,
+    `precioCliente` DOUBLE NOT NULL
+);
+
+CREATE TABLE `Sponsor`(
+    `idSponsor` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `nombre` VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE `Servicio`(
+    `idServicio` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `nombre` VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE `Proveedor`(
+    `idProveedor` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `nombre` VARCHAR(30) NOT NULL,
+    `telefono` VARCHAR(30) NOT NULL,
+    `correo` VARCHAR(30) NOT NULL
+);
+
+CREATE TABLE `Solicitud`(
+    `idSolicitud` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `nombre` VARCHAR(30) NOT NULL,
+    `cantidad` INT UNSIGNED NOT NULL,
+    `fecha` DATE NOT NULL,
+    `idEntregable` INT UNSIGNED NOT NULL,
+    `idEjecucion` INT UNSIGNED NOT NULL,
+    `idSponsor` INT UNSIGNED NOT NULL,
+    `idServicio` INT UNSIGNED NOT NULL,
+    `idCuentaCobro` INT UNSIGNED NOT NULL
+);
+
+CREATE TABLE `CuentaCobro`(
+    `idCuentaCobro` INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `nombre` VARCHAR(30) NOT NULL,
+    `mes` VARCHAR(20) NOT NULL,
+    `idProveedor` INT UNSIGNED NOT NULL
+);
+
+ALTER TABLE
+    `Ejecucion` ADD CONSTRAINT `ejecucion_idcliente_foreign` FOREIGN KEY(`idCliente`) REFERENCES `Cliente`(`idCliente`);
+ALTER TABLE
+    `Solicitud` ADD CONSTRAINT `solicitud_idejecucion_foreign` FOREIGN KEY(`idEjecucion`) REFERENCES `Ejecucion`(`idEjecucion`);
+ALTER TABLE
+    `Solicitud` ADD CONSTRAINT `solicitud_identregable_foreign` FOREIGN KEY(`idEntregable`) REFERENCES `Entregable`(`idEntregable`);
+ALTER TABLE
+    `CuentaCobro` ADD CONSTRAINT `cuentacobro_idproveedor_foreign` FOREIGN KEY(`idProveedor`) REFERENCES `Proveedor`(`idProveedor`);
+ALTER TABLE
+    `Solicitud` ADD CONSTRAINT `solicitud_idsponsor_foreign` FOREIGN KEY(`idSponsor`) REFERENCES `Sponsor`(`idSponsor`);
+ALTER TABLE
+    `Solicitud` ADD CONSTRAINT `solicitud_idservicio_foreign` FOREIGN KEY(`idServicio`) REFERENCES `Servicio`(`idServicio`);
+ALTER TABLE
+    `Solicitud` ADD CONSTRAINT `solicitud_idcuentacobro_foreign` FOREIGN KEY(`idCuentaCobro`) REFERENCES `CuentaCobro`(`idCuentaCobro`);

@@ -1,132 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Poppins">
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script 
-            src = "https://kit.fontawesome.com/64d58efce2.js"
-            crossorigin = "anonymous"
-        ></script>
-        <link rel="stylesheet" href="style.css">
-        <title>
-            Ver Sponsor
-        </title>
-    </head>
-    <body>
-        <div class="grid-container">
-            <div class="grid-item-menu">
-                <p></p>
-                <a href="Index.html"><p>HOME</p></a>
-                <p></p>
-                <a href="IngresarSolicitud.html"><p>INGESAR SOLICITUD </p></a>
-                <a href="VerCuentaDeCobro.html"><p>VER CUENTA DE COBRO </p></a>
-                <a href="VerOrdenDeServicio.html"><p>VER ORDEN DE SERVICIO </p></a>
-                <a href="IngresarProveedor.html"><p>INGRESAR PROVEEDOR</p></a> 
-                <a href="IngresarCliente.html"><p>INGRESAR CLIENTE </p></a>
-                <div class = "selected">INGRESAR SPONSOR </div>
-                <a href="IngresarTarifas.html"><p>INGRESAR TARIFAS </p></a>
-                <a href="IngresarServicios.html"><p>INGRESAR SERVICIOS </p></a>
-                <a href="VerProveedores.html"><p>VER PROVEEDORES</p></a>
-                <a href="VerClientes.html"><p>VER CLIENTES</p></a>
-                <a href="VerTarifas.html"><p>VER TARIFAS</p></a>
-                <a href="Comparar.html"><p>COMPARAR </p></a>
-                <p></p>
-                <p>SALIR </p>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Poppins"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="style.css" />
+    <title>Ver Sponsor</title>
+  </head>
+  <body>
+    <div class="grid-container">
+      <div class="grid-item-menu">
+        <p></p>
+        <a href="Index.html"><p>HOME</p></a>
+        <p></p>
+        <a href="IngresarSolicitud.html"><p>INGRESAR SOLICITUD</p></a>
+        <a href="VerCuentaDeCobro.html"><p>VER CUENTA DE COBRO</p></a>
+        <a href="VerOrdenDeServicio.html"><p>VER ORDEN DE SERVICIO</p></a>
+        <a href="IngresarProveedor.html"><p>INGRESAR PROVEEDOR</p></a>
+        <a href="IngresarCliente.html"><p>INGRESAR CLIENTE</p></a>
+        <div class="selected">INGRESAR SPONSOR</div>
+        <a href="IngresarTarifas.html"><p>INGRESAR TARIFAS</p></a>
+        <a href="IngresarServicios.html"><p>INGRESAR SERVICIOS</p></a>
+        <a href="VerProveedores.html"><p>VER PROVEEDORES</p></a>
+        <a href="VerClientes.html"><p>VER CLIENTES</p></a>
+        <a href="VerTarifas.html"><p>VER TARIFAS</p></a>
+        <a href="Comparar.html"><p>COMPARAR</p></a>
+        <p></p>
+        <p>SALIR</p>
+      </div>
+
+      <div class="grid-item">
+        <div class="grid-info" style="margin-top: 10%">
+          <div class="form">
+            <div class="form-text">Nombre</div>
+            <div id="errorNombre" class="error-text"></div>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input
+                type="text"
+                placeholder="Nombre"
+                id="nombre"
+                onchange="nameValidation()"
+                disabled
+              />
             </div>
-            
-            <div class="grid-item">
-                <div class="grid-info" style="margin-top: 10%;">
-                        <div class= "form">
-                            <div class = "form-text">Nombre</div>
-                            <div id="errorNombre" class="error-text"></div>
-                            <div class="input-field">
-                                <i class="fas fa-user"></i>
-                                <input type="text" placeholder="Nombre" id="nombre" onchange="nameValidation()" disabled>
-                            </div>
-                            
-                            <div class="arrow">
-                                <i class="fas fa-caret-left" onclick="lastRegister()" style="display:none;" id="left"></i>
-                                <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()" style="margin-right: 3px;">
-                                <input type="submit" value="Eliminar" class="btn solid" id="botonEliminar" onclick="eliminar()" style="margin-left: 3px;">
-                                <i class="fas fa-caret-right" onclick="nextRegister()" id="right"></i>
-                            </div>
-                        </div>
-                    <div class="circle"><h1 id="title">INGRESAR<br>SPONSOR</h1></div>
-                    
-                </div>
-                
+
+            <div class="arrow">
+              <i
+                class="fas fa-caret-left"
+                onclick="lastRegister()"
+                style="display: none"
+                id="left"
+              ></i>
+              <input
+                type="submit"
+                value="Modificar"
+                class="btn solid"
+                id="boton"
+                onclick="change()"
+                style="margin-right: 3px"
+              />
+              <input
+                type="submit"
+                value="Eliminar"
+                class="btn solid"
+                id="botonEliminar"
+                onclick="eliminar()"
+                style="margin-left: 3px"
+              />
+              <i
+                class="fas fa-caret-right"
+                onclick="nextRegister()"
+                id="right"
+              ></i>
             </div>
           </div>
-          <script>
-              var registerPosition = 0;
-              cargarDatos()
+          <div class="circle">
+            <h1 id="title">INGRESAR<br />SPONSOR</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      var registerPosition = 0;
+      cargarDatos();
 
-            function cargarDatos(){
-                document.getElementById("nombre").value = "nombre1"
-            }
+      function cargarDatos() {
+        document.getElementById("nombre").value = "nombre1";
+      }
 
-            function change(){
-                valor = document.getElementById("boton").value;
-                if (valor == "Modificar"){
-                    document.getElementById("boton").value = "Aceptar"
-                    document.getElementById("title").innerHTML= "MODIFICAR<br>SPONSOR"
-                    document.getElementById("nombre").disabled = false
-                }else{
-                    const nameValidatio = nameValidation()
-                    if (nameValidatio) {
-                        document.getElementById("boton").value = "Modificar"
-                        document.getElementById("title").innerHTML= "VER<br>SPONSOR"
-                        document.getElementById("nombre").disabled = true
-                        if(document.getElementById("nombre").value != "posicion"){
-                            const name = document.getElementById("nombre").value
-                        }
-                        alert("Elemento modificado")
-                    } else {
-                        alert("Por favor llene todos los campos")
-                    }
-                    
-                }
+      function change() {
+        valor = document.getElementById("boton").value;
+        if (valor == "Modificar") {
+          document.getElementById("boton").value = "Aceptar";
+          document.getElementById("title").innerHTML = "MODIFICAR<br>SPONSOR";
+          document.getElementById("nombre").disabled = false;
+        } else {
+          const nameValidatio = nameValidation();
+          if (nameValidatio) {
+            document.getElementById("boton").value = "Modificar";
+            document.getElementById("title").innerHTML = "VER<br>SPONSOR";
+            document.getElementById("nombre").disabled = true;
+            if (document.getElementById("nombre").value != "posicion") {
+              const name = document.getElementById("nombre").value;
             }
+            alert("Elemento modificado");
+          } else {
+            alert("Por favor llene todos los campos");
+          }
+        }
+      }
 
-            function lastRegister(){
-                registerPosition--
-                document.getElementById("right").style.display = "inline";
-                cargarDatos()
-                if (registerPosition==0){
-                    document.getElementById("left").style.display = "none";
-                }
-            }
+      function lastRegister() {
+        registerPosition--;
+        document.getElementById("right").style.display = "inline";
+        cargarDatos();
+        if (registerPosition == 0) {
+          document.getElementById("left").style.display = "none";
+        }
+      }
 
-            function nextRegister(){
-                registerPosition++
-                document.getElementById("left").style.display = "inline";
-                cargarDatos()
-                if (registerPosition==10){
-                    document.getElementById("right").style.display = "none";
-                }
-            }
+      function nextRegister() {
+        registerPosition++;
+        document.getElementById("left").style.display = "inline";
+        cargarDatos();
+        if (registerPosition == 10) {
+          document.getElementById("right").style.display = "none";
+        }
+      }
 
-            function eliminar() {
-                if (registerPosition==10) {
-                    registerPosition--
-                }
-                cargarDatos()
-                alert("Elemento eliminado")
-            }
+      function eliminar() {
+        if (registerPosition == 10) {
+          registerPosition--;
+        }
+        cargarDatos();
+        alert("Elemento eliminado");
+      }
 
-            function nameValidation(){
-                const name = document.getElementById("nombre").value
-                if (name == "") {
-                    document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
-                    return false
-                }else{
-                    document.getElementById("errorNombre").innerHTML = ""
-                    return true
-                }
-            }
-          </script>
-    </body>
+      function nameValidation() {
+        const name = document.getElementById("nombre").value;
+        if (name == "") {
+          document.getElementById("errorNombre").innerHTML =
+            "Por favor ingrese un nombre";
+          return false;
+        } else {
+          document.getElementById("errorNombre").innerHTML = "";
+          return true;
+        }
+      }
+    </script>
+  </body>
 </html>

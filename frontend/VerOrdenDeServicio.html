@@ -57,8 +57,11 @@
             </div>
         </div>
         <script>
-            for (var x = 0; x<1; x++)
-                agregar(document.getElementById("proveedor"),"opcion1") 
+            fetch("http://localhost:8080//")
+                .then((response) => response.json())
+                .then((data) => datas = data);
+            for (var x = 0; x < datas.lenght; x++)
+                agregar(document.getElementById("proveedor"), datas[x]) 
             
             function agregar (select, val){
                 const option = document.createElement('option');

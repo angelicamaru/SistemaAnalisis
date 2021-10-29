@@ -107,14 +107,33 @@
         </div>
         <script>
             var registerPosition = 0;
-            for (var x = 0; x<1; x++)
-                agregar(document.getElementById("entregable"),"opcion1")    
-            for (var x = 0; x<1; x++)
-                agregar(document.getElementById("ejecucion"),"opcion1")
-            for (var x = 0; x<1; x++)
-                agregar(document.getElementById("sponsor"),"opcion1")
-            for (var x = 0; x<1; x++)
-                agregar(document.getElementById("servicio"),"opcion1")
+            var datas
+            fetch("http://localhost:8080//")
+                .then((response) => response.json())
+                .then((data) => datas = data);
+            for (var x = 0; x < datas.lenght; x++)
+                agregar(document.getElementById("entregable"),datas[x]) 
+            fetch("http://localhost:8080//")
+                .then((response) => response.json())
+                .then((data) => datas = data);
+            for (var x = 0; x < datas.lenght; x++)
+                agregar(document.getElementById("ejecucion"),datas[x]) 
+            fetch("http://localhost:8080//")
+                .then((response) => response.json())
+                .then((data) => datas = data);
+            for (var x = 0; x < datas.lenght; x++)
+                agregar(document.getElementById("sponsor"),datas[x]) 
+            fetch("http://localhost:8080//")
+                .then((response) => response.json())
+                .then((data) => datas = data);
+            for (var x = 0; x < datas.lenght; x++)
+                agregar(document.getElementById("servicio"),datas[x]) 
+            
+            let datos
+            fetch("http://localhost:8080//")
+                .then((response) => response.json())
+                .then((data) => datos = data);
+            
             cargarDatos()
 
             function agregar (select, val){
@@ -126,13 +145,13 @@
             };
             
             function cargarDatos(){
-                document.getElementById("nombre").value = "nombre1"
-                document.getElementById("entregable").value = "opcion1"
-                document.getElementById("ejecucion").value = "opcion1"
-                document.getElementById("sponsor").value = "opcion1"
-                document.getElementById("servicio").value = "opcion1"
-                document.getElementById("cantidad").value = 1
-                document.getElementById("fecha").value = "2010-10-10"
+                document.getElementById("nombre").value = datos[registerPosition].nombre
+                document.getElementById("entregable").value = datos[registerPosition].entrgable
+                document.getElementById("ejecucion").value = datos[registerPosition].ejecucion
+                document.getElementById("sponsor").value = datos[registerPosition].sponsor
+                document.getElementById("servicio").value = datos[registerPosition].servicio
+                document.getElementById("cantidad").value = datos[registerPosition].cantidad
+                document.getElementById("fecha").value = datos[registerPosition].fecha
             }
             
 

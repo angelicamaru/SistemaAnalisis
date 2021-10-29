@@ -12,7 +12,7 @@
             crossorigin = "anonymous"
         ></script>
         <title>
-            Ver cuenta de cobro
+            Ver cuenta de cobro 
         </title>
     </head>
     <body>
@@ -57,8 +57,12 @@
             </div>
         </div>
         <script>
-            for (var x = 0; x<1; x++)
-                agregar(document.getElementById("cliente"),"opcion1") 
+            var datas
+            fetch("http://localhost:8080//")
+                .then((response) => response.json())
+                .then((data) => datas = data);
+            for (var x = 0; x < datas.lenght; x++)
+                agregar(document.getElementById("cliente"), datas[x]) 
             
             function agregar (select, val){
                 const option = document.createElement('option');

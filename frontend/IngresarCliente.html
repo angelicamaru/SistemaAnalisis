@@ -91,8 +91,6 @@
                 const addressValidatio = addressValidation()
                 var tipo = ""
                 var typeValidation = false
-                
-                 
                 const telefono = document.getElementById("Telefono").value
                 const correo = document.getElementById("Correo").value
                 if (document.getElementById("Empresa").checked){
@@ -114,7 +112,27 @@
                     document.getElementById("Direccion").value = ""
                     document.getElementById("Empresa").checked = false
                     document.getElementById("Persona").checked = false
-                    alert("Registro agregado")
+
+                    var url = "http://localhost:8080/añadirCliente";
+                    var data = {
+                        nombre: name,
+                        telefono: telefono,
+                        correo: correo,
+                        direccion: direccion,
+                        tipo: tipo,
+                    }
+                    fetch(url, {
+                        method: "POST",
+                        body: JSON.stringify(data),
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                        },
+                    })
+                    .then(function (response) {
+                        alert("Registro agregado")
+                        return response.json();
+                    });
                 } else {
                     alert("Por favor llene todos los campos")
                 }

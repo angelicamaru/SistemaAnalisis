@@ -3,6 +3,7 @@ package com.spring.rest.conf.controllers;
 import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,7 +30,7 @@ public class ControllerProveedor {
 	}
 
 	// Traer nombres de proveedores
-	@PostMapping("/traerNombresProveedores")
+	@GetMapping("/traerNombresProveedores")
 	ArrayList<String> traerSolicitudes() {
 		ArrayList<String> proveedores = proveedor.traerNombres();
 		return proveedores;
@@ -40,6 +41,18 @@ public class ControllerProveedor {
 	int traerId(@RequestBody Proveedor proo) {
 		int id = proveedor.id(proo.getNombre());
 		return id;
+	}
+
+	// Modificar proveedor
+	@PostMapping("/modProveedor")
+	void modCliente(@RequestBody Proveedor proo) {
+		proveedor.mod(proo);
+	}
+
+	// Eliminar proveedor
+	@PostMapping("/eliminarProveedor")
+	void deleteProveedor(@RequestBody Proveedor nombreP) {
+		proveedor.eliminarP(nombreP);
 	}
 
 }

@@ -42,5 +42,12 @@ public class ControllerCuentaCobro {
 	void añadirCuentaCobro(@RequestBody CuentaCobro cuentacobro) {
 		cuentaCobro.añadirCuentaCobro(cuentacobro.getIdProveedor(),cuentacobro.getmes(),cuentacobro.getNombre());
 	}
+	
+	// Traer cuenta de cobro
+		@PostMapping("/traerCuentaCobro")
+		CuentaCobro cuentaCobro(@RequestBody CuentaCobro cuentacobro) {
+			CuentaCobro cuentaCobroS = cuentaCobro.cuentaCobro(cuentacobro.getIdProveedor(), cuentacobro.getmes());
+			return cuentaCobroS;
+		}
 
 }

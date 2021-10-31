@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import com.entidades.Cliente;
+import com.entidades.Proveedor;
 import com.entidades.Solicitud;
 
 public class ConexionCliente {
@@ -102,5 +103,35 @@ public class ConexionCliente {
 
 		return id;
 	}
+
+	
+	//ModCliente
+	public void modC(Cliente clienteMod) {
+		conexion();
+
+		try (PreparedStatement stmt = con.prepareStatement(
+				"UPDATE cliente SET nombre = '"+clienteMod.getNombre()+"', telefono = '"+clienteMod.getTelefono()+"', correo = '"+clienteMod.getCorreo()+"', direccion = '"+clienteMod.getDireccion()+"', empresa = '"+clienteMod.isEmpresa()+" "
+						+ "' WHERE idCliente ='"+clienteMod.getIdCliente()+"'")){
+			stmt.executeUpdate();
+		} catch (SQLException sqle) {
+			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+		}
+
+		
+		
+	}
+	
+		
+		//Eliminar cliente
+		public void eliminarC(Cliente nombre) {
+			conexion();
+
+			try (PreparedStatement stmt = con.prepareStatement("DELETE FROM cliente WHERE nombre = '"+nombre.getNombre()+"'")){
+				stmt.executeUpdate();
+			} catch (SQLException sqle) {
+				System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+			}
+
+		}
 
 }

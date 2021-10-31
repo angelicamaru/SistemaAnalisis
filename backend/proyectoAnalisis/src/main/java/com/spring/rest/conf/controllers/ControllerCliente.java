@@ -38,5 +38,11 @@ public class ControllerCliente {
 		int id = cliente.id(clienteS.getNombre());
 		return id;
 	}
+	
+	// Modificar cliente
+		@PostMapping("/modCliente")
+		void modCliente(@RequestBody Cliente clienteMod) {
+			 cliente.mod(clienteMod);		
+		}
 
 }

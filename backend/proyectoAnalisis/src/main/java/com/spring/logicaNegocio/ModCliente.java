@@ -37,4 +37,12 @@ public class ModCliente {
 
 	}
 
+	// Mod cliente
+	public void mod(Cliente clienteMod) {
+		con = new ConexionCliente();
+		con.modC(clienteMod);
+		con.desconectar();
+		
+	}
+
 }

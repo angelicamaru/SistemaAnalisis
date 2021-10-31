@@ -1,8 +1,11 @@
 package com.spring.logicaNegocio;
 
+import java.util.ArrayList;
+
 import org.springframework.stereotype.Service;
 
 import com.entidades.CuentaCobro;
+import com.entidades.Solicitud;
 
 import basededatos.ConexionCuentaCobro;
 
@@ -48,6 +51,31 @@ public class ModCuentaCobro {
 		con.nuevaCuentaCobro(idProveedor, mes, nombre);
 		con.desconectar();
 
+	}
+
+	//Traer cuenta de cobro
+	public CuentaCobro cuentaCobro(int idProveedor, String mes) {
+		con = new ConexionCuentaCobro();
+		
+		ModSolicitud solicitud = new ModSolicitud();
+		
+		int id = con.id(idProveedor, mes);
+		String nombre = con.nombre(idProveedor, mes);
+		
+		ArrayList<Solicitud> solicitudes = solicitud.traerSolicitudes(id);	
+		
+		
+		CuentaCobro cuenta = new CuentaCobro(id,nombre,mes, idProveedor,solicitudes,total());
+		con.desconectar();
+		return cuenta;
+	}
+	
+	//Total solicitudes
+	
+	public double total() {
+		double precioTotal = 3000;
+		
+		return precioTotal;
 	}
 
 }

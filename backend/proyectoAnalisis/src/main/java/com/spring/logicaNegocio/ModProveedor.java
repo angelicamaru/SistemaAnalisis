@@ -39,4 +39,20 @@ public class ModProveedor {
 
 	}
 
+	// Mod proveedor
+	public void mod(Proveedor provMod) {
+		con = new ConexionProveedor();
+		con.modP(provMod);
+		con.desconectar();
+
+	}
+
+	// Eliminar proveedor
+	public void eliminarP(Proveedor nombre) {
+		con = new ConexionProveedor();
+		con.eliminarP(nombre);
+		con.desconectar();
+
+	}
+
 }

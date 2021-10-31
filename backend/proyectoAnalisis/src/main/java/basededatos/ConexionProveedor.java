@@ -7,9 +7,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-
+import com.entidades.Cliente;
 import com.entidades.Proveedor;
-
 
 public class ConexionProveedor {
 	private final String url = "jdbc:mysql://localhost:3306/analisisproyecto?useUnicode=true&use"
@@ -51,8 +50,8 @@ public class ConexionProveedor {
 		conexion();
 		try (PreparedStatement stmt = con.prepareStatement(
 
-				"INSERT INTO Proveedor VALUES (null,'" + nuevoProveedor.getNombre() + "','" + nuevoProveedor.getTelefono()
-						+ "','" + nuevoProveedor.getCorreo() + "')")) {
+				"INSERT INTO Proveedor VALUES (null,'" + nuevoProveedor.getNombre() + "','"
+						+ nuevoProveedor.getTelefono() + "','" + nuevoProveedor.getCorreo() + "')")) {
 			stmt.executeUpdate();
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
@@ -86,12 +85,12 @@ public class ConexionProveedor {
 		conexion();
 		int id = 0;
 
-		try (PreparedStatement stmt = con.prepareStatement(
-				"SELECT idProveedor FROM Proveedor WHERE nombre= '" + nombre+"'")) {
+		try (PreparedStatement stmt = con
+				.prepareStatement("SELECT idProveedor FROM Proveedor WHERE nombre= '" + nombre + "'")) {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-			System.out.println(rs);
-			id = rs.getInt("idProveedor");
+				System.out.println(rs);
+				id = rs.getInt("idProveedor");
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
@@ -100,4 +99,30 @@ public class ConexionProveedor {
 		return id;
 	}
 
+	
+	//Modificar proveedor
+	public void modP(Proveedor provMod) {
+		conexion();
+
+		try (PreparedStatement stmt = con.prepareStatement(
+				"UPDATE proveedor SET nombre = '"+provMod.getNombre()+"', telefono = '"+provMod.getTelefono()+"', correo = '"+provMod.getCorreo()+"' "
+						+ "WHERE idProveedor ='"+provMod.getIdProveedor()+"'")){
+			stmt.executeUpdate();
+		} catch (SQLException sqle) {
+			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+		}
+
+	}
+	
+	//Eliminar proveedor
+	public void eliminarP(Proveedor nombre) {
+		conexion();
+
+		try (PreparedStatement stmt = con.prepareStatement("DELETE FROM proveedor WHERE nombre = '"+nombre.getNombre()+"'")){
+			stmt.executeUpdate();
+		} catch (SQLException sqle) {
+			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+		}
+
+	}
 }

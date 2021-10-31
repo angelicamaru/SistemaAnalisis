@@ -1,11 +1,15 @@
 package com.entidades;
 
+import java.util.ArrayList;
+
 public class CuentaCobro {
 
 	private int idCuentaCobro;
 	private String nombre;
 	private String mes;
 	private int idProveedor;
+	private ArrayList<Solicitud> solicitudes;
+	private double total;
 
 	public CuentaCobro() {
 
@@ -33,6 +37,19 @@ public class CuentaCobro {
 		this.nombre = nombre;
 		this.mes = mes;
 		this.idProveedor = idProveedor;
+	}
+	
+	
+
+	public CuentaCobro(int idCuentaCobro, String nombre, String mes, int idProveedor,
+			ArrayList<Solicitud> solicitudes, double total) {
+		
+		this.idCuentaCobro = idCuentaCobro;
+		this.nombre = nombre;
+		this.mes = mes;
+		this.idProveedor = idProveedor;
+		this.solicitudes = solicitudes;
+		this.total = total;
 	}
 
 	public int getIdCuentaCobro() {
@@ -66,5 +83,31 @@ public class CuentaCobro {
 	public void setIdProveedor(int idProveedor) {
 		this.idProveedor = idProveedor;
 	}
+
+	public String getMes() {
+		return mes;
+	}
+
+	public void setMes(String mes) {
+		this.mes = mes;
+	}
+
+	public ArrayList<Solicitud> getSolicitudes() {
+		return solicitudes;
+	}
+
+	public void setSolicitudes(ArrayList<Solicitud> solicitudes) {
+		this.solicitudes = solicitudes;
+	}
+
+	public double getTotal() {
+		return total;
+	}
+
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	
+	
 
 }

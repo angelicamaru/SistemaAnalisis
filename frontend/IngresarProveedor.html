@@ -21,7 +21,7 @@
                 <p></p>
                 <a href="Index.html"><p>HOME</p></a>
                 <p></p>
-                <a href="IngresarSolicitud.html"><p>INGESAR SOLICITUD </p></a>
+                <a href="IngresarSolicitud.html"><p>INGRESAR SOLICITUD </p></a>
                 <a href="VerCuentaDeCobro.html"><p>VER CUENTA DE COBRO </p></a>
                 <a href="VerOrdenDeServicio.html"><p>VER ORDEN DE SERVICIO </p></a>
                 <div class = "selected">INGRESAR PROVEEDOR</div>
@@ -67,6 +67,15 @@
             </div>
           </div>
           <script>
+            let nombres;
+            fetch("http://localhost:8080//traerNombresProveedores")
+                .then((response) => response.json())
+                .then((data) => initialize(data));
+
+            function intialize(data){
+                nombres = data;
+            }    
+
             function agregarRegistro(){
                 const telValidatio = telValidation()
                 const emailValidatio = emailValidation()
@@ -79,7 +88,7 @@
                     document.getElementById("Nombre").value = ""
                     document.getElementById("Telefono").value = ""
                     document.getElementById("Correo").value = ""
-                    var url = "http://localhost:8080/";
+                    var url = "http://localhost:8080/añadirProveedor";
                     var data = {
                         nombre: name,
                         telefono: telefono,
@@ -141,6 +150,12 @@
                     document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
                     return false
                 }else{
+                    for (let i = 0; i < nombres.length; i++) {
+                        if (name == nombres[i]) {
+                            document.getElementById("errorNombre").innerHTML = "Este nombre ya existe, por favor digite otro"
+                            return false
+                        }
+                    }
                     document.getElementById("errorNombre").innerHTML = ""
                     return true
                 }

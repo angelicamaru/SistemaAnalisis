@@ -21,7 +21,7 @@
                 <p></p>
                 <a href="Index.html"><p>HOME</p></a>
                 <p></p>
-                <a href="IngresarSolicitud.html"><p>INGESAR SOLICITUD </p></a>
+                <a href="IngresarSolicitud.html"><p>INGRESAR SOLICITUD </p></a>
                 <a href="VerCuentaDeCobro.html"><p>VER CUENTA DE COBRO </p></a>
                 <a href="VerOrdenDeServicio.html"><p>VER ORDEN DE SERVICIO </p></a>
                 <a href="IngresarProveedor.html"><p>INGRESAR PROVEEDOR</p></a> 
@@ -82,6 +82,16 @@
             </div>
           </div>
         <script>
+
+            let nombres;
+            fetch("http://localhost:8080//traerNombresClientes")
+                .then((response) => response.json())
+                .then((data) => initialize(data));
+
+            function intialize(data){
+                nombres = data;
+            }
+
             function agregarRegistro(){
                 const telValidatio = telValidation()
                 const emailValidatio = emailValidation()
@@ -94,11 +104,11 @@
                 const telefono = document.getElementById("Telefono").value
                 const correo = document.getElementById("Correo").value
                 if (document.getElementById("Empresa").checked){
-                    tipo = "Empresa"
+                    tipo = true
                     typeValidation = true
                     document.getElementById("errorTipo").innerHTML = ""
                 }else if (document.getElementById("Persona").checked){
-                    tipo = "Persona"
+                    tipo = false
                     typeValidation = true
                     document.getElementById("errorTipo").innerHTML = ""
                 }else{
@@ -177,6 +187,12 @@
                     document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
                     return false
                 }else{
+                    for (let i = 0; i < nombres.length; i++) {
+                        if (name == nombres[i]) {
+                            document.getElementById("errorNombre").innerHTML = "Este nombre ya existe, por favor digite otro"
+                            return false
+                        }
+                    }
                     document.getElementById("errorNombre").innerHTML = ""
                     return true
                 }

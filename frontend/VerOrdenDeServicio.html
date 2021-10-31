@@ -21,7 +21,7 @@
                 <p></p>
                 <a href="Index.html"><p>HOME </p></a>
                 <p></p>
-                <a href="IngresarSolicitud.html"><p>INGESAR SOLICITUD </p></a>
+                <a href="IngresarSolicitud.html"><p>INGRESAR SOLICITUD </p></a>
                 <a href="VerCuentaDeCobro.html"><p>VER CUENTA DE COBRO</p></a>
                 <div class = "selected">VER ORDEN DE SERVICIO </div>
                 <a href="IngresarProveedor.html"><p>INGRESAR PROVEEDOR</p></a> 
@@ -40,28 +40,45 @@
             <div class="grid-item">
                 <h1 id = "title" class="titleContent">VER ORDEN DE SERVICIO</h1>
                 <div class="cuentas">
-                    <div class = "form-text">Proveedor</div>
+                    <div class = "form-text">Cliente</div>
                     <div class = "form-text">Fecha</div>
                     <div class="cuentas-select-field">
                         <i class="fas fa-user"></i>
-                        <select name="proveedor" id="proveedor" onchange="traerCuenta()">
-                            <option value="Seleccione proveedor" style="color: #aaa; font-weight: 500;">Seleccione proveedor</option>
+                        <select name="cliente" id="cliente" onchange="traerCuenta()">
+                            <option value="Seleccione cliente" style="color: #aaa; font-weight: 500;">Seleccione cliente</option>
                         </select>
                     </div>
-                    <div class="cuentas-input-field">
+                    <div class="cuentas-select-field">
                         <i class="far fa-calendar"></i>
-                        <input type="date" placeholder="Fecha" id="fecha" onchange="traerCuenta()">
+                        <select name="fecha" id="fecha" onchange="traerCuenta()">
+                            <option value="Seleccione un mes" style="color: #aaa; font-weight: 500;">Seleccione un mes</option>
+                            <option value=1>Enero</option>
+                            <option value=2>Febrero</option>
+                            <option value=3>Marzo</option>
+                            <option value=4>Abril</option>
+                            <option value=5>Mayo</option>
+                            <option value=6>Junio</option>
+                            <option value=7>Julio</option>
+                            <option value=8>Agosto</option>
+                            <option value=9>Septiembre</option>
+                            <option value=10>Octubre</option>
+                            <option value=11>Noviembre</option>
+                            <option value=12>Diciembre</option>
+                        </select>
                     </div>
                 </div>
                 <iframe src="" frameborder="0" id="iframe" ></iframe>
             </div>
         </div>
         <script>
-            fetch("http://localhost:8080//")
+            fetch("http://localhost:8080//traerNombresClientes")
                 .then((response) => response.json())
-                .then((data) => datas = data);
-            for (var x = 0; x < datas.lenght; x++)
-                agregar(document.getElementById("proveedor"), datas[x]) 
+                .then((data) => cargarComboBox("cliente",data));
+
+            function cargarComboBox(tipo,datas){
+                for (var x = 0; x < datas.length(); x++)
+                    agregar(document.getElementById(tipo),datas[x]) 
+            }
             
             function agregar (select, val){
                 const option = document.createElement('option');
@@ -72,9 +89,9 @@
             };
 
             function traerCuenta(){
-                const cliente = document.getElementById("proveedor").value
+                const cliente = document.getElementById("cliente").value
                 const fecha = document.getElementById("fecha").value
-                if(cliente != "Seleccione proveedor" && fecha != ""){
+                if(cliente != "Seleccione cliente" && fecha != ""){
                     document.getElementById("iframe").src = "http://docs.google.com/gview?url=http://www.educoas.org/portal/bdigital/contenido/valzacchi/ValzacchiCapitulo-2New.pdf&embedded=true" 
                 }else{
                     document.getElementById("iframe").src = ""

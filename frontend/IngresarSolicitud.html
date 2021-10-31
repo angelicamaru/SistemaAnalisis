@@ -98,29 +98,38 @@
                                 
             </div>
         </div>
-        <script>
-            var datas
-            fetch("http://localhost:8080//")
-                .then((response) => response.json())
-                .then((data) => datas = data);
-            for (var x = 0; x < datas.lenght; x++)
-                agregar(document.getElementById("entregable"),datas[x]) 
-            fetch("http://localhost:8080//")
-                .then((response) => response.json())
-                .then((data) => datas = data);
-            for (var x = 0; x < datas.lenght; x++)
-                agregar(document.getElementById("ejecucion"),datas[x]) 
-            fetch("http://localhost:8080//")
-                .then((response) => response.json())
-                .then((data) => datas = data);
-            for (var x = 0; x < datas.lenght; x++)
-                agregar(document.getElementById("sponsor"),datas[x]) 
-            fetch("http://localhost:8080//")
-                .then((response) => response.json())
-                .then((data) => datas = data);
-            for (var x = 0; x < datas.lenght; x++)
-                agregar(document.getElementById("servicio"),datas[x]) 
 
+        <script>
+            fetch("http://localhost:8080//traerNombreEntregable")
+                .then((response) => response.json())
+                .then((data) => cargarComboBox("entregable",data));
+
+            fetch("http://localhost:8080//traerNombreEjecucion")
+                .then((response) => response.json())
+                .then((data) => cargarComboBox("ejecucion",data));
+
+            fetch("http://localhost:8080//traerNombresSponsors")
+                .then((response) => response.json())
+                .then((data) => cargarComboBox("sponsor",data));
+
+            fetch("http://localhost:8080//traerNombreServicio")
+                .then((response) => response.json())
+                .then((data) => cargarComboBox("servicio",data));
+
+            function cargarComboBox(tipo,datas){
+                for (var x = 0; x < datas.length(); x++)
+                    agregar(document.getElementById(tipo),datas[x]) 
+            }
+
+            let nombres;
+            fetch("http://localhost:8080//traerNombresSolicitudes")
+                .then((response) => response.json())
+                .then((data) => initialize(data));
+
+            function intialize(data){
+                nombres = data;
+            }
+            
             function agregar (select, val){
                 const option = document.createElement('option');
                 const valor = val;
@@ -152,7 +161,7 @@
                     document.getElementById("servicio").value = "Seleccione servicio"
                     document.getElementById("cantidad").value = ""
                     document.getElementById("fecha").value = ""
-                    var url = "http://localhost:8080/";
+                    var url = "http://localhost:8080//añadirSolicitud";
                     var data = {
                         nombre: name,
                         entregable: entregable,
@@ -186,6 +195,12 @@
                     document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
                     return false
                 }else{
+                    for (let i = 0; i < nombres.length; i++) {
+                        if (name == nombres[i]) {
+                            document.getElementById("errorNombre").innerHTML = "Este nombre ya existe, por favor digite otro"
+                            return false
+                        }
+                    }
                     document.getElementById("errorNombre").innerHTML = ""
                     return true
                 }

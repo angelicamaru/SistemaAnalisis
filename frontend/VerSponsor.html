@@ -21,12 +21,12 @@
                 <p></p>
                 <a href="Index.html"><p>HOME</p></a>
                 <p></p>
-                <a href="IngresarSolicitud.html"><p>INGESAR SOLICITUD </p></a>
+                <a href="IngresarSolicitud.html"><p>INGRESAR SOLICITUD </p></a>
                 <a href="VerCuentaDeCobro.html"><p>VER CUENTA DE COBRO </p></a>
                 <a href="VerOrdenDeServicio.html"><p>VER ORDEN DE SERVICIO </p></a>
                 <a href="IngresarProveedor.html"><p>INGRESAR PROVEEDOR</p></a> 
                 <a href="IngresarCliente.html"><p>INGRESAR CLIENTE </p></a>
-                <div class = "selected">INGRESAR SPONSOR </div>
+                <a href="IngresarSponsor.html"><p>INGRESAR SPONSOR </p></a>
                 <a href="IngresarTarifas.html"><p>INGRESAR TARIFAS </p></a>
                 <a href="IngresarServicios.html"><p>INGRESAR SERVICIOS </p></a>
                 <a href="VerProveedores.html"><p>VER PROVEEDORES</p></a>
@@ -59,13 +59,23 @@
                 </div>
                 
             </div>
-          </div>
-          <script>
-              var registerPosition = 0;
-              cargarDatos()
+        </div>
+        <script>
+            var registerPosition = 0;
+            let datos;
+            fetch("http://localhost:8080//traerSponsors")
+                .then((response) => response.json())
+                .then((data) => initialize(data));
+
+            function intialize(data){
+                datos = data;
+                cargarDatos()
+            }
+                
+
 
             function cargarDatos(){
-                document.getElementById("nombre").value = "nombre1"
+                document.getElementById("nombre").value = datos[registerPosition].nombre
             }
 
             function change(){
@@ -80,10 +90,27 @@
                         document.getElementById("boton").value = "Modificar"
                         document.getElementById("title").innerHTML= "VER<br>SPONSOR"
                         document.getElementById("nombre").disabled = true
-                        if(document.getElementById("nombre").value != "posicion"){
+                        if(document.getElementById("nombre").value != datos[registerPosition].nombre){
                             const name = document.getElementById("nombre").value
+                            var url = "http://localhost:8080//";
+                            var data = {
+                                id = datos[registerPosition].id,
+                                mombre = name,
+                            }
+                            fetch(url, {
+                                method: "POST",
+                                body: JSON.stringify(data),
+                                headers: {
+                                    Accept: "application/json",
+                                    "Content-Type": "application/json",
+                                },
+                            })
+                            .then(function (response) {
+                                alert("Elemento modificado")
+                                return response.json();
+                            });
                         }
-                        alert("Elemento modificado")
+                        
                     } else {
                         alert("Por favor llene todos los campos")
                     }
@@ -104,17 +131,31 @@
                 registerPosition++
                 document.getElementById("left").style.display = "inline";
                 cargarDatos()
-                if (registerPosition==10){
+                if (registerPosition==datos.lenth){
                     document.getElementById("right").style.display = "none";
                 }
             }
 
             function eliminar() {
-                if (registerPosition==10) {
+                if (registerPosition==datos.lenth) {
                     registerPosition--
                 }
+                var url = "http://localhost:8080//";
+                const id = datos[registerPosition].id
+                fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(id),
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                })
+                .then(function (response) {
+                    alert("Elemento eliminado")
+                    return response.json();
+                });
                 cargarDatos()
-                alert("Elemento eliminado")
+                
             }
 
             function nameValidation(){

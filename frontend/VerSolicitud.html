@@ -21,7 +21,7 @@
                 <p></p>
                 <a href="Index.html"><p>HOME</p></a>
                 <p></p>
-                <div class = "selected">INGESAR SOLICITUD </div>
+                <a href="IngresarSolicitud.html"><p>INGRESAR SOLICITUD </p></a>
                 <a href="VerCuentaDeCobro.html"><p>VER CUENTA DE COBRO </p></a>
                 <a href="VerOrdenDeServicio.html"><p>VER ORDEN DE SERVICIO </p></a>
                 <a href="IngresarProveedor.html"><p>INGRESAR PROVEEDOR</p></a> 
@@ -89,7 +89,7 @@
                         <div id="errorFecha" class="error-text"></div>
                         <div class="input-field">
                             <i class="fas fa-user"></i>
-                            <input type="date" placeholder="Fecha" id="fecha" onchange="fechaValidation()"> disabled>
+                            <input type="date" placeholder="Fecha" id="fecha" onchange="fechaValidation()" disabled>
                         </div>
                         <div class="arrow">
                             <i class="fas fa-caret-left" onclick="lastRegister()" style="display:none;" id="left"></i>
@@ -107,32 +107,26 @@
         </div>
         <script>
             var registerPosition = 0;
-            var datas
-            fetch("http://localhost:8080//")
+            fetch("http://localhost:8080//traerNombreEntregable")
                 .then((response) => response.json())
-                .then((data) => datas = data);
-            for (var x = 0; x < datas.lenght; x++)
-                agregar(document.getElementById("entregable"),datas[x]) 
-            fetch("http://localhost:8080//")
+                .then((data) => cargarComboBox("entregable",data));
+
+            fetch("http://localhost:8080//traerNombreEjecucion")
                 .then((response) => response.json())
-                .then((data) => datas = data);
-            for (var x = 0; x < datas.lenght; x++)
-                agregar(document.getElementById("ejecucion"),datas[x]) 
-            fetch("http://localhost:8080//")
+                .then((data) => cargarComboBox("ejecucion",data));
+
+            fetch("http://localhost:8080//traerNombresSponsors")
                 .then((response) => response.json())
-                .then((data) => datas = data);
-            for (var x = 0; x < datas.lenght; x++)
-                agregar(document.getElementById("sponsor"),datas[x]) 
-            fetch("http://localhost:8080//")
+                .then((data) => cargarComboBox("sponsor",data));
+
+            fetch("http://localhost:8080//traerNombreServicio")
                 .then((response) => response.json())
-                .then((data) => datas = data);
-            for (var x = 0; x < datas.lenght; x++)
-                agregar(document.getElementById("servicio"),datas[x]) 
-            
-            let datos
-            fetch("http://localhost:8080//")
-                .then((response) => response.json())
-                .then((data) => datos = data);
+                .then((data) => cargarComboBox("servicio",data));
+
+            function cargarComboBox(tipo,datas){
+                for (var x = 0; x < datas.length(); x++)
+                    agregar(document.getElementById(tipo),datas[x]) 
+            }
             
             cargarDatos()
 
@@ -143,6 +137,16 @@
                 option.text = valor;
                 select.appendChild(option);
             };
+
+            let datos;
+            fetch("http://localhost:8080//traerSolicitudes")
+                .then((response) => response.json())
+                .then((data) => initialize(data));
+
+            function intialize(data){
+                datos = data;
+                cargarDatos()
+            }
             
             function cargarDatos(){
                 document.getElementById("nombre").value = datos[registerPosition].nombre
@@ -185,7 +189,6 @@
                         document.getElementById("servicio").disabled = true
                         document.getElementById("cantidad").disabled = true
                         document.getElementById("fecha").disabled = true
-                        const modificado = []
                         if(document.getElementById("nombre").value != "posicion"){
                             modificado.push([document.getElementById("nombre").value, "nombre"])
                         }
@@ -207,7 +210,23 @@
                         if(document.getElementById("fecha").value != "posicion"){
                             modificado.push([document.getElementById("fecha").value, "fecha"])
                         }
-                        alert("Elemento modificado")
+                        var url = "http://localhost:8080//";
+                        var data = {
+                            id = datos[registerPosition].id,
+                            modificacion = modificado,
+                        }
+                        fetch(url, {
+                            method: "POST",
+                            body: JSON.stringify(data),
+                            headers: {
+                                Accept: "application/json",
+                                "Content-Type": "application/json",
+                            },
+                        })
+                        .then(function (response) {
+                            alert("Elemento modificado")
+                            return response.json();
+                        });
                     }else {
                         alert("Por favor llene todos los campos")
                     }
@@ -227,15 +246,29 @@
                 registerPosition++
                 document.getElementById("left").style.display = "inline";
                 cargarDatos()
-                if (registerPosition==10){
+                if (registerPosition==datos.length){
                     document.getElementById("right").style.display = "none";
                 }
             }
 
             function eliminar() {
-                if (registerPosition==10) {
+                if (registerPosition==datos.length) {
                     registerPosition--
                 }
+                var url = "http://localhost:8080//";
+                const id = datos[registerPosition].id
+                fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(id),
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                })
+                .then(function (response) {
+                    alert("Elemento eliminado")
+                    return response.json();
+                });
                 cargarDatos()
                 alert("Elemento eliminado")
             }

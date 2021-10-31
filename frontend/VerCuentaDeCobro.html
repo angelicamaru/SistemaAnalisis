@@ -100,7 +100,6 @@
             </div>
         </div>
         <script>
-            crearPdf()
             fetch("http://localhost:8080//traerNombresProveedores")
                 .then((response) => response.json())
                 .then((data) => cargarComboBox("proveedor", data));

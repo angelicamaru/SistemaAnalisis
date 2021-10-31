@@ -20,7 +20,7 @@ public class CuentaCobro {
 	}
 
 	public CuentaCobro(int idProveedor, String mes) {
-
+		super();
 		this.mes = mes;
 		this.idProveedor = idProveedor;
 	}
@@ -68,14 +68,7 @@ public class CuentaCobro {
 		this.nombre = nombre;
 	}
 
-	public String getmes() {
-		return mes;
-	}
-
-	public void setmes(String mes) {
-		this.mes = mes;
-	}
-
+	
 	public int getIdProveedor() {
 		return idProveedor;
 	}

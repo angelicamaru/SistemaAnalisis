@@ -63,19 +63,13 @@ public class ModCuentaCobro {
 		String nombre = con.nombre(idProveedor, mes);
 		
 		ArrayList<Solicitud> solicitudes = solicitud.traerSolicitudes(id);	
-		
-		
-		CuentaCobro cuenta = new CuentaCobro(id,nombre,mes, idProveedor,solicitudes,total());
+		double total = con.total(id);
+		System.out.println(total);
+		CuentaCobro cuenta = new CuentaCobro(id,nombre,mes, idProveedor,solicitudes,total);
 		con.desconectar();
 		return cuenta;
 	}
 	
-	//Total solicitudes
-	
-	public double total() {
-		double precioTotal = 3000;
-		
-		return precioTotal;
-	}
+
 
 }

@@ -1,7 +1,10 @@
 package com.spring.logicaNegocio;
 
+import java.util.ArrayList;
+
 import com.entidades.CuentaCobro;
 import com.entidades.Ejecucion;
+import com.entidades.Solicitud;
 
 import basededatos.ConexionCuentaCobro;
 import basededatos.ConexionEjecucion;
@@ -48,5 +51,22 @@ public class ModEjecucion {
 			con.desconectar();
 			
 
+		}
+
+		//Traer cuenta de cobro
+		public Ejecucion traerEjecucion(int idCliente, String mes) {
+			con = new ConexionEjecucion();
+			
+			ModSolicitud solicitud = new ModSolicitud();
+			
+			int id = con.id(idCliente, mes);
+			String descripcion = con.descripcion(idCliente, mes);
+			ArrayList<Solicitud> solicitudes = solicitud.traerSolicitudes(id);	
+			double total = con.total(id);
+			
+			System.out.println(total);
+			Ejecucion eje = new Ejecucion(id,descripcion,mes, idCliente,solicitudes,total);
+			con.desconectar();
+			return eje;
 		}
 }

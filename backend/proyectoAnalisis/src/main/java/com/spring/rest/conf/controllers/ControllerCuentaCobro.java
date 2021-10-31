@@ -19,35 +19,39 @@ public class ControllerCuentaCobro {
 	// Validar si existe la cuenta de cobro
 	@PostMapping("/validaCuentaCobro")
 	Boolean validaExistencia(@RequestBody CuentaCobro cuentacobro) {
-		Boolean existe = cuentaCobro.existe(cuentacobro.getIdProveedor(), cuentacobro.getmes());
+		Boolean existe = cuentaCobro.existe(cuentacobro.getIdProveedor(), cuentacobro.getMes());
 		return existe;
 	}
 
 	// Traer cuenta de cobro
 	@PostMapping("/traerNombreCuentaCobro")
 	String traerNombre(@RequestBody CuentaCobro cuentacobro) {
-		String nombre = cuentaCobro.nombre(cuentacobro.getIdProveedor(), cuentacobro.getmes());
+		String nombre = cuentaCobro.nombre(cuentacobro.getIdProveedor(), cuentacobro.getMes());
 		return nombre;
 	}
 
 	// Traer id cuenta de cobro
 	@PostMapping("/traerIdCuentaCobro")
 	int traerId(@RequestBody CuentaCobro cuentacobro) {
-		int id = cuentaCobro.id(cuentacobro.getIdProveedor(), cuentacobro.getmes());
-		return id;
+		int id = cuentaCobro.id(cuentacobro.getIdProveedor(), cuentacobro.getMes());
+		System.out.println("helo");
+		return 1;
 	}
 
 	// Añadir nueva cuenta de cobro
 	@PostMapping("/añadirCuentaCobro")
 	void añadirCuentaCobro(@RequestBody CuentaCobro cuentacobro) {
-		cuentaCobro.añadirCuentaCobro(cuentacobro.getIdProveedor(),cuentacobro.getmes(),cuentacobro.getNombre());
+		cuentaCobro.añadirCuentaCobro(cuentacobro.getIdProveedor(),cuentacobro.getMes(),cuentacobro.getNombre());
 	}
 	
 	// Traer cuenta de cobro
 		@PostMapping("/traerCuentaCobro")
-		CuentaCobro cuentaCobro(@RequestBody CuentaCobro cuentacobro) {
-			CuentaCobro cuentaCobroS = cuentaCobro.cuentaCobro(cuentacobro.getIdProveedor(), cuentacobro.getmes());
+		CuentaCobro cuentaCobroTraer(@RequestBody CuentaCobro cuentacobro) {
+			System.out.println("HELLO");
+			CuentaCobro cuentaCobroS = cuentaCobro.cuentaCobro(cuentacobro.getIdProveedor(), cuentacobro.getMes());
 			return cuentaCobroS;
 		}
+		
+		
 
 }

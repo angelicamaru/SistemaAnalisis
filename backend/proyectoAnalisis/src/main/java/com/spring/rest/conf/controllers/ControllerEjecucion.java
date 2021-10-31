@@ -46,6 +46,13 @@ public class ControllerEjecucion {
 			ejecucion.añadirEjecucion(eje.getIdCliente(), eje.getMes(), eje.getDescripcion());
 		}
 		
+		// Traer ejecucion
+				@PostMapping("/traerEjecucion")
+				Ejecucion cuentaCobroTraer(@RequestBody Ejecucion eje) {
+					System.out.println("HELLO");
+					Ejecucion ejeS = ejecucion.traerEjecucion(eje.getIdCliente(), eje.getMes());
+					return ejeS;
+				}
 		
 		
 }

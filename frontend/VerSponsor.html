@@ -36,28 +36,35 @@
                 <p></p>
                 <p>SALIR </p>
             </div>
-            
-            <div class="grid-item">
-                <div class="grid-info" style="margin-top: 10%;">
-                        <div class= "form">
-                            <div class = "form-text">Nombre</div>
-                            <div id="errorNombre" class="error-text"></div>
-                            <div class="input-field">
-                                <i class="fas fa-user"></i>
-                                <input type="text" placeholder="Nombre" id="nombre" onchange="nameValidation()" disabled>
-                            </div>
-                            
-                            <div class="arrow">
-                                <i class="fas fa-caret-left" onclick="lastRegister()" style="display:none;" id="left"></i>
-                                <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()" style="margin-right: 3px;">
-                                <input type="submit" value="Eliminar" class="btn solid" id="botonEliminar" onclick="eliminar()" style="margin-left: 3px;">
-                                <i class="fas fa-caret-right" onclick="nextRegister()" id="right"></i>
-                            </div>
-                        </div>
-                    <div class="circle"><h1 id="title">INGRESAR<br>SPONSOR</h1></div>
-                    
-                </div>
-                
+
+            <div class="arrow">
+              <i
+                class="fas fa-caret-left"
+                onclick="lastRegister()"
+                style="display: none"
+                id="left"
+              ></i>
+              <input
+                type="submit"
+                value="Modificar"
+                class="btn solid"
+                id="boton"
+                onclick="change()"
+                style="margin-right: 3px"
+              />
+              <input
+                type="submit"
+                value="Eliminar"
+                class="btn solid"
+                id="botonEliminar"
+                onclick="eliminar()"
+                style="margin-left: 3px"
+              />
+              <i
+                class="fas fa-caret-right"
+                onclick="nextRegister()"
+                id="right"
+              ></i>
             </div>
         </div>
         <script>
@@ -118,14 +125,14 @@
                 }
             }
 
-            function lastRegister(){
-                registerPosition--
-                document.getElementById("right").style.display = "inline";
-                cargarDatos()
-                if (registerPosition==0){
-                    document.getElementById("left").style.display = "none";
-                }
-            }
+      function lastRegister() {
+        registerPosition--;
+        document.getElementById("right").style.display = "inline";
+        cargarDatos();
+        if (registerPosition == 0) {
+          document.getElementById("left").style.display = "none";
+        }
+      }
 
             function nextRegister(){
                 registerPosition++
@@ -158,16 +165,17 @@
                 
             }
 
-            function nameValidation(){
-                const name = document.getElementById("nombre").value
-                if (name == "") {
-                    document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
-                    return false
-                }else{
-                    document.getElementById("errorNombre").innerHTML = ""
-                    return true
-                }
-            }
-          </script>
-    </body>
+      function nameValidation() {
+        const name = document.getElementById("nombre").value;
+        if (name == "") {
+          document.getElementById("errorNombre").innerHTML =
+            "Por favor ingrese un nombre";
+          return false;
+        } else {
+          document.getElementById("errorNombre").innerHTML = "";
+          return true;
+        }
+      }
+    </script>
+  </body>
 </html>

@@ -2,8 +2,10 @@ package com.spring.rest.conf.controllers;
 
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entidades.Cliente;
@@ -13,6 +15,7 @@ import com.spring.logicaNegocio.ModCliente;
 import com.spring.logicaNegocio.ModProveedor;
 import com.spring.logicaNegocio.ModSolicitud;
 
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
 @RestController
 public class ControllerProveedor {
 

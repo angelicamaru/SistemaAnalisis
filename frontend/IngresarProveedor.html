@@ -36,35 +36,29 @@
                 <p></p>
                 <p>SALIR </p>
             </div>
-            
-            <div class="grid-item">
-                <div class="grid-info">
-                        <div class= "form">
-                            <div class = "form-text">Nombre</div>
-                            <div id="errorNombre" class="error-text"></div>
-                            <div class="input-field">
-                                <i class="fas fa-user"></i>
-                                <input type="text" placeholder="Nombre" id="Nombre" onchange="nameValidation()">
-                            </div>
-                            <div class = "form-text">Telefono</div>
-                            <div id="errorTelefono" class="error-text"></div>
-                            <div class="input-field">
-                                <i class="fas fa-mobile"></i>
-                                <input type="number" placeholder="Telefono" id="Telefono" onchange="telValidation()">
-                            </div>
-                            <div class = "form-text">Correo</div>
-                            <div id="errorCorreo" class="error-text"></div>
-                            <div class="input-field">
-                                <i class="fas fa-envelope"></i>
-                                <input type="text" placeholder="Correo" id="Correo" onchange="emailValidation()">
-                            </div>
-                            <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()">
-                        </div>
-                    <div class="circle" style="height: 100%;"><h1>INGRESAR<br> PROVEEDOR</h1></div>
-                    
-                </div>
-                
+            <div class="form-text">Correo</div>
+            <div id="errorCorreo" class="error-text"></div>
+            <div class="input-field">
+              <i class="fas fa-envelope"></i>
+              <input
+                type="text"
+                placeholder="Correo"
+                id="Correo"
+                onchange="emailValidation()"
+              />
             </div>
+            <input
+              type="submit"
+              value="Agregar"
+              class="btn solid"
+              onclick="agregarRegistro()"
+            />
+          </div>
+          <div class="circle" style="height: 100%">
+            <h1>
+              INGRESAR<br />
+              PROVEEDOR
+            </h1>
           </div>
           <script>
             let nombres;
@@ -112,37 +106,40 @@
                 
             }
 
-            function telValidation(){
-                var validation
-                const telefono = document.getElementById("Telefono").value
-                if(telefono == ""){
-                    document.getElementById("errorTelefono").innerHTML = "Por favor ingrese un numero de telefono"
-                    return false
-                }else if (telefono <= 999999999 || telefono >9999999999) {
-                    document.getElementById("errorTelefono").innerHTML = "Numero de telefono no valido"
-                    return false
-                }else{
-                    document.getElementById("errorTelefono").innerHTML = ""
-                    return true
-                }
-                return validation
-            }
+      function telValidation() {
+        var validation;
+        const telefono = document.getElementById("Telefono").value;
+        if (telefono == "") {
+          document.getElementById("errorTelefono").innerHTML =
+            "Por favor ingrese un numero de telefono";
+          return false;
+        } else if (telefono <= 999999999 || telefono > 9999999999) {
+          document.getElementById("errorTelefono").innerHTML =
+            "Numero de telefono no valido";
+          return false;
+        } else {
+          document.getElementById("errorTelefono").innerHTML = "";
+          return true;
+        }
+        return validation;
+      }
 
-            function emailValidation(){
-                var validation
-                const correo = document.getElementById("Correo").value
-                if(correo == ""){
-                    document.getElementById("errorCorreo").innerHTML = "Por favor ingrese un correo"
-                    return false
-                }else if (!correo.includes('@')) {
-                    document.getElementById("errorCorreo").innerHTML = "Correo no valido"
-                    return false
-                }else{
-                    document.getElementById("errorCorreo").innerHTML = ""
-                    return true
-                }
-                return validation
-            }
+      function emailValidation() {
+        var validation;
+        const correo = document.getElementById("Correo").value;
+        if (correo == "") {
+          document.getElementById("errorCorreo").innerHTML =
+            "Por favor ingrese un correo";
+          return false;
+        } else if (!correo.includes("@")) {
+          document.getElementById("errorCorreo").innerHTML = "Correo no valido";
+          return false;
+        } else {
+          document.getElementById("errorCorreo").innerHTML = "";
+          return true;
+        }
+        return validation;
+      }
 
             function nameValidation(){
                 const name = document.getElementById("Nombre").value

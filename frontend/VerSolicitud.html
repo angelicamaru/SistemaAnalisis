@@ -104,6 +104,10 @@
                 </div>
                                 
             </div>
+          </div>
+          <div class="circle">
+            <h1 id="title">VER<br />SOLICITUD</h1>
+          </div>
         </div>
         <script>
             var registerPosition = 0;
@@ -233,15 +237,6 @@
                 }
             }
 
-            function lastRegister(){
-                registerPosition--
-                document.getElementById("right").style.display = "inline";
-                cargarDatos()
-                if (registerPosition==0){
-                    document.getElementById("left").style.display = "none";
-                }
-            }
-
             function nextRegister(){
                 registerPosition++
                 document.getElementById("left").style.display = "inline";
@@ -270,86 +265,101 @@
                     return response.json();
                 });
                 cargarDatos()
-                alert("Elemento eliminado")
             }
 
-            function nameValidation(){
-                const name = document.getElementById("nombre").value
-                if (name == "") {
-                    document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
-                    return false
-                }else{
-                    document.getElementById("errorNombre").innerHTML = ""
-                    return true
-                }
-            }
 
-            function entregableValidation(){
-                const name = document.getElementById("entregable").value
-                if (name == "Seleccione entregable") {
-                    document.getElementById("errorEntregable").innerHTML = "Por favor seleccione un entregable"
-                    return false
-                }else{
-                    document.getElementById("errorEntregable").innerHTML = ""
-                    return true
-                }
-            }
+      function lastRegister() {
+        registerPosition--;
+        document.getElementById("right").style.display = "inline";
+        cargarDatos();
+        if (registerPosition == 0) {
+          document.getElementById("left").style.display = "none";
+        }
+      }
 
-            function ejecucionValidation(){
-                const name = document.getElementById("ejecucion").value
-                if (name == "Seleccione ejecución") {
-                    document.getElementById("errorEjecucion").innerHTML = "Por favor seleccione una ejecución"
-                    return false
-                }else{
-                    document.getElementById("errorEjecucion").innerHTML = ""
-                    return true
-                }
-            }
+      function nameValidation() {
+        const name = document.getElementById("nombre").value;
+        if (name == "") {
+          document.getElementById("errorNombre").innerHTML =
+            "Por favor ingrese un nombre";
+          return false;
+        } else {
+          document.getElementById("errorNombre").innerHTML = "";
+          return true;
+        }
+      }
 
-            function sponsorValidation(){
-                const name = document.getElementById("sponsor").value
-                if (name == "Seleccione sponsor") {
-                    document.getElementById("errorSponsor").innerHTML = "Por favor seleccione un sponsor"
-                    return false
-                }else{
-                    document.getElementById("errorSponsor").innerHTML = ""
-                    return true
-                }
-            }
+      function entregableValidation() {
+        const name = document.getElementById("entregable").value;
+        if (name == "Seleccione entregable") {
+          document.getElementById("errorEntregable").innerHTML =
+            "Por favor seleccione un entregable";
+          return false;
+        } else {
+          document.getElementById("errorEntregable").innerHTML = "";
+          return true;
+        }
+      }
 
-            function servicioValidation(){
-                const name = document.getElementById("servicio").value
-                if (name == "Seleccione servicio") {
-                    document.getElementById("errorServicio").innerHTML = "Por favor seleccione un servicio"
-                    return false
-                }else{
-                    document.getElementById("errorServicio").innerHTML = ""
-                    return true
-                }
-            }
+      function ejecucionValidation() {
+        const name = document.getElementById("ejecucion").value;
+        if (name == "Seleccione ejecución") {
+          document.getElementById("errorEjecucion").innerHTML =
+            "Por favor seleccione una ejecución";
+          return false;
+        } else {
+          document.getElementById("errorEjecucion").innerHTML = "";
+          return true;
+        }
+      }
 
-            function cantidadValidation(){
-                const name = document.getElementById("cantidad").value
-                if (name == "") {
-                    document.getElementById("errorCantidad").innerHTML = "Por favor ingrese una cantidad"
-                    return false
-                }else{
-                    document.getElementById("errorCantidad").innerHTML = ""
-                    return true
-                }
-            }
+      function sponsorValidation() {
+        const name = document.getElementById("sponsor").value;
+        if (name == "Seleccione sponsor") {
+          document.getElementById("errorSponsor").innerHTML =
+            "Por favor seleccione un sponsor";
+          return false;
+        } else {
+          document.getElementById("errorSponsor").innerHTML = "";
+          return true;
+        }
+      }
 
-            function fechaValidation(){
-                const name = document.getElementById("fecha").value
-                if (name == "") {
-                    document.getElementById("errorFecha").innerHTML = "Por favor ingrese una fecha"
-                    return false
-                }else{
-                    document.getElementById("errorFecha").innerHTML = ""
-                    return true
-                }
-            }
+      function servicioValidation() {
+        const name = document.getElementById("servicio").value;
+        if (name == "Seleccione servicio") {
+          document.getElementById("errorServicio").innerHTML =
+            "Por favor seleccione un servicio";
+          return false;
+        } else {
+          document.getElementById("errorServicio").innerHTML = "";
+          return true;
+        }
+      }
 
-        </script>
-    </body>
+      function cantidadValidation() {
+        const name = document.getElementById("cantidad").value;
+        if (name == "") {
+          document.getElementById("errorCantidad").innerHTML =
+            "Por favor ingrese una cantidad";
+          return false;
+        } else {
+          document.getElementById("errorCantidad").innerHTML = "";
+          return true;
+        }
+      }
+
+      function fechaValidation() {
+        const name = document.getElementById("fecha").value;
+        if (name == "") {
+          document.getElementById("errorFecha").innerHTML =
+            "Por favor ingrese una fecha";
+          return false;
+        } else {
+          document.getElementById("errorFecha").innerHTML = "";
+          return true;
+        }
+      }
+    </script>
+  </body>
 </html>

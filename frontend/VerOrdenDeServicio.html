@@ -1,57 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
-        <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Poppins">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="style.css">
-        <script 
-            src = "https://kit.fontawesome.com/64d58efce2.js"
-            crossorigin = "anonymous"
-        ></script>
+        <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
         <title>
             Ver orden de servicio
         </title>
     </head>
+
     <body>
         <div class="grid-container">
             <div class="grid-item-menu">
                 <p></p>
-                <a href="Index.html"><p>HOME </p></a>
+                <a href="Index.html">
+                    <p>HOME </p>
+                </a>
                 <p></p>
-                <a href="IngresarSolicitud.html"><p>INGRESAR SOLICITUD </p></a>
-                <a href="VerCuentaDeCobro.html"><p>VER CUENTA DE COBRO</p></a>
-                <div class = "selected">VER ORDEN DE SERVICIO </div>
-                <a href="IngresarProveedor.html"><p>INGRESAR PROVEEDOR</p></a> 
-                <a href="IngresarCliente.html"><p>INGRESAR CLIENTE </p></a>
-                <a href="IngresarSponsor.html"><p>INGRESAR SPONSOR </p></a>
-                <a href="IngresarTarifas.html"><p>INGRESAR TARIFAS </p></a>
-                <a href="IngresarServicios.html"><p>INGRESAR SERVICIOS </p></a>
-                <a href="VerProveedores.html"><p>VER PROVEEDORES</p></a>
-                <a href="VerClientes.html"><p>VER CLIENTES</p></a>
-                <a href="VerTarifas.html"><p>VER TARIFAS</p></a>
-                <a href="Comparar.html"><p>COMPARAR </p></a>
+                <a href="IngresarSolicitud.html">
+                    <p>INGRESAR SOLICITUD </p>
+                </a>
+                <a href="VerCuentaDeCobro.html">
+                    <p>VER CUENTA DE COBRO</p>
+                </a>
+                <div class="selected">VER ORDEN DE SERVICIO </div>
+                <a href="IngresarProveedor.html">
+                    <p>INGRESAR PROVEEDOR</p>
+                </a>
+                <a href="IngresarCliente.html">
+                    <p>INGRESAR CLIENTE </p>
+                </a>
+                <a href="IngresarSponsor.html">
+                    <p>INGRESAR SPONSOR </p>
+                </a>
+                <a href="IngresarTarifas.html">
+                    <p>INGRESAR TARIFAS </p>
+                </a>
+                <a href="IngresarServicios.html">
+                    <p>INGRESAR SERVICIOS </p>
+                </a>
+                <a href="VerProveedores.html">
+                    <p>VER PROVEEDORES</p>
+                </a>
+                <a href="VerClientes.html">
+                    <p>VER CLIENTES</p>
+                </a>
+                <a href="VerTarifas.html">
+                    <p>VER TARIFAS</p>
+                </a>
+                <a href="Comparar.html">
+                    <p>COMPARAR </p>
+                </a>
                 <p></p>
                 <p>SALIR </p>
             </div>
-            
+
             <div class="grid-item">
-                <h1 id = "title" class="titleContent">VER ORDEN DE SERVICIO</h1>
+                <h1 id="title" class="titleContent">VER ORDEN DE SERVICIO</h1>
                 <div class="cuentas">
-                    <div class = "form-text">Cliente</div>
-                    <div class = "form-text">Fecha</div>
+                    <div class="form-text">Cliente</div>
+                    <div class="form-text">Fecha</div>
                     <div class="cuentas-select-field">
                         <i class="fas fa-user"></i>
                         <select name="cliente" id="cliente" onchange="traerCuenta()">
-                            <option value="Seleccione cliente" style="color: #aaa; font-weight: 500;">Seleccione cliente</option>
+                            <option value="Seleccione cliente" style="color: #aaa; font-weight: 500;">Seleccione cliente
+                            </option>
                         </select>
                     </div>
                     <div class="cuentas-select-field">
                         <i class="far fa-calendar"></i>
                         <select name="fecha" id="fecha" onchange="traerCuenta()">
-                            <option value="Seleccione un mes" style="color: #aaa; font-weight: 500;">Seleccione un mes</option>
+                            <option value="Seleccione un mes" style="color: #aaa; font-weight: 500;">Seleccione un mes
+                            </option>
                             <option value=1>Enero</option>
                             <option value=2>Febrero</option>
                             <option value=3>Marzo</option>
@@ -67,20 +91,20 @@
                         </select>
                     </div>
                 </div>
-                <iframe src="" frameborder="0" id="iframe" ></iframe>
+                <iframe src="" frameborder="0" id="iframe"></iframe>
             </div>
         </div>
         <script>
             fetch("http://localhost:8080//traerNombresClientes")
                 .then((response) => response.json())
-                .then((data) => cargarComboBox("cliente",data));
+                .then((data) => cargarComboBox("cliente", data));
 
-            function cargarComboBox(tipo,datas){
+            function cargarComboBox(tipo, datas) {
                 for (var x = 0; x < datas.length(); x++)
-                    agregar(document.getElementById(tipo),datas[x]) 
+                    agregar(document.getElementById(tipo), datas[x])
             }
-            
-            function agregar (select, val){
+
+            function agregar(select, val) {
                 const option = document.createElement('option');
                 const valor = val;
                 option.value = valor;
@@ -88,15 +112,16 @@
                 select.appendChild(option);
             };
 
-            function traerCuenta(){
+            function traerCuenta() {
                 const cliente = document.getElementById("cliente").value
                 const fecha = document.getElementById("fecha").value
-                if(cliente != "Seleccione cliente" && fecha != ""){
-                    document.getElementById("iframe").src = "http://docs.google.com/gview?url=http://www.educoas.org/portal/bdigital/contenido/valzacchi/ValzacchiCapitulo-2New.pdf&embedded=true" 
-                }else{
+                if (cliente != "Seleccione cliente" && fecha != "") {
+                    document.getElementById("iframe").src = "http://docs.google.com/gview?url=http://www.educoas.org/portal/bdigital/contenido/valzacchi/ValzacchiCapitulo-2New.pdf&embedded=true"
+                } else {
                     document.getElementById("iframe").src = ""
                 }
             }
         </script>
     </body>
+
 </html>

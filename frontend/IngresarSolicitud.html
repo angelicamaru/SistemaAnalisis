@@ -1,38 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
   <head>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Poppins"
-    />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins" />
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css" />
     <title>Ingresar Solicitud</title>
   </head>
+
   <body>
     <div class="grid-container">
       <div class="grid-item-menu">
         <p></p>
-        <a href="Index.html"><p>HOME</p></a>
+        <a href="Index.html">
+          <p>HOME</p>
+        </a>
         <p></p>
         <div class="selected">INGRESAR SOLICITUD</div>
-        <a href="VerCuentaDeCobro.html"><p>VER CUENTA DE COBRO</p></a>
-        <a href="VerOrdenDeServicio.html"><p>VER ORDEN DE SERVICIO</p></a>
-        <a href="IngresarProveedor.html"><p>INGRESAR PROVEEDOR</p></a>
-        <a href="IngresarCliente.html"><p>INGRESAR CLIENTE</p></a>
-        <a href="IngresarSponsor.html"><p>INGRESAR SPONSOR</p></a>
-        <a href="IngresarTarifas.html"><p>INGRESAR TARIFAS</p></a>
-        <a href="IngresarServicios.html"><p>INGRESAR SERVICIOS</p></a>
-        <a href="VerProveedores.html"><p>VER PROVEEDORES</p></a>
-        <a href="VerClientes.html"><p>VER CLIENTES</p></a>
-        <a href="VerTarifas.html"><p>VER TARIFAS</p></a>
-        <a href="Comparar.html"><p>COMPARAR</p></a>
+        <a href="VerCuentaDeCobro.html">
+          <p>VER CUENTA DE COBRO</p>
+        </a>
+        <a href="VerOrdenDeServicio.html">
+          <p>VER ORDEN DE SERVICIO</p>
+        </a>
+        <a href="IngresarProveedor.html">
+          <p>INGRESAR PROVEEDOR</p>
+        </a>
+        <a href="IngresarCliente.html">
+          <p>INGRESAR CLIENTE</p>
+        </a>
+        <a href="IngresarSponsor.html">
+          <p>INGRESAR SPONSOR</p>
+        </a>
+        <a href="IngresarTarifas.html">
+          <p>INGRESAR TARIFAS</p>
+        </a>
+        <a href="IngresarServicios.html">
+          <p>INGRESAR SERVICIOS</p>
+        </a>
+        <a href="VerProveedores.html">
+          <p>VER PROVEEDORES</p>
+        </a>
+        <a href="VerClientes.html">
+          <p>VER CLIENTES</p>
+        </a>
+        <a href="VerTarifas.html">
+          <p>VER TARIFAS</p>
+        </a>
+        <a href="Comparar.html">
+          <p>COMPARAR</p>
+        </a>
         <p></p>
         <p>SALIR</p>
       </div>
@@ -44,26 +64,14 @@
             <div id="errorNombre" class="error-text"></div>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input
-                type="text"
-                placeholder="Nombre"
-                id="nombre"
-                onchange="nameValidation()"
-              />
+              <input type="text" placeholder="Nombre" id="nombre" onchange="nameValidation()" />
             </div>
             <div class="form-text">Entregable</div>
             <div id="errorEntregable" class="error-text"></div>
             <div class="select-field">
               <i class="fas fa-hammer"></i>
-              <select
-                name="entregable"
-                id="entregable"
-                onchange="entregableValidation()"
-              >
-                <option
-                  value="Seleccione entregable"
-                  style="color: #aaa; font-weight: 500"
-                >
+              <select name="entregable" id="entregable" onchange="entregableValidation()">
+                <option value="Seleccione entregable" style="color: #aaa; font-weight: 500">
                   Seleccione entregable
                 </option>
               </select>
@@ -72,15 +80,8 @@
             <div id="errorEjecucion" class="error-text"></div>
             <div class="select-field">
               <i class="fas fa-file"></i>
-              <select
-                name="ejecucion"
-                id="ejecucion"
-                onchange="ejecucionValidation()"
-              >
-                <option
-                  value="Seleccione ejecución"
-                  style="color: #aaa; font-weight: 500"
-                >
+              <select name="ejecucion" id="ejecucion" onchange="ejecucionValidation()">
+                <option value="Seleccione ejecución" style="color: #aaa; font-weight: 500">
                   Seleccione ejecución
                 </option>
               </select>
@@ -89,15 +90,8 @@
             <div id="errorSponsor" class="error-text"></div>
             <div class="select-field">
               <i class="fas fa-user-tie"></i>
-              <select
-                name="sponsor"
-                id="sponsor"
-                onchange="sponsorValidation()"
-              >
-                <option
-                  value="Seleccione sponsor"
-                  style="color: #aaa; font-weight: 500"
-                >
+              <select name="sponsor" id="sponsor" onchange="sponsorValidation()">
+                <option value="Seleccione sponsor" style="color: #aaa; font-weight: 500">
                   Seleccione sponsor
                 </option>
               </select>
@@ -106,15 +100,8 @@
             <div id="errorServicio" class="error-text"></div>
             <div class="select-field">
               <i class="fas fa-swatchbook"></i>
-              <select
-                name="servicio"
-                id="servicio"
-                onchange="servicioValidation()"
-              >
-                <option
-                  value="Seleccione servicio"
-                  style="color: #aaa; font-weight: 500"
-                >
+              <select name="servicio" id="servicio" onchange="servicioValidation()">
+                <option value="Seleccione servicio" style="color: #aaa; font-weight: 500">
                   Seleccione servicio
                 </option>
               </select>
@@ -123,30 +110,15 @@
             <div id="errorCantidad" class="error-text"></div>
             <div class="input-field">
               <i class="fas fa-calculator"></i>
-              <input
-                type="number"
-                placeholder="Cantidad"
-                id="cantidad"
-                onchange="cantidadValidation()"
-              />
+              <input type="number" placeholder="Cantidad" id="cantidad" onchange="cantidadValidation()" />
             </div>
             <div class="form-text">Fecha</div>
             <div id="errorFecha" class="error-text"></div>
             <div class="input-field">
               <i class="far fa-calendar"></i>
-              <input
-                type="date"
-                placeholder="Fecha"
-                id="fecha"
-                onchange="fechaValidation()"
-              />
+              <input type="date" placeholder="Fecha" id="fecha" onchange="fechaValidation()" />
             </div>
-            <input
-              type="submit"
-              value="Agregar"
-              class="btn solid"
-              onclick="agregarRegistro()"
-            />
+            <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()" />
           </div>
           <div class="circle">
             <h1>INGRESAR<br />SOLICITUD</h1>
@@ -154,183 +126,184 @@
         </div>
 
         <script>
-            fetch("http://localhost:8080//traerNombreEntregable")
-                .then((response) => response.json())
-                .then((data) => cargarComboBox("entregable",data));
+          fetch("http://localhost:8080//traerNombreEntregable")
+            .then((response) => response.json())
+            .then((data) => cargarComboBox("entregable", data));
 
-            fetch("http://localhost:8080//traerNombreEjecucion")
-                .then((response) => response.json())
-                .then((data) => cargarComboBox("ejecucion",data));
+          fetch("http://localhost:8080//traerNombreEjecucion")
+            .then((response) => response.json())
+            .then((data) => cargarComboBox("ejecucion", data));
 
-            fetch("http://localhost:8080//traerNombresSponsors")
-                .then((response) => response.json())
-                .then((data) => cargarComboBox("sponsor",data));
+          fetch("http://localhost:8080//traerNombresSponsors")
+            .then((response) => response.json())
+            .then((data) => cargarComboBox("sponsor", data));
 
-            fetch("http://localhost:8080//traerNombreServicio")
-                .then((response) => response.json())
-                .then((data) => cargarComboBox("servicio",data));
+          fetch("http://localhost:8080//traerNombreServicio")
+            .then((response) => response.json())
+            .then((data) => cargarComboBox("servicio", data));
 
-            function cargarComboBox(tipo,datas){
-                for (var x = 0; x < datas.length(); x++)
-                    agregar(document.getElementById(tipo),datas[x]) 
+          function cargarComboBox(tipo, datas) {
+            for (var x = 0; x < datas.length(); x++)
+              agregar(document.getElementById(tipo), datas[x])
+          }
+
+          let nombres;
+          fetch("http://localhost:8080//traerNombresSolicitudes")
+            .then((response) => response.json())
+            .then((data) => initialize(data));
+
+          function intialize(data) {
+            nombres = data;
+          }
+
+          function agregar(select, val) {
+            const option = document.createElement('option');
+            const valor = val;
+            option.value = valor;
+            option.text = valor;
+            select.appendChild(option);
+          };
+
+          function agregarRegistro() {
+            const nameValidatio = nameValidation()
+            const entregableValidatio = entregableValidation()
+            const ejecucionValidatio = ejecucionValidation()
+            const fechaValidatio = fechaValidation()
+            const sponsorValidatio = sponsorValidation()
+            const servicioValidatio = servicioValidation()
+            const cantidadValidatio = cantidadValidation()
+            const name = document.getElementById("nombre").value
+            const entregable = document.getElementById("entregable").value
+            const ejecucion = document.getElementById("ejecucion").value
+            const sponsor = document.getElementById("sponsor").value
+            const servicio = document.getElementById("servicio").value
+            const cantidad = document.getElementById("cantidad").value
+            const fecha = document.getElementById("fecha").value
+            if (nameValidatio && entregableValidatio && ejecucionValidatio && fechaValidatio && servicioValidatio && sponsorValidatio && cantidadValidatio) {
+              document.getElementById("nombre").value = ""
+              document.getElementById("entregable").value = "Seleccione entregable"
+              document.getElementById("ejecucion").value = "Seleccione ejecución"
+              document.getElementById("sponsor").value = "Seleccione sponsor"
+              document.getElementById("servicio").value = "Seleccione servicio"
+              document.getElementById("cantidad").value = ""
+              document.getElementById("fecha").value = ""
+              var url = "http://localhost:8080//añadirSolicitud";
+              var data = {
+                nombre: name,
+                entregable: entregable,
+                ejecucion: ejecucion,
+                sponsor: sponsor,
+                servicio: servicio,
+                cantidad: cantidad,
+                fecha: fecha,
+              }
+              fetch(url, {
+                method: "POST",
+                body: JSON.stringify(data),
+                headers: {
+                  Accept: "application/json",
+                  "Content-Type": "application/json",
+                },
+              })
+                .then(function (response) {
+                  alert("Registro agregado")
+                  return response.json();
+                });
+            } else {
+              alert("Por favor llene todos los campos")
             }
 
-            let nombres;
-            fetch("http://localhost:8080//traerNombresSolicitudes")
-                .then((response) => response.json())
-                .then((data) => initialize(data));
+          }
 
-            function intialize(data){
-                nombres = data;
-            }
-            
-            function agregar (select, val){
-                const option = document.createElement('option');
-                const valor = val;
-                option.value = valor;
-                option.text = valor;
-                select.appendChild(option);
-            };
-
-            function agregarRegistro(){
-                const nameValidatio = nameValidation()
-                const entregableValidatio = entregableValidation()
-                const ejecucionValidatio = ejecucionValidation()
-                const fechaValidatio = fechaValidation()
-                const sponsorValidatio = sponsorValidation()
-                const servicioValidatio = servicioValidation()
-                const cantidadValidatio = cantidadValidation()
-                const name = document.getElementById("nombre").value
-                const entregable = document.getElementById("entregable").value
-                const ejecucion = document.getElementById("ejecucion").value
-                const sponsor = document.getElementById("sponsor").value
-                const servicio = document.getElementById("servicio").value
-                const cantidad = document.getElementById("cantidad").value
-                const fecha = document.getElementById("fecha").value
-                if (nameValidatio && entregableValidatio && ejecucionValidatio && fechaValidatio && servicioValidatio && sponsorValidatio && cantidadValidatio) {
-                    document.getElementById("nombre").value = ""
-                    document.getElementById("entregable").value = "Seleccione entregable"
-                    document.getElementById("ejecucion").value = "Seleccione ejecución"
-                    document.getElementById("sponsor").value = "Seleccione sponsor"
-                    document.getElementById("servicio").value = "Seleccione servicio"
-                    document.getElementById("cantidad").value = ""
-                    document.getElementById("fecha").value = ""
-                    var url = "http://localhost:8080//añadirSolicitud";
-                    var data = {
-                        nombre: name,
-                        entregable: entregable,
-                        ejecucion: ejecucion,
-                        sponsor: sponsor,
-                        servicio: servicio,
-                        cantidad: cantidad,
-                        fecha: fecha,
-                    }
-                    fetch(url, {
-                        method: "POST",
-                        body: JSON.stringify(data),
-                        headers: {
-                            Accept: "application/json",
-                            "Content-Type": "application/json",
-                        },
-                    })
-                    .then(function (response) {
-                        alert("Registro agregado")
-                        return response.json();
-                    });
-                } else {
-                    alert("Por favor llene todos los campos")
+          function nameValidation() {
+            const name = document.getElementById("nombre").value
+            if (name == "") {
+              document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
+              return false
+            } else {
+              for (let i = 0; i < nombres.length; i++) {
+                if (name == nombres[i]) {
+                  document.getElementById("errorNombre").innerHTML = "Este nombre ya existe, por favor digite otro"
+                  return false
                 }
-                
+              }
+              document.getElementById("errorNombre").innerHTML = ""
+              return true
             }
+          }
 
-            function nameValidation(){
-                const name = document.getElementById("nombre").value
-                if (name == "") {
-                    document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
-                    return false
-                }else{
-                    for (let i = 0; i < nombres.length; i++) {
-                        if (name == nombres[i]) {
-                            document.getElementById("errorNombre").innerHTML = "Este nombre ya existe, por favor digite otro"
-                            return false
-                        }
-                    }
-                    document.getElementById("errorNombre").innerHTML = ""
-                    return true
-                }
+          function entregableValidation() {
+            const name = document.getElementById("entregable").value;
+            if (name == "Seleccione entregable") {
+              document.getElementById("errorEntregable").innerHTML =
+                "Por favor seleccione un entregable";
+              return false;
+            } else {
+              document.getElementById("errorEntregable").innerHTML = "";
+              return true;
             }
+          }
 
-      function entregableValidation() {
-        const name = document.getElementById("entregable").value;
-        if (name == "Seleccione entregable") {
-          document.getElementById("errorEntregable").innerHTML =
-            "Por favor seleccione un entregable";
-          return false;
-        } else {
-          document.getElementById("errorEntregable").innerHTML = "";
-          return true;
-        }
-      }
+          function ejecucionValidation() {
+            const name = document.getElementById("ejecucion").value;
+            if (name == "Seleccione ejecución") {
+              document.getElementById("errorEjecucion").innerHTML =
+                "Por favor seleccione una ejecución";
+              return false;
+            } else {
+              document.getElementById("errorEjecucion").innerHTML = "";
+              return true;
+            }
+          }
 
-      function ejecucionValidation() {
-        const name = document.getElementById("ejecucion").value;
-        if (name == "Seleccione ejecución") {
-          document.getElementById("errorEjecucion").innerHTML =
-            "Por favor seleccione una ejecución";
-          return false;
-        } else {
-          document.getElementById("errorEjecucion").innerHTML = "";
-          return true;
-        }
-      }
+          function sponsorValidation() {
+            const name = document.getElementById("sponsor").value;
+            if (name == "Seleccione sponsor") {
+              document.getElementById("errorSponsor").innerHTML =
+                "Por favor seleccione un sponsor";
+              return false;
+            } else {
+              document.getElementById("errorSponsor").innerHTML = "";
+              return true;
+            }
+          }
 
-      function sponsorValidation() {
-        const name = document.getElementById("sponsor").value;
-        if (name == "Seleccione sponsor") {
-          document.getElementById("errorSponsor").innerHTML =
-            "Por favor seleccione un sponsor";
-          return false;
-        } else {
-          document.getElementById("errorSponsor").innerHTML = "";
-          return true;
-        }
-      }
+          function servicioValidation() {
+            const name = document.getElementById("servicio").value;
+            if (name == "Seleccione servicio") {
+              document.getElementById("errorServicio").innerHTML =
+                "Por favor seleccione un servicio";
+              return false;
+            } else {
+              document.getElementById("errorServicio").innerHTML = "";
+              return true;
+            }
+          }
 
-      function servicioValidation() {
-        const name = document.getElementById("servicio").value;
-        if (name == "Seleccione servicio") {
-          document.getElementById("errorServicio").innerHTML =
-            "Por favor seleccione un servicio";
-          return false;
-        } else {
-          document.getElementById("errorServicio").innerHTML = "";
-          return true;
-        }
-      }
+          function cantidadValidation() {
+            const name = document.getElementById("cantidad").value;
+            if (name == "") {
+              document.getElementById("errorCantidad").innerHTML =
+                "Por favor ingrese una cantidad";
+              return false;
+            } else {
+              document.getElementById("errorCantidad").innerHTML = "";
+              return true;
+            }
+          }
 
-      function cantidadValidation() {
-        const name = document.getElementById("cantidad").value;
-        if (name == "") {
-          document.getElementById("errorCantidad").innerHTML =
-            "Por favor ingrese una cantidad";
-          return false;
-        } else {
-          document.getElementById("errorCantidad").innerHTML = "";
-          return true;
-        }
-      }
-
-      function fechaValidation() {
-        const name = document.getElementById("fecha").value;
-        if (name == "") {
-          document.getElementById("errorFecha").innerHTML =
-            "Por favor ingrese una fecha";
-          return false;
-        } else {
-          document.getElementById("errorFecha").innerHTML = "";
-          return true;
-        }
-      }
-    </script>
+          function fechaValidation() {
+            const name = document.getElementById("fecha").value;
+            if (name == "") {
+              document.getElementById("errorFecha").innerHTML =
+                "Por favor ingrese una fecha";
+              return false;
+            } else {
+              document.getElementById("errorFecha").innerHTML = "";
+              return true;
+            }
+          }
+        </script>
   </body>
+
 </html>

@@ -1,76 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
+
     <head>
-        <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Poppins">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <script 
-            src = "https://kit.fontawesome.com/64d58efce2.js"
-            crossorigin = "anonymous"
-        ></script>
+        <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="style.css">
         <title>
             Ingresar Proveedor
         </title>
     </head>
+
     <body>
         <div class="grid-container">
             <div class="grid-item-menu">
                 <p></p>
-                <a href="Index.html"><p>HOME</p></a>
+                <a href="Index.html">
+                    <p>HOME</p>
+                </a>
                 <p></p>
-                <a href="IngresarSolicitud.html"><p>INGRESAR SOLICITUD </p></a>
-                <a href="VerCuentaDeCobro.html"><p>VER CUENTA DE COBRO </p></a>
-                <a href="VerOrdenDeServicio.html"><p>VER ORDEN DE SERVICIO </p></a>
-                <div class = "selected">INGRESAR PROVEEDOR</div>
-                <a href="IngresarCliente.html"><p>INGRESAR CLIENTE </p></a>
-                <a href="IngresarSponsor.html"><p>INGRESAR SPONSOR </p></a>
-                <a href="IngresarTarifas.html"><p>INGRESAR TARIFAS </p></a>
-                <a href="IngresarServicios.html"><p>INGRESAR SERVICIOS </p></a>
-                <a href="VerProveedores.html"><p>VER PROVEEDORES</p></a>
-                <a href="VerClientes.html"><p>VER CLIENTES</p></a>
-                <a href="VerTarifas.html"><p>VER TARIFAS</p></a>
-                <a href="Comparar.html"><p>COMPARAR </p></a>
+                <a href="IngresarSolicitud.html">
+                    <p>INGRESAR SOLICITUD </p>
+                </a>
+                <a href="VerCuentaDeCobro.html">
+                    <p>VER CUENTA DE COBRO </p>
+                </a>
+                <a href="VerOrdenDeServicio.html">
+                    <p>VER ORDEN DE SERVICIO </p>
+                </a>
+                <div class="selected">INGRESAR PROVEEDOR</div>
+                <a href="IngresarCliente.html">
+                    <p>INGRESAR CLIENTE </p>
+                </a>
+                <a href="IngresarSponsor.html">
+                    <p>INGRESAR SPONSOR </p>
+                </a>
+                <a href="IngresarTarifas.html">
+                    <p>INGRESAR TARIFAS </p>
+                </a>
+                <a href="IngresarServicios.html">
+                    <p>INGRESAR SERVICIOS </p>
+                </a>
+                <a href="VerProveedores.html">
+                    <p>VER PROVEEDORES</p>
+                </a>
+                <a href="VerClientes.html">
+                    <p>VER CLIENTES</p>
+                </a>
+                <a href="VerTarifas.html">
+                    <p>VER TARIFAS</p>
+                </a>
+                <a href="Comparar.html">
+                    <p>COMPARAR </p>
+                </a>
                 <p></p>
                 <p>SALIR </p>
             </div>
             <div class="form-text">Correo</div>
             <div id="errorCorreo" class="error-text"></div>
             <div class="input-field">
-              <i class="fas fa-envelope"></i>
-              <input
-                type="text"
-                placeholder="Correo"
-                id="Correo"
-                onchange="emailValidation()"
-              />
+                <i class="fas fa-envelope"></i>
+                <input type="text" placeholder="Correo" id="Correo" onchange="emailValidation()" />
             </div>
-            <input
-              type="submit"
-              value="Agregar"
-              class="btn solid"
-              onclick="agregarRegistro()"
-            />
-          </div>
-          <div class="circle" style="height: 100%">
+            <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()" />
+        </div>
+        <div class="circle" style="height: 100%">
             <h1>
-              INGRESAR<br />
-              PROVEEDOR
+                INGRESAR<br />
+                PROVEEDOR
             </h1>
-          </div>
-          <script>
+        </div>
+        <script>
             let nombres;
             fetch("http://localhost:8080//traerNombresProveedores")
                 .then((response) => response.json())
                 .then((data) => initialize(data));
 
-            function intialize(data){
+            function intialize(data) {
                 nombres = data;
-            }    
+            }
 
-            function agregarRegistro(){
+            function agregarRegistro() {
                 const telValidatio = telValidation()
                 const emailValidatio = emailValidation()
                 const nameValidatio = nameValidation()
@@ -96,57 +108,57 @@
                             "Content-Type": "application/json",
                         },
                     })
-                    .then(function (response) {
-                        alert("Registro agregado")
-                        return response.json();
-                    });
+                        .then(function (response) {
+                            alert("Registro agregado")
+                            return response.json();
+                        });
                 } else {
                     alert("Por favor llene todos los campos")
                 }
-                
+
             }
 
-      function telValidation() {
-        var validation;
-        const telefono = document.getElementById("Telefono").value;
-        if (telefono == "") {
-          document.getElementById("errorTelefono").innerHTML =
-            "Por favor ingrese un numero de telefono";
-          return false;
-        } else if (telefono <= 999999999 || telefono > 9999999999) {
-          document.getElementById("errorTelefono").innerHTML =
-            "Numero de telefono no valido";
-          return false;
-        } else {
-          document.getElementById("errorTelefono").innerHTML = "";
-          return true;
-        }
-        return validation;
-      }
+            function telValidation() {
+                var validation;
+                const telefono = document.getElementById("Telefono").value;
+                if (telefono == "") {
+                    document.getElementById("errorTelefono").innerHTML =
+                        "Por favor ingrese un numero de telefono";
+                    return false;
+                } else if (telefono <= 999999999 || telefono > 9999999999) {
+                    document.getElementById("errorTelefono").innerHTML =
+                        "Numero de telefono no valido";
+                    return false;
+                } else {
+                    document.getElementById("errorTelefono").innerHTML = "";
+                    return true;
+                }
+                return validation;
+            }
 
-      function emailValidation() {
-        var validation;
-        const correo = document.getElementById("Correo").value;
-        if (correo == "") {
-          document.getElementById("errorCorreo").innerHTML =
-            "Por favor ingrese un correo";
-          return false;
-        } else if (!correo.includes("@")) {
-          document.getElementById("errorCorreo").innerHTML = "Correo no valido";
-          return false;
-        } else {
-          document.getElementById("errorCorreo").innerHTML = "";
-          return true;
-        }
-        return validation;
-      }
+            function emailValidation() {
+                var validation;
+                const correo = document.getElementById("Correo").value;
+                if (correo == "") {
+                    document.getElementById("errorCorreo").innerHTML =
+                        "Por favor ingrese un correo";
+                    return false;
+                } else if (!correo.includes("@")) {
+                    document.getElementById("errorCorreo").innerHTML = "Correo no valido";
+                    return false;
+                } else {
+                    document.getElementById("errorCorreo").innerHTML = "";
+                    return true;
+                }
+                return validation;
+            }
 
-            function nameValidation(){
+            function nameValidation() {
                 const name = document.getElementById("Nombre").value
                 if (name == "") {
                     document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
                     return false
-                }else{
+                } else {
                     for (let i = 0; i < nombres.length; i++) {
                         if (name == nombres[i]) {
                             document.getElementById("errorNombre").innerHTML = "Este nombre ya existe, por favor digite otro"
@@ -157,6 +169,7 @@
                     return true
                 }
             }
-          </script>
+        </script>
     </body>
+
 </html>

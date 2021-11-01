@@ -135,10 +135,10 @@ public class ConexionCuentaCobro {
 	//Total por solicitud
 			public double totalSolicitud(int id) {
 				double t=0;
-				System.out.println("SELECT SUM(entregable.precioCliente*solicitud.cantidad) as total from entregable inner join solicitud on Entregable.idEntregable "
+				System.out.println("SELECT SUM(entregable.precioProveedor*solicitud.cantidad) as total from entregable inner join solicitud on Entregable.idEntregable "
 						+ " = solicitud.idEntregable where solicitud.idCuentaCobro = "+id+")"); 
 					
-				try (PreparedStatement stmt = con.prepareStatement("SELECT SUM(entregable.precioCliente*solicitud.cantidad) as total from entregable inner join solicitud on Entregable.idEntregable "
+				try (PreparedStatement stmt = con.prepareStatement("SELECT SUM(entregable.precioProveedor*solicitud.cantidad) as total from entregable inner join solicitud on Entregable.idEntregable "
 						+ " = solicitud.idEntregable where solicitud.idCuentaCobro = "+id)) {
 					ResultSet rs = stmt.executeQuery();
 					while (rs.next()) {

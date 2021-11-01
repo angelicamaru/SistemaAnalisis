@@ -61,7 +61,7 @@ public class ModEjecucion {
 			
 			int id = con.id(idCliente, mes);
 			String descripcion = con.descripcion(idCliente, mes);
-			ArrayList<Solicitud> solicitudes = solicitud.traerSolicitudes(id);	
+			ArrayList<Solicitud> solicitudes = solicitud.traerSolicitudesPrecio(id);	
 			double total = con.total(id);
 			
 			System.out.println(total);

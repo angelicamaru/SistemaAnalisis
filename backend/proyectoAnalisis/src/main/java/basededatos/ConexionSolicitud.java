@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.entidades.Proveedor;
 import com.entidades.Solicitud;
 
 public class ConexionSolicitud {
@@ -84,4 +85,29 @@ public class ConexionSolicitud {
 		System.out.println(solicitudes);
 		return solicitudes;
 	}
+	
+	//Modificar solicitud
+		public void modS(Solicitud solMod) {
+			conexion();
+
+			try (PreparedStatement stmt = con.prepareStatement(
+					"UPDATE proveedor SET nombre = '"+solMod.getNombre()+"', cantidad = '"+solMod.getCantidad()+"', fecha = '"+solMod.getFecha()+"', idEntregable = '"+solMod.getIdEntregable()+"', idEjecucion = '"+solMod.getIdSponsor()+"', cantidad = '"+solMod.getIdService()+"', cantidad = '"+solMod.getIdCuentaCobro()+"WHERE idSolicitud ='"+solMod.getIdSolicitud()+"'")){
+				stmt.executeUpdate();
+			} catch (SQLException sqle) {
+				System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+			}
+
+		}
+		
+		//Eliminar solicitud
+		public void eliminarS(Solicitud id) {
+			conexion();
+
+			try (PreparedStatement stmt = con.prepareStatement("DELETE FROM solicitud WHERE idSolicitud = '"+id.getIdSolicitud()+"'")){
+				stmt.executeUpdate();
+			} catch (SQLException sqle) {
+				System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+			}
+
+		}
 }

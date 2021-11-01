@@ -3,8 +3,10 @@ package com.spring.logicaNegocio;
 import java.util.ArrayList;
 
 import com.entidades.Cliente;
+import com.entidades.Proveedor;
 
 import basededatos.ConexionCliente;
+import basededatos.ConexionProveedor;
 
 public class ModCliente {
 
@@ -43,6 +45,14 @@ public class ModCliente {
 		con.modC(clienteMod);
 		con.desconectar();
 		
+	}
+
+	// Eliminar proveedor
+	public void eliminarC(Cliente nombre) {
+		con = new ConexionCliente();
+		con.eliminarC(nombre);
+		con.desconectar();
+
 	}
 
 }

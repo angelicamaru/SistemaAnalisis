@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.entidades.Cliente;
 import com.entidades.CuentaCobro;
 import com.entidades.Solicitud;
 import com.spring.logicaNegocio.ModSolicitud;
@@ -31,5 +32,18 @@ public class ControllerSolicitud {
 		ArrayList<Solicitud> solicitudes = solicitud.traerSolicitudes(cuentaC.getIdCuentaCobro());		
 		return solicitudes;
 	}
+	
+
+	// Modificar solicitud
+		@PostMapping("/modSolicitud")//Envío del objeto modificado
+		void modCliente(@RequestBody Solicitud idSol) {
+			solicitud.mod(idSol);
+		}
+
+		// Eliminar cliente
+		@PostMapping("/eliminarSolicitud")//Envío del id de la solicitud a eliminar
+		void deleteProveedor(@RequestBody Solicitud idSol) {
+			solicitud.eliminarS(idSol);
+		}
 
 }

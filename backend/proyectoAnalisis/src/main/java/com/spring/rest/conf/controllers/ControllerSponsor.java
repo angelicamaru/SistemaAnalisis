@@ -8,11 +8,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-
-
+import com.entidades.Solicitud;
 import com.entidades.Sponsor;
 import com.spring.logicaNegocio.ModSponsor;
-
 
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
 @RestController
@@ -39,6 +37,18 @@ public class ControllerSponsor {
 	int traerId(@RequestBody Sponsor spons) {
 		int id = sponsor.id(spons.getNombre());
 		return id;
+	}
+
+	// Modificar sponsor
+	@PostMapping("/modSponsor")
+	void modCliente(@RequestBody Sponsor sp) {
+		sponsor.mod(sp);
+	}
+
+	// Eliminar sponsor
+	@PostMapping("/eliminarSponsor")//Envía el id del sponsor a eliminar
+	void deleteProveedor(@RequestBody Sponsor idSp) {
+		sponsor.eliminarS(idSp);
 	}
 
 }

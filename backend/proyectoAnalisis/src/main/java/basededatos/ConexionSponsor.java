@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import com.entidades.Proveedor;
 import com.entidades.Sponsor;
 
 public class ConexionSponsor {
@@ -95,7 +96,31 @@ public class ConexionSponsor {
 
 		return id;
 	}
-	
+	//Modificar sponsor
+		public void modS(Sponsor spoMod) {
+			conexion();
+
+			try (PreparedStatement stmt = con.prepareStatement(
+					"UPDATE sponsor SET nombre = '"+spoMod.getNombre()+"' "
+							+ "WHERE idSponsor ='"+spoMod.getIdSponsor()+"'")){
+				stmt.executeUpdate();
+			} catch (SQLException sqle) {
+				System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+			}
+
+		}
+		
+		//Eliminar sponsor
+		public void eliminarS(Sponsor idS) {
+			conexion();
+
+			try (PreparedStatement stmt = con.prepareStatement("DELETE FROM sponsor WHERE idSponsor = '"+idS.getIdSponsor()+"'")){
+				stmt.executeUpdate();
+			} catch (SQLException sqle) {
+				System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+			}
+
+		}
 	
 
 }

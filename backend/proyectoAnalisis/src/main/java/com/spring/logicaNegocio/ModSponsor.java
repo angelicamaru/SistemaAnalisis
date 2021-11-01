@@ -2,10 +2,11 @@ package com.spring.logicaNegocio;
 
 import java.util.ArrayList;
 
+import com.entidades.Proveedor;
 import com.entidades.Sponsor;
 
+import basededatos.ConexionProveedor;
 import basededatos.ConexionSponsor;
-
 
 public class ModSponsor {
 
@@ -35,6 +36,22 @@ public class ModSponsor {
 		int id = con.id(nombre);
 		con.desconectar();
 		return id;
+
+	}
+
+	// Mod sponsor
+	public void mod(Sponsor provMod) {
+		con = new ConexionSponsor();
+		con.modS(provMod);
+		con.desconectar();
+
+	}
+
+	// Eliminar sponsor
+	public void eliminarS(Sponsor nombre) {
+		con = new ConexionSponsor();
+		con.eliminarS(nombre);
+		con.desconectar();
 
 	}
 

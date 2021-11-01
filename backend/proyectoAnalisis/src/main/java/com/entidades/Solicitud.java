@@ -19,6 +19,12 @@ public class Solicitud {
 	}
 
 
+	public Solicitud(int idSolicitud) {
+		super();
+		this.idSolicitud = idSolicitud;
+	}
+
+
 	public Solicitud( String nombre, int cantidad, String fecha) {
 		this.nombre = nombre;
 		this.cantidad = cantidad;

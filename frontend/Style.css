@@ -7,9 +7,36 @@ body {
 
 .grid-container {
     display: grid;
-    grid-template-columns: 1fr  6fr;
+    grid-template-columns: 5fr  6fr;
     background-color:  #415a5a ;
     
+}
+
+.login-container{
+    display: grid;
+    grid-template-columns: 1fr  6fr;
+    background-color:  #415a5a ;
+}
+
+.title-login{
+    color: #d9e4e3;
+    text-align: center;
+    padding: 50px;
+    padding-top: 0px;
+    text-shadow: 0px;
+}
+
+.login{
+    background-color: #d9e4e3;
+    width: 100%;
+    height: 637px;
+    text-align: center;
+}
+
+.login-form{
+    margin: 100px;
+    font-family: "Poppins", sans-serif;
+    color: black;
 }
 
 .cuentas{
@@ -90,7 +117,6 @@ h1{
     color: #415a5a;
     margin: 0 auto;
     margin-top: 60%;
-    text-shadow: 2px 2px;
 }
 
 .form{

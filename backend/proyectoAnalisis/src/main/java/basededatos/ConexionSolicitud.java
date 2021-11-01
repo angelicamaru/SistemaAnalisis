@@ -86,6 +86,36 @@ public class ConexionSolicitud {
 		return solicitudes;
 	}
 	
+	
+	
+	// Solicitudes con precio
+
+		public ArrayList<Solicitud> solicitudesPrecio(int idCuentaCobro) {
+
+			conexion();
+
+			ArrayList<Solicitud> solicitudes = new ArrayList<Solicitud>();
+
+			
+System.out.println(	"SELECT solicitud.idSolicitud, solicitud.nombre, solicitud.idEntregable,solicitud.idEjecucion, solicitud.idSponsor, solicitud.idServicio, solicitud.cantidad, solicitud.fecha, entregable.precioProveedor*solicitud.cantidad as total from entregable inner join solicitud on Entregable.idEntregable  = solicitud.idEntregable where solicitud.idCuentaCobro = "
+							+ idCuentaCobro);
+			try (PreparedStatement stmt = con.prepareStatement(
+					"SELECT solicitud.idSolicitud, solicitud.nombre, solicitud.idEntregable,solicitud.idEjecucion, solicitud.idSponsor, solicitud.idServicio, solicitud.cantidad, solicitud.fecha, entregable.precioProveedor*solicitud.cantidad as total from entregable inner join solicitud on Entregable.idEntregable  = solicitud.idEntregable where solicitud.idCuentaCobro = "
+							+ idCuentaCobro)) {
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					Solicitud soli = new Solicitud(rs.getInt("idSolicitud"), rs.getString("nombre"), rs.getInt("cantidad"),
+							rs.getString("fecha"), rs.getInt("idEntregable"), rs.getInt("idEjecucion"),
+							rs.getInt("idSponsor"), rs.getInt("idServicio"), idCuentaCobro, rs.getDouble("total"));
+					solicitudes.add(soli);
+				}
+			} catch (SQLException sqle) {
+				System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+			}
+			System.out.println(solicitudes);
+			return solicitudes;
+		}
+	
 	//Modificar solicitud
 		public void modS(Solicitud solMod) {
 			conexion();

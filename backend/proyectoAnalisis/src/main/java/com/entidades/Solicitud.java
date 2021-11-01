@@ -12,6 +12,7 @@ public class Solicitud {
 	private int idSponsor;
 	private int idService; 
 	private int idCuentaCobro;
+	private double totalSolicitud;
 	
 	
 	
@@ -22,6 +23,23 @@ public class Solicitud {
 	public Solicitud(int idSolicitud) {
 		super();
 		this.idSolicitud = idSolicitud;
+	}
+
+	
+
+	public Solicitud(int idSolicitud, String nombre, int cantidad, String fecha, int idEntregable, int idEjecucion,
+			int idSponsor, int idService, int idCuentaCobro, double totalSolicitud) {
+		super();
+		this.idSolicitud = idSolicitud;
+		this.nombre = nombre;
+		this.cantidad = cantidad;
+		this.fecha = fecha;
+		this.idEntregable = idEntregable;
+		this.idEjecucion = idEjecucion;
+		this.idSponsor = idSponsor;
+		this.idService = idService;
+		this.idCuentaCobro = idCuentaCobro;
+		this.totalSolicitud = totalSolicitud;
 	}
 
 
@@ -157,6 +175,16 @@ public class Solicitud {
 
 	public void setIdCuentaCobro(int idCuentaCobro) {
 		this.idCuentaCobro = idCuentaCobro;
+	}
+
+
+	public double getTotalSolicitud() {
+		return totalSolicitud;
+	}
+
+
+	public void setTotalSolicitud(double totalSolicitud) {
+		this.totalSolicitud = totalSolicitud;
 	}
 	
 	

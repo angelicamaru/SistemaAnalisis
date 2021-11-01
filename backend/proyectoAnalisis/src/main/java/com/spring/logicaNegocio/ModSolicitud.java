@@ -38,6 +38,14 @@ public class ModSolicitud {
 		return solicitudes;
 	}
 	
+	//Traer solicitudes con precio
+		public ArrayList<Solicitud> traerSolicitudesPrecio(int idCuentaCobro) {
+			con = new ConexionSolicitud();
+			ArrayList<Solicitud> solicitudes = con.solicitudesPrecio(idCuentaCobro);
+		    con.desconectar();
+			return solicitudes;
+		}
+	
 	// Mod solicitud
 		public void mod(Solicitud provMod) {
 			con = new ConexionSolicitud();

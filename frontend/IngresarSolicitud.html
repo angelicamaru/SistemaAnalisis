@@ -134,7 +134,7 @@
             .then((response) => response.json())
             .then((data) => cargarComboBox("ejecucion", data));
 
-          fetch("http://localhost:8080//traerNombresSponsors")
+          fetch("http://localhost:8080/traerNombresSponsors")
             .then((response) => response.json())
             .then((data) => cargarComboBox("sponsor", data));
 

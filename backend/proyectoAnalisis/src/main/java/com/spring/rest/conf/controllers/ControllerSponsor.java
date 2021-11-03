@@ -3,6 +3,7 @@ package com.spring.rest.conf.controllers;
 import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +27,7 @@ public class ControllerSponsor {
 	}
 
 	// Traer nombres de sponsor
-	@PostMapping("/traerNombresSponsors")
+	@GetMapping("/traerNombresSponsors")
 	ArrayList<String> traerSolicitudes() {
 		ArrayList<String> sponsors = sponsor.traerNombres();
 		return sponsors;

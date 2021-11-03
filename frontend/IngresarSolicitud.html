@@ -66,6 +66,37 @@
             <i class="fas fa-user"></i>
             <input type="text" placeholder="Nombre" id="nombre" onchange="nameValidation()" />
           </div>
+          <div class="form-text">Fecha</div>
+          <div id="errorFecha" class="error-text"></div>
+          <div class="input-field">
+            <i class="far fa-calendar"></i>
+            <input type="date" placeholder="Fecha" id="fecha" onchange="fechaValidation()" />
+          </div>
+          <div class="form-text">Cliente</div>
+          <div id="errorCliente" class="error-text"></div>
+          <div class="select-field">
+            <i class="fas fa-hammer"></i>
+            <select name="cliente" id="cliente" onchange="clienteValidation()">
+              <option value="Seleccione cliente" style="color: #aaa; font-weight: 500">
+                Seleccione cliente
+              </option>
+              <option value="Seleccione" style="color: #aaa; font-weight: 500">
+                Seleccione
+              </option>
+            </select>
+          </div>
+          <div id="aparecer" style="display: none;">
+            <div class="form-text">Ejecución</div>
+            <div id="errorEjecucion" class="error-text"></div>
+            <div class="select-field">
+              <i class="fas fa-file"></i>
+              <select name="ejecucion" id="ejecucion" onchange="ejecucionValidation()">
+                <option value="Seleccione ejecución" style="color: #aaa; font-weight: 500">
+                  Seleccione ejecución
+                </option>
+              </select>
+            </div>
+          </div>
           <div class="form-text">Entregable</div>
           <div id="errorEntregable" class="error-text"></div>
           <div class="select-field">
@@ -76,16 +107,7 @@
               </option>
             </select>
           </div>
-          <div class="form-text">Ejecución</div>
-          <div id="errorEjecucion" class="error-text"></div>
-          <div class="select-field">
-            <i class="fas fa-file"></i>
-            <select name="ejecucion" id="ejecucion" onchange="ejecucionValidation()">
-              <option value="Seleccione ejecución" style="color: #aaa; font-weight: 500">
-                Seleccione ejecución
-              </option>
-            </select>
-          </div>
+
           <div class="form-text">Sponsor</div>
           <div id="errorSponsor" class="error-text"></div>
           <div class="select-field">
@@ -112,12 +134,6 @@
             <i class="fas fa-calculator"></i>
             <input type="number" placeholder="Cantidad" id="cantidad" onchange="cantidadValidation()" />
           </div>
-          <div class="form-text">Fecha</div>
-          <div id="errorFecha" class="error-text"></div>
-          <div class="input-field">
-            <i class="far fa-calendar"></i>
-            <input type="date" placeholder="Fecha" id="fecha" onchange="fechaValidation()" />
-          </div>
           <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()" />
         </div>
         <div class="circle">
@@ -130,9 +146,51 @@
           .then((response) => response.json())
           .then((data) => cargarComboBox("entregable", data));
 
-        fetch("http://localhost:8080//traerNombreEjecucion")
-          .then((response) => response.json())
-          .then((data) => cargarComboBox("ejecucion", data));
+        function traerEjecuciones() {
+          var url = "http://localhost:8080//traerEjecucion";
+          var fecha = document.getElementById("cliente").value;
+          var fecha = fecha.getMonth() + 1;
+          const mm = today.getMonth() + 1;
+          if (mm == 1) {
+            mes = "Enero";
+          } else if (mm == 2) {
+            mes = "Febrero";
+          } else if (mm == 3) {
+            mes = "Marzo";
+          } else if (mm == 4) {
+            mes = "Abril";
+          } else if (mm == 5) {
+            mes = "Mayo";
+          } else if (mm == 6) {
+            mes = "Junio";
+          } else if (mm == 7) {
+            mes = "Julio";
+          } else if (mm == 8) {
+            mes = "Agosto";
+          } else if (mm == 9) {
+            mes = "Septiembre";
+          } else if (mm == 10) {
+            mes = "Octubre";
+          } else if (mm == 11) {
+            mes = "Noviembre";
+          } else if (mm == 12) {
+            mes = "Diciembre";
+          }
+          var condicion = {
+            cliente: document.getElementById("cliente").value,
+            fecha: mm,
+          };
+          fetch(url, {
+            method: "POST",
+            body: JSON.stringify(condicion),
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => crearPdf(data));
+        }
 
         fetch("http://localhost:8080/traerNombresSponsors")
           .then((response) => response.json())
@@ -167,24 +225,27 @@
         function agregarRegistro() {
           const nameValidatio = nameValidation()
           const entregableValidatio = entregableValidation()
+          const clienteValidatio = clienteValidation()
           const ejecucionValidatio = ejecucionValidation()
           const fechaValidatio = fechaValidation()
           const sponsorValidatio = sponsorValidation()
           const servicioValidatio = servicioValidation()
           const cantidadValidatio = cantidadValidation()
           const name = document.getElementById("nombre").value
+          const cliente = document.getElementById("cliente").value
           const entregable = document.getElementById("entregable").value
           const ejecucion = document.getElementById("ejecucion").value
           const sponsor = document.getElementById("sponsor").value
           const servicio = document.getElementById("servicio").value
           const cantidad = document.getElementById("cantidad").value
           const fecha = document.getElementById("fecha").value
-          if (nameValidatio && entregableValidatio && ejecucionValidatio && fechaValidatio && servicioValidatio && sponsorValidatio && cantidadValidatio) {
+          if (nameValidatio && entregableValidatio && ejecucionValidatio && fechaValidatio && servicioValidatio && sponsorValidatio && cantidadValidatio && clienteValidatio) {
             document.getElementById("nombre").value = ""
             document.getElementById("entregable").value = "Seleccione entregable"
             document.getElementById("ejecucion").value = "Seleccione ejecución"
             document.getElementById("sponsor").value = "Seleccione sponsor"
             document.getElementById("servicio").value = "Seleccione servicio"
+            document.getElementById("cliente").value = "Seleccione cliente"
             document.getElementById("cantidad").value = ""
             document.getElementById("fecha").value = ""
             var url = "http://localhost:8080//añadirSolicitud";
@@ -196,6 +257,7 @@
               servicio: servicio,
               cantidad: cantidad,
               fecha: fecha,
+              cliente: cliente,
             }
             fetch(url, {
               method: "POST",
@@ -280,6 +342,28 @@
           }
         }
 
+        var validationCliente = false;
+        var validationFecha = false;
+        function clienteValidation() {
+          const name = document.getElementById("cliente").value;
+          if (name == "Seleccione cliente") {
+            document.getElementById("errorCliente").innerHTML = "Porfavor seleccione un cliente";
+            validationCliente = false;
+            document.getElementById("aparecer").style.display = "none"
+            return false;
+          } else {
+            document.getElementById("errorCliente").innerHTML = "";
+            validationCliente = true;
+            if (validationCliente && validationFecha) {
+              document.getElementById("aparecer").style.display = "block"
+              traerEjecuciones();
+            } else {
+              document.getElementById("aparecer").style.display = "none"
+            }
+            return true;
+          }
+        }
+
         function cantidadValidation() {
           const name = document.getElementById("cantidad").value;
           if (name == "") {
@@ -297,9 +381,18 @@
           if (name == "") {
             document.getElementById("errorFecha").innerHTML =
               "Por favor ingrese una fecha";
+            validationFecha = false;
+            document.getElementById("aparecer").style.display = "none"
             return false;
           } else {
             document.getElementById("errorFecha").innerHTML = "";
+            validationFecha = true;
+            if (validationCliente && validationFecha) {
+              document.getElementById("aparecer").style.display = "block"
+              traerEjecuciones();
+            } else {
+              document.getElementById("aparecer").style.display = "none"
+            }
             return true;
           }
         }

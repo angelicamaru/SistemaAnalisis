@@ -53,11 +53,14 @@ public class ModEjecucion {
 
 		}
 
-		//Traer cuenta de cobro
-		public Ejecucion traerEjecucion(int idCliente, String mes) {
+		//Traer ejecucion
+		public Ejecucion traerEjecucion(String nombreCliente, String mes) {
 			con = new ConexionEjecucion();
 			
 			ModSolicitud solicitud = new ModSolicitud();
+			ModCliente cliente = new ModCliente();
+			
+			int idCliente = cliente.id(nombreCliente);
 			
 			int id = con.id(idCliente, mes);
 			String descripcion = con.descripcion(idCliente, mes);

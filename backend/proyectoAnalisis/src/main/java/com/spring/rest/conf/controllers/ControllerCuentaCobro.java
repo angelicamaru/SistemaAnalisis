@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.entidades.CuentaCobro;
+import com.entidades.CuentaCobroMapper;
 import com.spring.logicaNegocio.ModCuentaCobro;
 
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
@@ -46,9 +47,9 @@ public class ControllerCuentaCobro {
 	
 	// Traer cuenta de cobro
 		@PostMapping("/traerCuentaCobro")
-		CuentaCobro cuentaCobroTraer(@RequestBody CuentaCobro cuentacobro) {
+		CuentaCobro cuentaCobroTraer(@RequestBody CuentaCobroMapper cuentacobro) {
 			System.out.println("HELLO");
-			CuentaCobro cuentaCobroS = cuentaCobro.cuentaCobro(cuentacobro.getIdProveedor(), cuentacobro.getMes());
+			CuentaCobro cuentaCobroS = cuentaCobro.cuentaCobro(cuentacobro.getNombreProveedor(), cuentacobro.getMes());
 			return cuentaCobroS;
 		}
 		

@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.entidades.CuentaCobro;
 import com.entidades.Ejecucion;
+import com.entidades.EjecucionMapper;
 import com.spring.logicaNegocio.ModCuentaCobro;
 import com.spring.logicaNegocio.ModEjecucion;
 
@@ -48,9 +49,9 @@ public class ControllerEjecucion {
 		
 		// Traer ejecucion
 				@PostMapping("/traerEjecucion")
-				Ejecucion cuentaCobroTraer(@RequestBody Ejecucion eje) {
+				Ejecucion cuentaCobroTraer(@RequestBody EjecucionMapper eje) {
 					System.out.println("HELLO");
-					Ejecucion ejeS = ejecucion.traerEjecucion(eje.getIdCliente(), eje.getMes());
+					Ejecucion ejeS = ejecucion.traerEjecucion(eje.getNombreCliente(), eje.getMes());
 					return ejeS;
 				}
 		

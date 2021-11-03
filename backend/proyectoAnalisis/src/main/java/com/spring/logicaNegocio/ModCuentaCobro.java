@@ -15,7 +15,9 @@ public class ModCuentaCobro {
 	// Objetos
 	CuentaCobro cuentaCobro = new CuentaCobro();
 	ConexionCuentaCobro con;
+	ModProveedor modP;
 
+	
 	// Metodos
 
 	// Validar existencia CuentaCobro
@@ -54,11 +56,14 @@ public class ModCuentaCobro {
 	}
 
 	//Traer cuenta de cobro
-	public CuentaCobro cuentaCobro(int idProveedor, String mes) {
+	public CuentaCobro cuentaCobro(String nombreProveedor, String mes) {
 		con = new ConexionCuentaCobro();
+		modP = new ModProveedor();
 		
 		ModSolicitud solicitud = new ModSolicitud();
 		
+		int idProveedor = modP.id(nombreProveedor);
+				
 		int id = con.id(idProveedor, mes);
 		String nombre = con.nombre(idProveedor, mes);
 		

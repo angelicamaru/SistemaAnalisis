@@ -196,6 +196,11 @@
           .then((response) => response.json())
           .then((data) => cargarComboBox("sponsor", data));
 
+          fetch("http://localhost:8080/traerNombresClientes")
+          .then((response) => response.json())
+          .then((data) => cargarComboBox("cliente", data));
+
+
         fetch("http://localhost:8080//traerNombreServicio")
           .then((response) => response.json())
           .then((data) => cargarComboBox("servicio", data));
@@ -210,7 +215,7 @@
           .then((response) => response.json())
           .then((data) => initialize(data));
 
-        function intialize(data) {
+        function initialize(data) {
           nombres = data;
         }
 

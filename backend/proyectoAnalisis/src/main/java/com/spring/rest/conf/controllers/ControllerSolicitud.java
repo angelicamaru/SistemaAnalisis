@@ -3,6 +3,7 @@ package com.spring.rest.conf.controllers;
 import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -46,4 +47,10 @@ public class ControllerSolicitud {
 			solicitud.eliminarS(idSol);
 		}
 
+		// Traer nombres de clientes
+		@GetMapping("/traerNombresSolicitudes")
+		ArrayList<String> traerSolicitudes() {
+			ArrayList<String> clientes = cliente.traerNombres();
+			return clientes;
+		}
 }

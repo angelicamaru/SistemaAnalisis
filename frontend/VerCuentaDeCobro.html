@@ -90,18 +90,18 @@
               >
                 Seleccione un mes
               </option>
-              <option value="1">Enero</option>
-              <option value="2">Febrero</option>
-              <option value="3">Marzo</option>
-              <option value="4">Abril</option>
-              <option value="5">Mayo</option>
-              <option value="6">Junio</option>
-              <option value="7">Julio</option>
-              <option value="8">Agosto</option>
-              <option value="9">Septiembre</option>
-              <option value="10">Octubre</option>
-              <option value="11">Noviembre</option>
-              <option value="12">Diciembre</option>
+              <option value="Enero">Enero</option>
+              <option value="Febrero">Febrero</option>
+              <option value="Marzo">Marzo</option>
+              <option value="Abril">Abril</option>
+              <option value="Mayo">Mayo</option>
+              <option value="Junio">Junio</option>
+              <option value="Julio">Julio</option>
+              <option value="Agosto">Agosto</option>
+              <option value="Septiembre">Septiembre</option>
+              <option value="Octubre">Octubre</option>
+              <option value="Noviembre">Noviembre</option>
+              <option value="Diciembre">Diciembre</option>
             </select>
           </div>
         </div>
@@ -172,7 +172,7 @@
         doc.text(110, 38, document.getElementById("proveedor").value, "center");
         doc.setFontType("normal");
         doc.text(110, 45, "LA SUMA DE:", "center");
-        doc.text(110, 50, data.total, "center");
+        doc.text(110, 50, data.total.toString(), "center");
         var today = new Date();
         var dd = today.getDate();
         var dia;
@@ -279,13 +279,13 @@
             "."
         );
         var columns = ["Fecha", "Nombre", "Cantidad", "Valor"];
-        let datos;
+        const datos = [];
         for (let index = 0; index < data.solicitudes.length; index++) {
           datos.push([
-            data.solicitudes.fecha,
-            data.solicitudes.nombre,
-            data.solicitudes.cantidad,
-            data.totalSolicitud,
+            data.solicitudes[index].fecha,
+            data.solicitudes[index].nombre,
+            data.solicitudes[index].cantidad,
+            data.solicitudes[index].totalSolicitud,
           ]);
         }
         doc.autoTable(columns, datos, {

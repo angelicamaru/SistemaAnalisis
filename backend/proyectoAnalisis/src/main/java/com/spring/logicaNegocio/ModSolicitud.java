@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import com.entidades.Solicitud;
 import com.entidades.Sponsor;
 
+import basededatos.ConexionCliente;
 import basededatos.ConexionSolicitud;
 import basededatos.ConexionSponsor;
 
@@ -59,6 +60,15 @@ public class ModSolicitud {
 			con = new ConexionSolicitud();
 			con.eliminarS(nombre);
 			con.desconectar();
+
+		}
+		
+		// Retorna el nombres de solicitudes
+		public ArrayList<String> traerNombres() {
+			con = new ConexionSolicitud();
+			ArrayList<String> nombres = con.traerNombres();
+			con.desconectar();
+			return nombres;
 
 		}
 }

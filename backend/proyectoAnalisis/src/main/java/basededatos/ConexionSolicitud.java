@@ -140,4 +140,27 @@ System.out.println(	"SELECT solicitud.idSolicitud, solicitud.nombre, solicitud.i
 			}
 
 		}
+		
+		
+		// Traer nombres
+		public ArrayList<String> traerNombres() {
+			conexion();
+
+			ArrayList<String> nombres = new ArrayList<String>();
+
+			try (PreparedStatement stmt = con.prepareStatement("SELECT nombre FROM Solicitud")) {
+				ResultSet rs = stmt.executeQuery();
+				while (rs.next()) {
+					String nombre = rs.getString("nombre");
+					System.out.println(nombre);
+					nombres.add(nombre);
+				}
+			} catch (SQLException sqle) {
+				System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+			}
+			System.out.println(nombres);
+			return nombres;
+
+		}
+
 }

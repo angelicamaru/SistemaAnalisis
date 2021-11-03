@@ -50,7 +50,7 @@ public class ControllerSolicitud {
 		// Traer nombres de clientes
 		@GetMapping("/traerNombresSolicitudes")
 		ArrayList<String> traerSolicitudes() {
-			ArrayList<String> clientes = cliente.traerNombres();
-			return clientes;
+			ArrayList<String> nombres = solicitud.traerNombres();
+			return nombres;
 		}
 }

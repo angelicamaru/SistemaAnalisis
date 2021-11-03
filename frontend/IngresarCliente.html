@@ -1,215 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
-    <title>
-      Ingresar Cliente
-    </title>
-  </head>
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+  <title>
+    Ingresar Cliente
+  </title>
+</head>
 
-  <body>
-    <div class="grid-container">
-      <div class="grid-item-menu">
-        <p></p>
-        <a href="Index.html">
-          <p>HOME</p>
-        </a>
-        <p></p>
-        <a href="IngresarSolicitud.html">
-          <p>INGRESAR SOLICITUD </p>
-        </a>
-        <a href="VerCuentaDeCobro.html">
-          <p>VER CUENTA DE COBRO </p>
-        </a>
-        <a href="VerOrdenDeServicio.html">
-          <p>VER ORDEN DE SERVICIO </p>
-        </a>
-        <a href="IngresarProveedor.html">
-          <p>INGRESAR PROVEEDOR</p>
-        </a>
-        <div class="selected">INGRESAR CLIENTE</div>
-        <a href="IngresarSponsor.html">
-          <p>INGRESAR SPONSOR </p>
-        </a>
-        <a href="IngresarTarifas.html">
-          <p>INGRESAR TARIFAS </p>
-        </a>
-        <a href="IngresarServicios.html">
-          <p>INGRESAR SERVICIOS </p>
-        </a>
-        <a href="VerProveedores.html">
-          <p>VER PROVEEDORES</p>
-        </a>
-        <a href="VerClientes.html">
-          <p>VER CLIENTES</p>
-        </a>
-        <a href="VerTarifas.html">
-          <p>VER TARIFAS</p>
-        </a>
-        <a href="Comparar.html">
-          <p>COMPARAR </p>
-        </a>
-        <p></p>
-        <p>SALIR </p>
-      </div>
-      <div class="form-text">Telefono</div>
-      <div id="errorTelefono" class="error-text"></div>
-      <div class="input-field">
-        <i class="fas fa-mobile"></i>
-        <input type="number" placeholder="Telefono" id="Telefono" onchange="telValidation()" />
-      </div>
-      <div class="form-text">Correo</div>
-      <div id="errorCorreo" class="error-text"></div>
-      <div class="input-field">
-        <i class="fas fa-envelope"></i>
-        <input type="email" placeholder="Correo" id="Correo" onchange="emailValidation()" />
-      </div>
-      <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()" />
+<body>
+  <div class="grid-container">
+    <div class="grid-item-menu">
+      <p></p>
+      <a href="Index.html">
+        <p>HOME</p>
+      </a>
+      <p></p>
+      <a href="IngresarSolicitud.html">
+        <p>INGRESAR SOLICITUD </p>
+      </a>
+      <a href="VerCuentaDeCobro.html">
+        <p>VER CUENTA DE COBRO </p>
+      </a>
+      <a href="VerOrdenDeServicio.html">
+        <p>VER ORDEN DE SERVICIO </p>
+      </a>
+      <a href="IngresarProveedor.html">
+        <p>INGRESAR PROVEEDOR</p>
+      </a>
+      <div class="selected">INGRESAR CLIENTE</div>
+      <a href="IngresarSponsor.html">
+        <p>INGRESAR SPONSOR </p>
+      </a>
+      <a href="IngresarTarifas.html">
+        <p>INGRESAR TARIFAS </p>
+      </a>
+      <a href="IngresarServicios.html">
+        <p>INGRESAR SERVICIOS </p>
+      </a>
+      <a href="VerProveedores.html">
+        <p>VER PROVEEDORES</p>
+      </a>
+      <a href="VerClientes.html">
+        <p>VER CLIENTES</p>
+      </a>
+      <a href="VerTarifas.html">
+        <p>VER TARIFAS</p>
+      </a>
+      <a href="Comparar.html">
+        <p>COMPARAR </p>
+      </a>
+      <p></p>
+      <p>SALIR </p>
     </div>
-    <div class="circle" style="height: 100%">
-      <h1>INGRESAR<br />CLIENTE</h1>
+    <div class="grid-item">
+      <div class="grid-info">
+        <div class="form">
+          <div class="form-text">Nombre</div>
+          <div id="errorNombre" class="error-text"></div>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Nombre" id="Nombre" onchange="nameValidation()">
+          </div>
+          <div class="form-text">Tipo</div>
+          <div id="errorTipo" class="error-text"></div>
+          <div class="check-field">
+            <input type="radio" name="Empresa" id="Empresa" value="Empresa" onchange="typeValidation()">
+            <i class="fas fa-building" style="padding-right: 5px;"></i>
+            Empresa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="Empresa" id="Persona" value="Persona" onchange="typeValidation()">
+            <i class="fas fa-user" style="padding-right: 5px;"></i>
+            Persona
+          </div>
+          <div class="form-text">Dirección</div>
+          <div id="errorDireccion" class="error-text"></div>
+          <div class="input-field">
+            <i class="fas fa-map"></i>
+            <input type="text" placeholder="Dirección" id="Direccion" onchange="addressValidation()">
+          </div>
+          <div class="form-text">Telefono</div>
+          <div id="errorTelefono" class="error-text"></div>
+          <div class="input-field">
+            <i class="fas fa-mobile"></i>
+            <input type="number" placeholder="Telefono" id="Telefono" onchange="telValidation()">
+          </div>
+          <div class="form-text">Correo</div>
+          <div id="errorCorreo" class="error-text"></div>
+          <div class="input-field">
+            <i class="fas fa-envelope"></i>
+            <input type="email" placeholder="Correo" id="Correo" onchange="emailValidation()">
+          </div>
+          <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()">
+        </div>
+        <div class="circle" style="height: 100%;">
+          <h1>INGRESAR<br>CLIENTE</h1>
+        </div>
+
+      </div>
     </div>
-    <script>
+  </div>
 
-      let nombres;
-      fetch("http://localhost:8080//traerNombresClientes")
-        .then((response) => response.json())
-        .then((data) => initialize(data));
+  <script>
 
-      function intialize(data) {
-        nombres = data;
+    let nombres;
+    fetch("http://localhost:8080//traerNombresClientes")
+      .then((response) => response.json())
+      .then((data) => initialize(data));
+
+    function intialize(data) {
+      nombres = data;
+    }
+
+    function agregarRegistro() {
+      const telValidatio = telValidation()
+      const emailValidatio = emailValidation()
+      const name = document.getElementById("Nombre").value
+      const direccion = document.getElementById("Direccion").value
+      const nameValidatio = nameValidation()
+      const addressValidatio = addressValidation()
+      var tipo = ""
+      var typeValidation = false
+      const telefono = document.getElementById("Telefono").value
+      const correo = document.getElementById("Correo").value
+      if (document.getElementById("Empresa").checked) {
+        tipo = true
+        typeValidation = true
+        document.getElementById("errorTipo").innerHTML = ""
+      } else if (document.getElementById("Persona").checked) {
+        tipo = false
+        typeValidation = true
+        document.getElementById("errorTipo").innerHTML = ""
+      } else {
+        typeValidation = false
+        document.getElementById("errorTipo").innerHTML = "Por favor seleccione un tipo de cliente"
       }
+      if (telValidatio && emailValidatio && nameValidatio && addressValidatio && typeValidation) {
+        document.getElementById("Nombre").value = ""
+        document.getElementById("Telefono").value = ""
+        document.getElementById("Correo").value = ""
+        document.getElementById("Direccion").value = ""
+        document.getElementById("Empresa").checked = false
+        document.getElementById("Persona").checked = false
 
-      function agregarRegistro() {
-        const telValidatio = telValidation()
-        const emailValidatio = emailValidation()
-        const name = document.getElementById("Nombre").value
-        const direccion = document.getElementById("Direccion").value
-        const nameValidatio = nameValidation()
-        const addressValidatio = addressValidation()
-        var tipo = ""
-        var typeValidation = false
-        const telefono = document.getElementById("Telefono").value
-        const correo = document.getElementById("Correo").value
-        if (document.getElementById("Empresa").checked) {
-          tipo = true
-          typeValidation = true
-          document.getElementById("errorTipo").innerHTML = ""
-        } else if (document.getElementById("Persona").checked) {
-          tipo = false
-          typeValidation = true
-          document.getElementById("errorTipo").innerHTML = ""
-        } else {
-          typeValidation = false
-          document.getElementById("errorTipo").innerHTML = "Por favor seleccione un tipo de cliente"
-        }
-        if (telValidatio && emailValidatio && nameValidatio && addressValidatio && typeValidation) {
-          document.getElementById("Nombre").value = ""
-          document.getElementById("Telefono").value = ""
-          document.getElementById("Correo").value = ""
-          document.getElementById("Direccion").value = ""
-          document.getElementById("Empresa").checked = false
-          document.getElementById("Persona").checked = false
-
-          console.log("hello!");
-          var url = "http://localhost:8080/anadirCliente";
-          var data = {
-            nombre: name,
-            telefono: telefono,
-            correo: correo,
-            direccion: direccion,
-            tipo: 0,
-          };
-          fetch(url, {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-          }).then(function (response) {
-            alert("Registro agregado");
-            return response.json();
-          });
-        } else {
-          alert("Por favor llene todos los campos");
-        }
+        console.log("hello!");
+        var url = "http://localhost:8080/anadirCliente";
+        var data = {
+          nombre: name,
+          telefono: telefono,
+          correo: correo,
+          direccion: direccion,
+          tipo: 0,
+        };
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }).then(function (response) {
+          alert("Registro agregado");
+          return response.json();
+        });
+      } else {
+        alert("Por favor llene todos los campos");
       }
+    }
 
-      function telValidation() {
-        var validation;
-        const telefono = document.getElementById("Telefono").value;
-        if (telefono == "") {
-          document.getElementById("errorTelefono").innerHTML =
-            "Por favor ingrese un numero de telefono";
-          return false;
-        } else if (telefono <= 999999999 || telefono > 9999999999) {
-          document.getElementById("errorTelefono").innerHTML =
-            "Numero de telefono no valido";
-          return false;
-        } else {
-          document.getElementById("errorTelefono").innerHTML = "";
-          return true;
-        }
-        return validation;
+    function telValidation() {
+      var validation;
+      const telefono = document.getElementById("Telefono").value;
+      if (telefono == "") {
+        document.getElementById("errorTelefono").innerHTML =
+          "Por favor ingrese un numero de telefono";
+        return false;
+      } else if (telefono <= 999999999 || telefono > 9999999999) {
+        document.getElementById("errorTelefono").innerHTML =
+          "Numero de telefono no valido";
+        return false;
+      } else {
+        document.getElementById("errorTelefono").innerHTML = "";
+        return true;
       }
+      return validation;
+    }
 
-      function emailValidation() {
-        var validation;
-        const correo = document.getElementById("Correo").value;
-        if (correo == "") {
-          document.getElementById("errorCorreo").innerHTML =
-            "Por favor ingrese un correo";
-          return false;
-        } else if (!correo.includes("@")) {
-          document.getElementById("errorCorreo").innerHTML = "Correo no valido";
-          return false;
-        } else {
-          document.getElementById("errorCorreo").innerHTML = "";
-          return true;
-        }
-        return validation;
+    function emailValidation() {
+      var validation;
+      const correo = document.getElementById("Correo").value;
+      if (correo == "") {
+        document.getElementById("errorCorreo").innerHTML =
+          "Por favor ingrese un correo";
+        return false;
+      } else if (!correo.includes("@")) {
+        document.getElementById("errorCorreo").innerHTML = "Correo no valido";
+        return false;
+      } else {
+        document.getElementById("errorCorreo").innerHTML = "";
+        return true;
       }
+      return validation;
+    }
 
-      function nameValidation() {
-        const name = document.getElementById("Nombre").value
-        if (name == "") {
-          document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
-          return false
-        } else {
-          for (let i = 0; i < nombres.length; i++) {
-            if (name == nombres[i]) {
-              document.getElementById("errorNombre").innerHTML = "Este nombre ya existe, por favor digite otro"
-              return false
-            }
+    function nameValidation() {
+      const name = document.getElementById("Nombre").value
+      if (name == "") {
+        document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
+        return false
+      } else {
+        for (let i = 0; i < nombres.length; i++) {
+          if (name == nombres[i]) {
+            document.getElementById("errorNombre").innerHTML = "Este nombre ya existe, por favor digite otro"
+            return false
           }
-          document.getElementById("errorNombre").innerHTML = ""
-          return true
         }
+        document.getElementById("errorNombre").innerHTML = ""
+        return true
       }
+    }
 
-      function typeValidation() {
-        document.getElementById("errorTipo").innerHTML = "";
-      }
+    function typeValidation() {
+      document.getElementById("errorTipo").innerHTML = "";
+    }
 
-      function addressValidation() {
-        const direccion = document.getElementById("Direccion").value;
-        if (direccion == "") {
-          document.getElementById("errorDireccion").innerHTML =
-            "Por favor ingrese una dirección";
-          return false;
-        } else {
-          document.getElementById("errorDireccion").innerHTML = "";
-          return true;
-        }
+    function addressValidation() {
+      const direccion = document.getElementById("Direccion").value;
+      if (direccion == "") {
+        document.getElementById("errorDireccion").innerHTML =
+          "Por favor ingrese una dirección";
+        return false;
+      } else {
+        document.getElementById("errorDireccion").innerHTML = "";
+        return true;
       }
-    </script>
-  </body>
+    }
+  </script>
+</body>
 
 </html>

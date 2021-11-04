@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Poppins"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.js"></script>
+
+    <title>Ver Proveedores</title>
+  </head>
+
+  <body>
+    <div class="grid-container">
+      <div class="grid-item-menu">
+        <p></p>
+        <a href="Index.html">
+          <p>HOME</p>
+        </a>
+        <p></p>
+        <a href="IngresarSolicitud.html">
+          <p>INGRESAR SOLICITUD</p>
+        </a>
+        <a href="VerCuentaDeCobro.html">
+            <p>VER CUENTA DE COBRO</p>
+        </a>
+        <a href="VerOrdenDeServicio.html">
+          <p>VER ORDEN DE SERVICIO</p>
+        </a>
+        <a href="IngresarProveedor.html">
+          <p>INGRESAR PROVEEDOR</p>
+        </a>
+        <a href="IngresarSponsor.html">
+          <p>INGRESAR SPONSOR</p>
+        </a>
+        <a href="IngresarTarifas.html">
+          <p>INGRESAR TARIFAS</p>
+        </a>
+        <a href="IngresarServicios.html">
+          <p>INGRESAR SERVICIOS</p>
+        </a>
+        <div class="selected">VER PROVEEDORES</div>
+        <a href="VerClientes.html">
+            <p>VER CLIENTES</p>
+        </a>
+        <a href="VerTarifas.html">
+          <p>VER TARIFAS</p>
+        </a>
+        <a href="Comparar.html">
+          <p>COMPARAR</p>
+        </a>
+        <p></p>
+        <button class="logout" onclick="mainApp.logout();">SALIR</button>
+      </div>
+      
+    <div class="grid-item">
+        <div class="grid-info">
+            <div class= "form">
+                <h1 id="title" class="titleContent">VER PROVEEDORES</h1><br>
+                <div class="Proveedores">
+                    <div class="Proveedores-select-field">
+                        <div class="select-field">
+                        <i class="fas fa-user"></i>
+                        <select name="proveedor" id="proveedor" onchange="traerProveedores()">
+                        <option
+                            value="Seleccione proveedor"
+                            style="color: #aaa; font-weight: 5000; font-size: large;">
+                            Seleccione el ID del proveedor
+                        </option>
+                        </select></div><br><br><br><br>
+                        <div class="form-text">Nombre: </div><br>
+                        <div class="form-text">Empresa: </div><br>
+                        <div class="form-text">direccion: </div><br>
+                        <div class="form-text">telefono: </div><br>
+
+                        <input type="submit" value="Modificar" class="btn solid">
+                        <div class="form-text">   </div>
+                        <input type="submit" value="Eliminar" class="btn solid">
+                    </div>
+                </div>
+                    <iframe src="" frameborder="0" id="iframe"></iframe>
+                </div>
+            </div>
+        </div>
+      
+    </div>
+    //font-weight: lighter;
+
+    <script>
+      fetch("http://localhost:8080//traerIDProveedores")
+        .then((response) => response.json())
+        .then((data) => cargarComboBox("proveedor", data));
+
+      function cargarComboBox(tipo, datas) {
+        for (var x = 0; x < datas.length; x++)
+          agregar(document.getElementById(tipo), datas[x]);
+      }
+
+      function agregar(select, val) {
+        const option = document.createElement("option");
+        const valor = val;
+        option.value = valor;
+        option.text = valor;
+        select.appendChild(option);
+      }
+
+      function traerProveedores() 
+      {
+        const proveedor = document.getElementById("proveedor").value;
+        if (
+            proveedor != "Seleccione proveedor"
+        ) {
+          var url = "http://localhost:8080//traerProveedores";
+          var condicion = {
+            idproveedor: proveedor
+          };
+
+          fetch(url, 
+          {
+            method: "POST",
+            body: JSON.stringify(condicion),
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => crearPdf(data));
+        } else {
+          document.getElementById("iframe").src = "";
+        }
+      }
+      function crearPdf(data) {
+        const doc = new jsPDF();
+
+        doc.setFontSize(8);
+        doc.setFont("times");
+        doc.setFontType("bold");
+        doc.text(110, 20, "PROVEEDOR: " + data.idProveedor, "center");
+        doc.text(
+          110,
+          30,
+          "JOURNEY MARKETING Y NEGOCIOS S.A.S. NIT 901.375.884-1",
+          "center"
+        );
+        doc.setFontType("normal");
+        doc.text(110, 35, "NOMBRE: "+ data.nombre, "center");
+        doc.setFontType("normal");
+        doc.text(110, 38, "TELEFONO: "+ data.telefono, "center");
+        doc.setFontType("normal");
+        doc.text(110, 45, "CORREO: "+ data.correo, "center");
+        //doc.text(110, 50, data.empresa.toString(), "center");
+        
+        var columns = ["idProveedor", "nombre", "telefono", "correo"];
+        const datos = [];
+        for (let index = 0; index < data.solicitudes.length; index++) {
+          datos.push([
+            data.solicitudes[index].idProveedor,
+            data.solicitudes[index].nombre,
+            data.solicitudes[index].telefono,
+            data.solicitudes[index].correo,
+          ]);
+        }
+        doc.autoTable(columns, datos, {
+          margin: { top: 60 },
+          styles: { fontSize: 8 },
+        });
+
+        const posicion = 60 + datos.length * 10;
+        doc.text(15, posicion, "Cordialmente,");
+        doc.setFontType("bold");
+        doc.text(15, posicion + 5, "Sandra Milena Castellanos Carrillo");
+        doc.setFontType("normal");
+        doc.text(15, posicion + 8, "C.C. 52.989.909");
+        doc.text(15, posicion + 11, "Teléfono 317 661 9521");
+
+        const objectUrl = doc.output("bloburl");
+        document.getElementById("iframe").src = objectUrl;
+      }
+    </script>
+    <script src="fireBase.js"></script>
+    <script src="main.js"></script>
+    </body>
+    </html>

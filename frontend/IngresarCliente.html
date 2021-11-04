@@ -16,7 +16,6 @@
     <title>Ingresar Cliente</title>
   </head>
 
-<<<<<<< Updated upstream
   <body>
     <div class="grid-container">
       <div class="grid-item-menu">
@@ -137,97 +136,6 @@
               class="btn solid"
               onclick="agregarRegistro()"
             />
-=======
-<head>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
-  <link rel="stylesheet" href="style.css">
-  <title>
-    Ingresar Cliente
-  </title>
-  <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-auth.js"></script>
-</head>
-
-<body>
-  <div class="grid-container">
-    <div class="grid-item-menu">
-      <p></p>
-      <a href="Index.html">
-        <p>HOME</p>
-      </a>
-      <p></p>
-      <a href="IngresarSolicitud.html">
-        <p>INGRESAR SOLICITUD </p>
-      </a>
-      <a href="VerCuentaDeCobro.html">
-        <p>VER CUENTA DE COBRO </p>
-      </a>
-      <a href="VerOrdenDeServicio.html">
-        <p>VER ORDEN DE SERVICIO </p>
-      </a>
-      <a href="IngresarProveedor.html">
-        <p>INGRESAR PROVEEDOR</p>
-      </a>
-      <div class="selected">INGRESAR CLIENTE</div>
-      <a href="IngresarSponsor.html">
-        <p>INGRESAR SPONSOR </p>
-      </a>
-      <a href="IngresarTarifas.html">
-        <p>INGRESAR TARIFAS </p>
-      </a>
-      <a href="IngresarServicios.html">
-        <p>INGRESAR SERVICIOS </p>
-      </a>
-      <a href="VerProveedores.html">
-        <p>VER PROVEEDORES</p>
-      </a>
-      <a href="VerClientes.html">
-        <p>VER CLIENTES</p>
-      </a>
-      <a href="VerTarifas.html">
-        <p>VER TARIFAS</p>
-      </a>
-      <a href="Comparar.html">
-        <p>COMPARAR </p>
-      </a>
-      <p></p>
-      <button class="logout" onclick="mainApp.logout();">SALIR</button>
-    </div>
-    <div class="grid-item">
-      <div class="grid-info">
-        <div class="form">
-          <div class="form-text">Nombre</div>
-          <div id="errorNombre" class="error-text"></div>
-          <div class="input-field">
-            <i class="fas fa-user"></i>
-            <input type="text" placeholder="Nombre" id="Nombre" onchange="nameValidation()">
-          </div>
-          <div class="form-text">Tipo</div>
-          <div id="errorTipo" class="error-text"></div>
-          <div class="check-field">
-            <input type="radio" name="Empresa" id="Empresa" value="Empresa" onchange="typeValidation()">
-            <i class="fas fa-building" style="padding-right: 5px;"></i>
-            Empresa &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <input type="radio" name="Empresa" id="Persona" value="Persona" onchange="typeValidation()">
-            <i class="fas fa-user" style="padding-right: 5px;"></i>
-            Persona
-          </div>
-          <div class="form-text">Dirección</div>
-          <div id="errorDireccion" class="error-text"></div>
-          <div class="input-field">
-            <i class="fas fa-map"></i>
-            <input type="text" placeholder="Dirección" id="Direccion" onchange="addressValidation()">
-          </div>
-          <div class="form-text">Telefono</div>
-          <div id="errorTelefono" class="error-text"></div>
-          <div class="input-field">
-            <i class="fas fa-mobile"></i>
-            <input type="number" placeholder="Telefono" id="Telefono" onchange="telValidation()">
->>>>>>> Stashed changes
           </div>
           <div class="circle" style="height: 100%">
             <h1>INGRESAR<br />CLIENTE</h1>
@@ -245,7 +153,6 @@
       function initialize(data) {
         nombres = data;
       }
-<<<<<<< Updated upstream
 
       function agregarRegistro() {
         const telValidatio = telValidation();
@@ -278,12 +185,6 @@
           addressValidatio &&
           typeValidation
         ) {
-          document.getElementById("Nombre").value = "";
-          document.getElementById("Telefono").value = "";
-          document.getElementById("Correo").value = "";
-          document.getElementById("Direccion").value = "";
-          document.getElementById("Empresa").checked = false;
-          document.getElementById("Persona").checked = false;
 
           console.log("hello!");
           var url = "http://localhost:8080/anadirCliente";
@@ -304,39 +205,13 @@
           }).then(function (response) {
             alert("Registro agregado");
             return response.json();
+          }).then(function (datas) {
+            console.log(datas);
+            location.href = "IngresarCliente.html";
           });
         } else {
           alert("Por favor llene todos los campos");
         }
-=======
-      if (telValidatio && emailValidatio && nameValidatio && addressValidatio && typeValidation) {
-        console.log("hello!");
-        var url = "http://localhost:8080/anadirCliente";
-        var data = {
-          nombre: name,
-          telefono: telefono,
-          correo: correo,
-          direccion: direccion,
-          tipo: 0,
-        };
-        fetch(url, {
-          method: "POST",
-          body: JSON.stringify(data),
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-        }).then(function (response) {
-          alert("Registro agregado");
-          return response.json();
-        })
-          .then(function (datas) {
-            console.log(datas);
-            location.href = "IngresarCliente.html";
-          });
-      } else {
-        alert("Por favor llene todos los campos");
->>>>>>> Stashed changes
       }
 
       function telValidation() {

@@ -1,96 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css?family=Poppins"
-    />
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
-    <script
-      src="https://kit.fontawesome.com/64d58efce2.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.js"></script>
 
-    <title>Ver Clientes</title>
-  </head>
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.js"></script>
 
-  <body>
-    <div class="grid-container">
-      <div class="grid-item-menu">
-        <p></p>
-        <a href="Index.html">
-          <p>HOME</p>
-        </a>
-        <p></p>
-        <a href="IngresarSolicitud.html">
-          <p>INGRESAR SOLICITUD</p>
-        </a>
-        <a href="VerCuentaDeCobro.html">
-            <p>VER CUENTA DE COBRO</p>
-        </a>
-        <a href="VerOrdenDeServicio.html">
-          <p>VER ORDEN DE SERVICIO</p>
-        </a>
-        <a href="IngresarProveedor.html">
-          <p>INGRESAR PROVEEDOR</p>
-        </a>
-        <a href="IngresarSponsor.html">
-          <p>INGRESAR SPONSOR</p>
-        </a>
-        <a href="IngresarTarifas.html">
-          <p>INGRESAR TARIFAS</p>
-        </a>
-        <a href="IngresarServicios.html">
-          <p>INGRESAR SERVICIOS</p>
-        </a>
-        <a href="VerProveedores.html">
-          <p>VER PROVEEDORES</p>
-        </a>
-        <div class="selected">VER CLIENTES</div>
+  <title>Ver Clientes</title>
+</head>
 
-        <a href="VerTarifas.html">
-          <p>VER TARIFAS</p>
-        </a>
-        <a href="Comparar.html">
-          <p>COMPARAR</p>
-        </a>
-        <p></p>
-        <button class="logout" onclick="mainApp.logout();">SALIR</button>
-      </div>
-      
+<body>
+  <div class="grid-container">
+    <div class="grid-item-menu">
+      <p></p>
+      <a href="Index.html">
+        <p>HOME</p>
+      </a>
+      <p></p>
+      <a href="IngresarSolicitud.html">
+        <p>INGRESAR SOLICITUD</p>
+      </a>
+      <a href="VerCuentaDeCobro.html">
+        <p>VER CUENTA DE COBRO</p>
+      </a>
+      <a href="VerOrdenDeServicio.html">
+        <p>VER ORDEN DE SERVICIO</p>
+      </a>
+      <a href="IngresarProveedor.html">
+        <p>INGRESAR PROVEEDOR</p>
+      </a>
+      <a href="IngresarSponsor.html">
+        <p>INGRESAR SPONSOR</p>
+      </a>
+      <a href="IngresarTarifas.html">
+        <p>INGRESAR TARIFAS</p>
+      </a>
+      <a href="IngresarServicios.html">
+        <p>INGRESAR SERVICIOS</p>
+      </a>
+      <a href="VerProveedores.html">
+        <p>VER PROVEEDORES</p>
+      </a>
+      <div class="selected">VER CLIENTES</div>
+
+      <a href="VerTarifas.html">
+        <p>VER TARIFAS</p>
+      </a>
+      <a href="Comparar.html">
+        <p>COMPARAR</p>
+      </a>
+      <p></p>
+      <button class="logout" onclick="mainApp.logout();">SALIR</button>
+    </div>
+
     <div class="grid-item">
-        <div class="grid-info">
-            <div class= "form">
-                <div class="Clientes">
-                    <div class="clientes-select-field">
-                        <div class="select-field">
-                        <i class="fas fa-user"></i>
-                        <select name="cliente" id="cliente" onchange="traerClientes()">
-                        <option
-                            value="Seleccione cliente"
-                            style="color: #aaa; font-weight: 5000; font-size: large;">
-                            Seleccione el ID del cliente
-                        </option>
-                        </select></div><br><br>
-                        <div class="form-text">Nombre:   </div><br>
-                        <div class="form-text">Empresa: </div><br>
-                        <div class="form-text">direccion: </div><br>
-                        <div class="form-text">telefono: </div><br>
+      <div class="grid-info">
+        <div class="form">
+          <div class="Clientes">
+            <div class="clientes-select-field">
+              <div class="select-field">
+                <i class="fas fa-user"></i>
+                <select name="cliente" id="cliente" onchange="traerClientes()">
+                  <option value="Seleccione cliente" style="color: #aaa; font-weight: 5000; font-size: large;">
+                    Seleccione el ID del cliente
+                  </option>
+                </select>
+              </div><br><br>
+              <div class="form-text">Nombre: </div><br>
+              <div class="form-text">Empresa: </div><br>
+              <div class="form-text">direccion: </div><br>
+              <div class="form-text">telefono: </div><br>
+              <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()"
+                style="margin-right: 3px;">
+              <input type="submit" value="Eliminar" class="btn solid" id="botonEliminar" onclick="eliminar()"
+                style="margin-left: 3px;">
 
-                        <input type="submit" value="Modificar" class="btn solid">
-                        
-                        <input type="submit" value="Eliminar" class="btn solid">
-                    </div>
-                    <iframe src="" frameborder="0" id="iframe"></iframe>
-                </div>
+              <input type="submit" value="Eliminar" class="btn solid">
             </div>
-            <div class="circle"><h1>VER<br>CLIENTES</h1></div>
+            <iframe src="" frameborder="0" id="iframe"></iframe>
+          </div>
         </div>
+        <div class="circle">
+          <h1>VER<br>CLIENTES</h1>
+        </div>
+      </div>
     </div>
 
     <script>

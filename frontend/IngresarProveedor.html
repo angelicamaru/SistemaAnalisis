@@ -16,7 +16,25 @@
     <title>Ingresar Proveedor</title>
   </head>
 
+<<<<<<< Updated upstream
   <body>
+=======
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <title>
+        Ingresar Proveedor
+    </title>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-auth.js"></script>
+</head>
+
+<body>
+>>>>>>> Stashed changes
     <div class="grid-container">
       <div class="grid-item-menu">
         <p></p>
@@ -123,6 +141,7 @@
         nombres = data;
       }
 
+<<<<<<< Updated upstream
       function agregarRegistro() {
         const telValidatio = telValidation();
         const emailValidatio = emailValidation();
@@ -130,6 +149,42 @@
         const name = document.getElementById("Nombre").value;
         const telefono = document.getElementById("Telefono").value;
         const correo = document.getElementById("Correo").value;
+=======
+        function agregarRegistro() {
+            const telValidatio = telValidation()
+            const emailValidatio = emailValidation()
+            const nameValidatio = nameValidation()
+            const name = document.getElementById("Nombre").value
+            const telefono = document.getElementById("Telefono").value
+            const correo = document.getElementById("Correo").value
+
+            if (telValidatio && emailValidatio && nameValidatio) {
+                var url = "http://localhost:8080/añadirProveedor";
+                var data = {
+                    nombre: name,
+                    telefono: telefono,
+                    correo: correo,
+                }
+                fetch(url, {
+                    method: "POST",
+                    body: JSON.stringify(data),
+                    headers: {
+                        Accept: "application/json",
+                        "Content-Type": "application/json",
+                    },
+                })
+                    .then(function (response) {
+                        alert("Registro agregado")
+                        return response.json();
+                    })
+                    .then(function (datas) {
+                        console.log(datas);
+                        location.href = "IngresarCliente.html";
+                    });
+            } else {
+                alert("Por favor llene todos los campos")
+            }
+>>>>>>> Stashed changes
 
         if (telValidatio && emailValidatio && nameValidatio) {
           document.getElementById("Nombre").value = "";

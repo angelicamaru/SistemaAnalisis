@@ -9,6 +9,8 @@
   <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
   <link rel="stylesheet" href="style.css" />
   <title>Ingresar Solicitud</title>
+  <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-auth.js"></script>
 </head>
 
 <body>
@@ -245,14 +247,6 @@
           const cantidad = document.getElementById("cantidad").value
           const fecha = document.getElementById("fecha").value
           if (nameValidatio && entregableValidatio && ejecucionValidatio && fechaValidatio && servicioValidatio && sponsorValidatio && cantidadValidatio && clienteValidatio) {
-            document.getElementById("nombre").value = ""
-            document.getElementById("entregable").value = "Seleccione entregable"
-            document.getElementById("ejecucion").value = "Seleccione ejecución"
-            document.getElementById("sponsor").value = "Seleccione sponsor"
-            document.getElementById("servicio").value = "Seleccione servicio"
-            document.getElementById("cliente").value = "Seleccione cliente"
-            document.getElementById("cantidad").value = ""
-            document.getElementById("fecha").value = ""
             var url = "http://localhost:8080//añadirSolicitud";
             var data = {
               nombre: name,
@@ -275,6 +269,10 @@
               .then(function (response) {
                 alert("Registro agregado")
                 return response.json();
+              })
+              .then(function (datas) {
+                console.log(datas);
+                location.href = "IngresarCliente.html";
               });
           } else {
             alert("Por favor llene todos los campos")

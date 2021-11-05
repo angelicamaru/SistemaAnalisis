@@ -31,8 +31,15 @@ public class ControllerProveedor {
 
 	// Traer nombres de proveedores
 	@GetMapping("/traerNombresProveedores")
-	ArrayList<String> traerSolicitudes() {
+	ArrayList<String> traerProveedores() {
 		ArrayList<String> proveedores = proveedor.traerNombres();
+		return proveedores;
+	}
+        
+        // Traer toda la info. de proveedores
+	@GetMapping("/traerTodoProveedores")
+	ArrayList<Proveedor> traerTodo() {
+		ArrayList<Proveedor> proveedores = proveedor.traerTodo();
 		return proveedores;
 	}
 

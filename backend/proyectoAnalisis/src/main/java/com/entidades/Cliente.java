@@ -13,8 +13,8 @@ public class Cliente {
 		
 	}
 	
-public Cliente(String nombre) {
-	this.nombre = nombre;
+        public Cliente(String nombre) {
+            this.nombre = nombre;
 	}
 
 	public Cliente(String nombre, int empresa, String direccion, String telefono, String correo) {

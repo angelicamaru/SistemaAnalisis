@@ -12,8 +12,14 @@ public class Entregable {
 	public Entregable() {
 		super();
 	}
-
-
+        
+        public Entregable(String entregable, double precioProveedor, double precioCliente) {
+		super();
+		this.idEntregable = idEntregable;
+		this.entregable = entregable;
+		this.precioProveedor = precioProveedor;
+		this.precioCliente = precioCliente;
+	}
 
 	public Entregable(int idEntregable, String entregable, double precioProveedor, double precioCliente) {
 		super();

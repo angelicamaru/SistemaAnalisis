@@ -32,6 +32,13 @@ public class ControllerEntregable {
 		ArrayList<String> entregables = entregable.traerNombres();
 		return entregables;
 	}
+        
+        // Traer info. de Entregable
+	@GetMapping("/traerTodoEntregables")
+	ArrayList<Entregable> traerTodo() {
+		ArrayList<Entregable> entregables = entregable.traerTodo();
+		return entregables;
+	}
 
 	// Traer id de Entregable
 	@PostMapping("/traerIdEntregable")

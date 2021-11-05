@@ -14,6 +14,12 @@ public class Proveedor {
 	public Proveedor(String nombre) {
 		this.nombre = nombre;
 	}
+        
+        public Proveedor(String nombre, String telefono, String correo) {
+		this.nombre = nombre;
+		this.telefono = telefono;
+		this.correo = correo;
+	}
 
 	public Proveedor(int idProveedor, String nombre, String telefono, String correo) {
 		this.idProveedor = idProveedor;

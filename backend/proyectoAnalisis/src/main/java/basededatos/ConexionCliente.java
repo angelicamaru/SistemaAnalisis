@@ -95,11 +95,18 @@ public class ConexionCliente {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				String nombre = rs.getString("nombre");
-				String empresa = Boolean.toString(rs.getBoolean("empresa"));
+				int empresa;
+				boolean empresaBool = rs.getBoolean("empresa");
+				if(!empresaBool ) {
+					
+					empresa = 0;
+				}else {
+					empresa = 1;
+				}
                                 String direccion = rs.getString("direccion");
                                 String telefono = rs.getString("telefono");
                                 String correo = rs.getString("correo");
-				clientes.add(new Cliente(nombre, Integer.parseInt(empresa), direccion, telefono, correo));
+				clientes.add(new Cliente(nombre, empresa, direccion, telefono, correo));
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
@@ -108,6 +115,10 @@ public class ConexionCliente {
 		return clientes;
 
 	}
+	
+	
+	
+	
 
 	// Traer id
 	public int id(String nombre) {

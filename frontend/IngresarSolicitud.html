@@ -82,7 +82,7 @@
               
             </select>
           </div>
-          <div id="aparecer" style="display: none;">
+        <div id="aparecer" style="display: none;">
             <div class="form-text">Ejecución</div>
             <div id="errorEjecucion" class="error-text"></div>
             <div class="select-field">
@@ -143,7 +143,7 @@
           .then((response) => response.json())
           .then((data) => cargarComboBox("entregable", data));
 
-        function traerEjecuciones() {
+       /* function traerEjecuciones() {
           var url = "http://localhost:8080//traerNombreEjecucion";
           var fecha = document.getElementById("fecha").value;
           const date = new Date(fecha);
@@ -193,7 +193,7 @@
         
       
       
-      }
+      }*/
 
         fetch("http://localhost:8080/traerNombresSponsors")
           .then((response) => response.json())
@@ -243,7 +243,7 @@
           const cliente = document.getElementById("cliente").value
           const entregable = document.getElementById("entregable").value
           //const ejecucion = document.getElementById("ejecucion").value
-          const ejecucion = "ejecucion1";
+         // const ejecucion = "ejecucion1";
           const sponsor = document.getElementById("sponsor").value
           const servicio = document.getElementById("servicio").value
           const cantidad = document.getElementById("cantidad").value
@@ -285,7 +285,6 @@
             var data = {
               nombreSolicitud: name,
               nombreEntregable: entregable,
-              nombreEjecucion: ejecucion,
               nombreSponsor: sponsor,
               nombreServicio: servicio,
               cantidad: cantidad,
@@ -394,8 +393,8 @@
             document.getElementById("errorCliente").innerHTML = "";
             validationCliente = true;
             if (validationCliente && validationFecha) {
-              document.getElementById("aparecer").style.display = "block"
-              traerEjecuciones();
+            /*  document.getElementById("aparecer").style.display = "block"
+              traerEjecuciones();*/
             } else {
               document.getElementById("aparecer").style.display = "none"
             }
@@ -427,8 +426,8 @@
             document.getElementById("errorFecha").innerHTML = "";
             validationFecha = true;
             if (validationCliente && validationFecha) {
-              document.getElementById("aparecer").style.display = "block"
-              traerEjecuciones();
+            /*  document.getElementById("aparecer").style.display = "block"
+              traerEjecuciones();*/
             } else {
               document.getElementById("aparecer").style.display = "none"
             }

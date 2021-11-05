@@ -19,6 +19,19 @@ public class SolicitudMapper {
 	public SolicitudMapper() {
 		super();
 	}
+	
+	public SolicitudMapper(int cantidad, String nombreCliente,String nombreEntregable,
+			String fecha, String nombreSolicitud, String nombreServicio, String nombreSponsor) {
+		super();
+		this.cantidad = cantidad;
+		this.nombreCliente = nombreCliente;
+		this.nombreEntregable = nombreEntregable;
+		this.fecha = fecha;
+		this.nombreSolicitud = nombreSolicitud;
+		this.nombreServicio = nombreServicio;
+		this.nombreSponsor = nombreSponsor;
+	}
+	
 
 	public SolicitudMapper(int cantidad, String nombreCliente, String nombreEjecucion, String nombreEntregable,
 			String fecha, String nombreSolicitud, String nombreServicio, String nombreSponsor) {

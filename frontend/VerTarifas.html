@@ -40,7 +40,9 @@
             <a href="IngresarSponsor.html">
                 <p>INGRESAR SPONSOR</p>
             </a>
-            <div class="selected">INGRESAR TARIFAS</div>
+            <a href="IngresarTarifas.html">
+                <p>INGRESAR TARIFAS</p>
+            </a>
             <a href="IngresarServicios.html">
                 <p>INGRESAR SERVICIOS</p>
             </a>
@@ -50,9 +52,8 @@
             <a href="VerClientes.html">
                 <p>VER CLIENTES</p>
             </a>
-            <a href="VerTarifas.html">
-                <p>VER TARIFAS</p>
-            </a>
+            <div class="selected">VER TARIFAS</div>
+            
             <a href="Comparar.html">
                 <p>COMPARAR</p>
             </a>
@@ -67,14 +68,14 @@
                     <div id="errorNombre" class="error-text"></div>
                     <div class="input-field">
                         <i class="fas fa-user"></i>
-                        <input type="text" placeholder="Nombre" id="Nombre" onchange="nameValidation()" />
+                        <input type="text" placeholder="Nombre" id="Nombre" onchange="nameValidation()" disbled />
                     </div>
                     <div class="form-text">Precio proveedor</div>
                     <div id="errorPrecioProveedor" class="error-text"></div>
                     <div class="input-field">
                         <i class="fas fa-calculator"></i>
                         <input type="number" placeholder="Precio Proveedor" id="PrecioProveedor"
-                            onchange="precioProveedorValidation()" />
+                            onchange="precioProveedorValidation()" disabled />
                     </div>
                     <div class="form-text">Precio cliente</div>
                     <div id="errorPrecioCliente" class="error-text"></div>
@@ -83,15 +84,39 @@
                         <input type="number" placeholder="Precio cliente" id="PrecioCliente"
                             onchange="precioClienteValidation()" />
                     </div>
-                    <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()" />
+                    <div class="arrow">
+                        <i class="fas fa-caret-left" onclick="lastRegister()" style="display:none;" id="left"></i>
+                        <input type="submit" value="Modificar" class="btn solid" id="boton" style="margin-right: 3px"
+                            onclick="change()" />
+                        <input type="submit" value="Eliminar" class="btn solid" id="botonEliminar" onclick="eliminar()"
+                            style="margin-left: 3px" />
+                        <i class="fas fa-caret-right" onclick="nextRegister()" id="right"></i>
+                    </div>
                 </div>
                 <div class="circle">
-                    <h1>INGRESAR<br />TARIFAS</h1>
+                    <h1>INGRESAR<br />Tarifas</h1>
                 </div>
             </div>
         </div>
     </div>
     <script>
+        let datos;
+        var registerPosition = 0;
+        fetch("http://localhost:8080//traerProveedores")
+            .then((response) => response.json())
+            .then((data) => initialize(data));
+
+        function initialize(data) {
+            datos = data;
+            cargarDatos()
+        }
+
+        function cargarDatos() {
+            document.getElementById("nombre").value = datos[registerPosition].nombre
+            document.getElementById("telefono").value = datos[registerPosition].telefono
+            document.getElementById("correo").value = datos[registerPosition].correo
+        }
+
         let nombres;
         fetch("http://localhost:8080//traerNombresTarifas")
             .then((response) => response.json())
@@ -175,6 +200,89 @@
             } else {
                 document.getElementById("errorPrecioCliente").innerHTML = "";
                 return true;
+            }
+        }
+
+        function change() {
+            valor = document.getElementById("boton").value;
+            if (valor == "Modificar") {
+                document.getElementById("boton").value = "Aceptar";
+                document.getElementById("title").innerHTML = "MODIFICAR<br>PROVEEDOR";
+                document.getElementById("nombre").disabled = false;
+                document.getElementById("PrecioCliente").disabled = false;
+                document.getElementById("PrecioProveedor").disabled = false;
+            } else {
+                const nameValidatio = nameValidation();
+                const proveedorValidatio = precioProveedorValidation();
+                const clienteValidatio = precioClienteValidation();
+                if (nameValidatio && clienteValidatio && proveedorValidatio) {
+                    document.getElementById("boton").value = "Modificar";
+                    document.getElementById("title").innerHTML = "VER<br>Proveedor";
+                    document.getElementById("nombre").disabled = true;
+                    document.getElementById("PrecioCliente").disabled = true;
+                    document.getElementById("PrecioProveedor").disabled = true;
+                    var url = "http://localhost:8080//modificartarifas";
+                    var data = {
+                        id: datos[registerPosition].id,
+                        nombre: document.getElementById("nombre").value,
+                        precioCliente: document.getElementById("PrecioCliente").value,
+                        precioProveedor: document.getElementById("PrecioProveedor").value,
+                    };
+                    fetch(url, {
+                        method: "POST",
+                        body: JSON.stringify(data),
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                        },
+                    })
+                        .then(function (response) {
+                            alert("Elemento modificado")
+                            return response.json();
+                        });
+                } else {
+                    alert("Por favor llene todos los campos");
+                }
+            }
+        }
+
+        function nextRegister() {
+            registerPosition++
+            document.getElementById("left").style.display = "inline";
+            cargarDatos()
+            if (registerPosition == datos.length) {
+                document.getElementById("right").style.display = "none";
+            }
+        }
+
+        function eliminar() {
+            if (registerPosition == datos.length) {
+                registerPosition--
+            }
+            var url = "http://localhost:8080//eliminarTarifas";
+            const id = datos[registerPosition].id
+            fetch(url, {
+                method: "POST",
+                body: JSON.stringify(id),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+            })
+                .then(function (response) {
+                    alert("Elemento eliminado")
+                    return response.json();
+                });
+            cargarDatos()
+        }
+
+
+        function lastRegister() {
+            registerPosition--;
+            document.getElementById("right").style.display = "inline";
+            cargarDatos();
+            if (registerPosition == 0) {
+                document.getElementById("left").style.display = "none";
             }
         }
     </script>

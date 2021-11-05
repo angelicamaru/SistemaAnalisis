@@ -30,7 +30,9 @@
             <a href="VerOrdenDeServicio.html">
                 <p>VER ORDEN DE SERVICIO</p>
             </a>
-            <div class="selected">INGRESAR PROVEEDOR</div>
+            <a href="IngresarProveedor.html">
+                <p>INGRESAR PROVEEDOR</p>
+            </a>
             <a href="IngresarCliente.html">
                 <p>INGRESAR CLIENTE</p>
             </a>
@@ -43,9 +45,8 @@
             <a href="IngresarServicios.html">
                 <p>INGRESAR SERVICIOS</p>
             </a>
-            <a href="VerProveedores.html">
-                <p>VER PROVEEDORES</p>
-            </a>
+            <div class="selected">VER PROVEEDORES</div>
+            
             <a href="VerClientes.html">
                 <p>VER CLIENTES</p>
             </a>
@@ -81,188 +82,190 @@
                     </div>
                     <div class="arrow">
                         <i class="fas fa-caret-left" onclick="lastRegister()" style="display:none;" id="left"></i>
-                        <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()"
-                            style="margin-right: 3px;">
+                        <input type="submit" value="Modificar" class="btn solid" id="boton" style="margin-right: 3px"
+                            onclick="change()" />
                         <input type="submit" value="Eliminar" class="btn solid" id="botonEliminar" onclick="eliminar()"
-                            style="margin-left: 3px;">
+                            style="margin-left: 3px" />
                         <i class="fas fa-caret-right" onclick="nextRegister()" id="right"></i>
                     </div>
-                    <div class="circle" style="height: 100%">
-                        <h1>
-                            INGRESAR<br />
-                            PROVEEDOR
-                        </h1>
-                    </div>
+                </div>
+                <div class="circle" style="height: 100%">
+                    <h1>
+                        VER<br />
+                        PROVEEDOR
+                    </h1>
                 </div>
             </div>
+
         </div>
-        <script>
-            let datos;
-            var registerPosition = 0;
-            fetch("http://localhost:8080//traerProveedores")
-                .then((response) => response.json())
-                .then((data) => initialize(data));
+    </div>
+    <script>
+        let datos;
+        var registerPosition = 0;
+        fetch("http://localhost:8080//traerProveedores")
+            .then((response) => response.json())
+            .then((data) => initialize(data));
 
-            function initialize(data) {
-                datos = data;
-                cargarDatos()
+        function initialize(data) {
+            datos = data;
+            cargarDatos()
+        }
+
+        function cargarDatos() {
+            document.getElementById("nombre").value = datos[registerPosition].nombre
+            document.getElementById("telefono").value = datos[registerPosition].telefono
+            document.getElementById("correo").value = datos[registerPosition].correo
+        }
+
+        let nombres;
+        fetch("http://localhost:8080//traerNombresProveedores")
+            .then((response) => response.json())
+            .then((data) => initialize2(data));
+
+        function initialize2(data) {
+            nombres = data;
+        }
+
+        function telValidation() {
+            var validation;
+            const telefono = document.getElementById("Telefono").value;
+            if (telefono == "") {
+                document.getElementById("errorTelefono").innerHTML =
+                    "Por favor ingrese un numero de telefono";
+                return false;
+            } else if (telefono <= 999999999 || telefono > 9999999999) {
+                document.getElementById("errorTelefono").innerHTML =
+                    "Numero de telefono no valido";
+                return false;
+            } else {
+                document.getElementById("errorTelefono").innerHTML = "";
+                return true;
             }
+            return validation;
+        }
 
-            function cargarDatos() {
-                document.getElementById("nombre").value = datos[registerPosition].nombre
-                document.getElementById("telefono").value = datos[registerPosition].telefono
-                document.getElementById("correo").value = datos[registerPosition].correo
+        function emailValidation() {
+            var validation;
+            const correo = document.getElementById("Correo").value;
+            if (correo == "") {
+                document.getElementById("errorCorreo").innerHTML =
+                    "Por favor ingrese un correo";
+                return false;
+            } else if (!correo.includes("@")) {
+                document.getElementById("errorCorreo").innerHTML = "Correo no valido";
+                return false;
+            } else {
+                document.getElementById("errorCorreo").innerHTML = "";
+                return true;
             }
+            return validation;
+        }
 
-            let nombres;
-            fetch("http://localhost:8080//traerNombresProveedores")
-                .then((response) => response.json())
-                .then((data) => initialize(data));
-
-            function initialize(data) {
-                nombres = data;
-            }
-
-            function telValidation() {
-                var validation;
-                const telefono = document.getElementById("Telefono").value;
-                if (telefono == "") {
-                    document.getElementById("errorTelefono").innerHTML =
-                        "Por favor ingrese un numero de telefono";
-                    return false;
-                } else if (telefono <= 999999999 || telefono > 9999999999) {
-                    document.getElementById("errorTelefono").innerHTML =
-                        "Numero de telefono no valido";
-                    return false;
-                } else {
-                    document.getElementById("errorTelefono").innerHTML = "";
-                    return true;
-                }
-                return validation;
-            }
-
-            function emailValidation() {
-                var validation;
-                const correo = document.getElementById("Correo").value;
-                if (correo == "") {
-                    document.getElementById("errorCorreo").innerHTML =
-                        "Por favor ingrese un correo";
-                    return false;
-                } else if (!correo.includes("@")) {
-                    document.getElementById("errorCorreo").innerHTML = "Correo no valido";
-                    return false;
-                } else {
-                    document.getElementById("errorCorreo").innerHTML = "";
-                    return true;
-                }
-                return validation;
-            }
-
-            function nameValidation() {
-                const name = document.getElementById("Nombre").value;
-                if (name == "") {
-                    document.getElementById("errorNombre").innerHTML =
-                        "Por favor ingrese un nombre";
-                    return false;
-                } else {
-                    for (let i = 0; i < nombres.length; i++) {
-                        if (name == nombres[i]) {
-                            document.getElementById("errorNombre").innerHTML =
-                                "Este nombre ya existe, por favor digite otro";
-                            return false;
-                        }
-                    }
-                    document.getElementById("errorNombre").innerHTML = "";
-                    return true;
-                }
-            }
-
-            function change() {
-                valor = document.getElementById("boton").value;
-                if (valor == "Modificar") {
-                    document.getElementById("boton").value = "Aceptar"
-                    document.getElementById("title").innerHTML = "MODIFICAR<br>PROVEEDOR"
-                    document.getElementById("nombre").disabled = false
-                    document.getElementById("telefono").disabled = false
-                    document.getElementById("correo").disabled = false
-                } else {
-                    const telValidatio = telValidation();
-                    const emailValidatio = emailValidation();
-                    const nameValidatio = nameValidation();
-                    if (nameValidatio && telValidatio && emailValidatio) {
-                        document.getElementById("boton").value = "Modificar"
-                        document.getElementById("title").innerHTML = "VER<br>Proveedor"
-                        document.getElementById("nombre").disabled = true
-                        document.getElementById("telefono").disabled = true
-                        document.getElementById("correo").disabled = true
-                        var url = "http://localhost:8080//modificarProovedor";
-                        var data = {
-                            id = datos[registerPosition].id,
-                            nombre = document.getElementById("nombre").value,
-                            telefono = document.getElementById("telefono").value,
-                            correo = document.getElementById("correo").value,
-                        }
-                        fetch(url, {
-                            method: "POST",
-                            body: JSON.stringify(data),
-                            headers: {
-                                Accept: "application/json",
-                                "Content-Type": "application/json",
-                            },
-                        })
-                            .then(function (response) {
-                                alert("Elemento modificado")
-                                return response.json();
-                            });
-                    } else {
-                        alert("Por favor llene todos los campos")
+        function nameValidation() {
+            const name = document.getElementById("Nombre").value;
+            if (name == "") {
+                document.getElementById("errorNombre").innerHTML =
+                    "Por favor ingrese un nombre";
+                return false;
+            } else {
+                for (let i = 0; i < nombres.length; i++) {
+                    if (name == nombres[i]) {
+                        document.getElementById("errorNombre").innerHTML =
+                            "Este nombre ya existe, por favor digite otro";
+                        return false;
                     }
                 }
+                document.getElementById("errorNombre").innerHTML = "";
+                return true;
             }
+        }
 
-            function nextRegister() {
-                registerPosition++
-                document.getElementById("left").style.display = "inline";
-                cargarDatos()
-                if (registerPosition == datos.length) {
-                    document.getElementById("right").style.display = "none";
+        function change() {
+            valor = document.getElementById("boton").value;
+            if (valor == "Modificar") {
+                document.getElementById("boton").value = "Aceptar";
+                document.getElementById("title").innerHTML = "MODIFICAR<br>PROVEEDOR";
+                document.getElementById("nombre").disabled = false;
+                document.getElementById("telefono").disabled = false;
+                document.getElementById("correo").disabled = false;
+            } else {
+                const telValidatio = telValidation();
+                const emailValidatio = emailValidation();
+                const nameValidatio = nameValidation();
+                if (nameValidatio && telValidatio && emailValidatio) {
+                    document.getElementById("boton").value = "Modificar";
+                    document.getElementById("title").innerHTML = "VER<br>Proveedor";
+                    document.getElementById("nombre").disabled = true;
+                    document.getElementById("telefono").disabled = true;
+                    document.getElementById("correo").disabled = true;
+                    var url = "http://localhost:8080//modificarProovedor";
+                    var data = {
+                        id: datos[registerPosition].id,
+                        nombre: document.getElementById("nombre").value,
+                        telefono: document.getElementById("telefono").value,
+                        correo: document.getElementById("correo").value,
+                    };
+                    fetch(url, {
+                        method: "POST",
+                        body: JSON.stringify(data),
+                        headers: {
+                            Accept: "application/json",
+                            "Content-Type": "application/json",
+                        },
+                    })
+                        .then(function (response) {
+                            alert("Elemento modificado")
+                            return response.json();
+                        });
+                } else {
+                    alert("Por favor llene todos los campos");
                 }
             }
+        }
 
-            function eliminar() {
-                if (registerPosition == datos.length) {
-                    registerPosition--
-                }
-                var url = "http://localhost:8080//eliminarProveedor";
-                const id = datos[registerPosition].id
-                fetch(url, {
-                    method: "POST",
-                    body: JSON.stringify(id),
-                    headers: {
-                        Accept: "application/json",
-                        "Content-Type": "application/json",
-                    },
-                })
-                    .then(function (response) {
-                        alert("Elemento eliminado")
-                        return response.json();
-                    });
-                cargarDatos()
+        function nextRegister() {
+            registerPosition++
+            document.getElementById("left").style.display = "inline";
+            cargarDatos()
+            if (registerPosition == datos.length) {
+                document.getElementById("right").style.display = "none";
             }
+        }
 
-
-            function lastRegister() {
-                registerPosition--;
-                document.getElementById("right").style.display = "inline";
-                cargarDatos();
-                if (registerPosition == 0) {
-                    document.getElementById("left").style.display = "none";
-                }
+        function eliminar() {
+            if (registerPosition == datos.length) {
+                registerPosition--
             }
+            var url = "http://localhost:8080//eliminarProveedor";
+            const id = datos[registerPosition].id
+            fetch(url, {
+                method: "POST",
+                body: JSON.stringify(id),
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+            })
+                .then(function (response) {
+                    alert("Elemento eliminado")
+                    return response.json();
+                });
+            cargarDatos()
+        }
 
-        </script>
-        <script src="fireBase.js"></script>
-        <script src="main.js"></script>
+
+        function lastRegister() {
+            registerPosition--;
+            document.getElementById("right").style.display = "inline";
+            cargarDatos();
+            if (registerPosition == 0) {
+                document.getElementById("left").style.display = "none";
+            }
+        }
+
+    </script>
+    <script src="fireBase.js"></script>
+    <script src="main.js"></script>
 </body>
 
 </html>

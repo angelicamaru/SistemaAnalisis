@@ -316,19 +316,19 @@
         }
 
         function nameValidation() {
-          const name = document.getElementById("nombre").value
+          const name = document.getElementById("nombre").value;
           if (name == "") {
-            document.getElementById("errorNombre").innerHTML = "Por favor ingrese un nombre"
-            return false
+            document.getElementById("errorNombre").innerHTML = ",Por favor ingrese un nombre";
+            return false;
           } else {
             for (let i = 0; i < nombres.length; i++) {
               if (name == nombres[i]) {
-                document.getElementById("errorNombre").innerHTML = "Este nombre ya existe, por favor digite otro"
-                return false
+                document.getElementById("errorNombre").innerHTML = "Este nombre ya existe, por favor digite otro";
+                return ;
               }
             }
-            document.getElementById("errorNombre").innerHTML = ""
-            return true
+            document.getElementById("errorNombre").innerHTML = "";
+            return true;
           }
         }
 

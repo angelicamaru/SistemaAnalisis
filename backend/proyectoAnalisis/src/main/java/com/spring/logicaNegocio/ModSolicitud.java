@@ -20,12 +20,12 @@ public class ModSolicitud {
 	
 	//Objetos
 	Solicitud solicitud;
-	ModEntregable entregable;
-	ModEjecucion ejecucion;
-	ModCliente cliente;
-	ModSponsor sponsor;
-	ModServicio servicio;
-	ModCuentaCobro cuentaCobro;
+	ModEntregable entregable = new ModEntregable();
+	ModEjecucion ejecucion = new ModEjecucion();
+	ModCliente cliente = new ModCliente();
+	ModSponsor sponsor = new ModSponsor();
+	ModServicio servicio = new ModServicio();
+	ModCuentaCobro cuentaCobro = new ModCuentaCobro();
 	ConexionSolicitud con;
 
 	//Metodos
@@ -33,15 +33,15 @@ public class ModSolicitud {
 	//Añadir solicitud
 	public void añadirSolicitud(SolicitudMapper nuevaSolicitud) {
 		con = new ConexionSolicitud();
-		System.out.println("ENTRE");
-		System.out.println(entregable.id(nuevaSolicitud.getNombreEntregable()));
+		
 		
 		int idEntregable = entregable.id(nuevaSolicitud.getNombreEntregable());
 		int idCliente = cliente.id(nuevaSolicitud.getNombreCliente());
-		int idEjecucion = ejecucion.id(idCliente,"Enero");
-		int idSponsor = sponsor.id(nuevaSolicitud.getNombreSolicitud());
+		int idEjecucion = ejecucion.id(idCliente,nuevaSolicitud.getMes());
+		int idSponsor = sponsor.id(nuevaSolicitud.getNombreSponsor());
 		int idServicio = servicio.id(nuevaSolicitud.getNombreServicio());
-		int idCuentaCobro = cuentaCobro.id(1, "Enero");
+		int idProveedor = 1;
+		int idCuentaCobro = cuentaCobro.id(idProveedor, nuevaSolicitud.getMes());
 		
 		
 		solicitud = new Solicitud(nuevaSolicitud.getNombreSolicitud(),

@@ -44,6 +44,7 @@ public class ModEntregable {
 	// Retorna el id de entregable
 	public int id(String nombre) {
 		con = new ConexionEntregable();
+		System.out.println("entre mod");
 		int id = con.id(nombre);
 		con.desconectar();
 		return id;

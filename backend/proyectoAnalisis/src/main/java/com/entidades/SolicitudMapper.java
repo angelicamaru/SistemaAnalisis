@@ -13,7 +13,7 @@ public class SolicitudMapper {
 	private String nombreSolicitud;
 	private String nombreServicio;
 	private String nombreSponsor;
-	
+	private String mes;
 	
 	
 	public SolicitudMapper() {
@@ -31,6 +31,19 @@ public class SolicitudMapper {
 		this.nombreSolicitud = nombreSolicitud;
 		this.nombreServicio = nombreServicio;
 		this.nombreSponsor = nombreSponsor;
+	}
+	public SolicitudMapper(int cantidad, String nombreCliente, String nombreEjecucion, String nombreEntregable,
+			String fecha, String nombreSolicitud, String nombreServicio, String nombreSponsor, String mes) {
+		super();
+		this.cantidad = cantidad;
+		this.nombreCliente = nombreCliente;
+		this.nombreEjecucion = nombreEjecucion;
+		this.nombreEntregable = nombreEntregable;
+		this.fecha = fecha;
+		this.nombreSolicitud = nombreSolicitud;
+		this.nombreServicio = nombreServicio;
+		this.nombreSponsor = nombreSponsor;
+		this.mes = mes;
 	}
 
 	public int getCantidad() {
@@ -96,6 +109,15 @@ public class SolicitudMapper {
 	public void setNombreSponsor(String nombreSponsor) {
 		this.nombreSponsor = nombreSponsor;
 	}
+
+	public String getMes() {
+		return mes;
+	}
+
+	public void setMes(String mes) {
+		this.mes = mes;
+	}
+	
 	
 	
 	

@@ -148,7 +148,7 @@ public class ConexionEntregable {
         public void eliminarE(Entregable nombre) {
                 conexion();
 
-                System.out.println(nombre.getEntregable());
+                
                 try (PreparedStatement stmt = con.prepareStatement("DELETE FROM Entregable WHERE entregable = '"+nombre.getEntregable()+"'")){
                         stmt.executeUpdate();
                 } catch (SQLException sqle) {

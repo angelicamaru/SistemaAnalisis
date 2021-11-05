@@ -178,14 +178,14 @@
             nombreCliente: document.getElementById("cliente").value,
             mes: mes,
           };
-        fetch(url, {
-            method: "POST",
-            body: JSON.stringify(condicion),
-            headers: {
-              "Accept": "application/json",
-              "Content-Type": "application/json",
-            },
-          })
+          fetch(url, {
+              method: "POST",
+              body: JSON.stringify(condicion),
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            })
             .then((response) => response.json())
             .then((data) => console.log(data))
             .then((data) => cargarComboBox("ejecucion",data.descripcion));
@@ -248,19 +248,51 @@
           const servicio = document.getElementById("servicio").value
           const cantidad = document.getElementById("cantidad").value
           const fecha = document.getElementById("fecha").value
+
+          const date = new Date(fecha);
+          var mm = date.getMonth() + 1;
+         
+          if (mm == 1) {
+            mes = "Enero";
+          } else if (mm == 2) {
+            mes = "Febrero";
+          } else if (mm == 3) {
+            mes = "Marzo";
+          } else if (mm == 4) {
+            mes = "Abril";
+          } else if (mm == 5) {
+            mes = "Mayo";
+          } else if (mm == 6) {
+            mes = "Junio";
+          } else if (mm == 7) {
+            mes = "Julio";
+          } else if (mm == 8) {
+            mes = "Agosto";
+          } else if (mm == 9) {
+            mes = "Septiembre";
+          } else if (mm == 10) {
+            mes = "Octubre";
+          } else if (mm == 11) {
+            mes = "Noviembre";
+          } else if (mm == 12) {
+            mes = "Diciembre";
+          }
+
          // if (nameValidatio && entregableValidatio && ejecucionValidatio && fechaValidatio && servicioValidatio && sponsorValidatio && cantidadValidatio && clienteValidatio) {
           if (nameValidatio && entregableValidatio && fechaValidatio && servicioValidatio && sponsorValidatio && cantidadValidatio && clienteValidatio) {
   
           var url = "http://localhost:8080//añadirSolicitud";
             var data = {
-              nombre: name,
-              entregable: entregable,
-              ejecucion: ejecucion,
-              sponsor: sponsor,
-              servicio: servicio,
+              nombreSolicitud: name,
+              nombreEntregable: entregable,
+              nombreEjecucion: ejecucion,
+              nombreSponsor: sponsor,
+              nombreServicio: servicio,
               cantidad: cantidad,
               fecha: fecha,
-              cliente: cliente,
+              nombreCliente: cliente,
+              mes:mes,
+
             }
             fetch(url, {
               method: "POST",
@@ -271,7 +303,7 @@
               },
             })
               .then(function (response) {
-                alert("Registro agregado")
+                alert("Registro agregado");
                 return response.json();
               })
               .then(function (datas) {
@@ -279,7 +311,7 @@
                 location.href = "IngresarSolicitud.html";
               });
           } else {
-            alert("Por favor llene todos los campos")
+            alert("Por favor llene todos los campos");
           }
 
         }

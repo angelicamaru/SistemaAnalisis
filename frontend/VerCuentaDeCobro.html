@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Poppins"
+    />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/64d58efce2.js"
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.js"></script>
+
+    <title>Ver cuenta de cobro</title>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-auth.js"></script>
+  </head>
+
+  <body>
+    <div class="grid-container">
+      <div class="grid-item-menu">
+        <p></p>
+        <a href="Index.html">
+          <p>HOME</p>
+        </a>
+        <p></p>
+        <a href="IngresarSolicitud.html">
+          <p>INGRESAR SOLICITUD</p>
+        </a>
+        <div class="selected">VER CUENTA DE COBRO</div>
+        <a href="VerOrdenDeServicio.html">
+          <p>VER ORDEN DE SERVICIO</p>
+        </a>
+        <a href="IngresarProveedor.html">
+          <p>INGRESAR PROVEEDOR</p>
+        </a>
+        <a href="IngresarCliente.html">
+          <p>INGRESAR CLIENTE</p>
+        </a>
+        <a href="IngresarSponsor.html">
+          <p>INGRESAR SPONSOR</p>
+        </a>
+        <a href="IngresarTarifas.html">
+          <p>INGRESAR TARIFAS</p>
+        </a>
+        <a href="IngresarServicios.html">
+          <p>INGRESAR SERVICIOS</p>
+        </a>
+        <a href="VerProveedores.html">
+          <p>VER PROVEEDORES</p>
+        </a>
+        <a href="VerClientes.html">
+          <p>VER CLIENTES</p>
+        </a>
+        <a href="VerTarifas.html">
+          <p>VER TARIFAS</p>
+        </a>
+        <a href="Comparar.html">
+          <p>COMPARAR</p>
+        </a>
+        <p></p>
+        <button class="logout" onclick="mainApp.logout();">SALIR</button>
+      </div>
+
+      <div class="grid-item">
+        <h1 id="title" class="titleContent">VER CUENTA DE COBRO</h1>
+        <div class="cuentas">
+          <div class="form-text">Proveedor</div>
+          <div class="form-text">Fecha</div>
+          <div class="cuentas-select-field">
+            <i class="fas fa-user"></i>
+            <select name="proveedor" id="proveedor" onchange="traerCuenta()">
+              <option
+                value="Seleccione proveedor"
+                style="color: #aaa; font-weight: 500"
+              >
+                Seleccione proveedor
+              </option>
+            </select>
+          </div>
+          <div class="cuentas-select-field">
+            <i class="far fa-calendar"></i>
+            <select name="fecha" id="fecha" onchange="traerCuenta()">
+              <option
+                value="Seleccione un mes"
+                style="color: #aaa; font-weight: 500"
+              >
+                Seleccione un mes
+              </option>
+              <option value="Enero">Enero</option>
+              <option value="Febrero">Febrero</option>
+              <option value="Marzo">Marzo</option>
+              <option value="Abril">Abril</option>
+              <option value="Mayo">Mayo</option>
+              <option value="Junio">Junio</option>
+              <option value="Julio">Julio</option>
+              <option value="Agosto">Agosto</option>
+              <option value="Septiembre">Septiembre</option>
+              <option value="Octubre">Octubre</option>
+              <option value="Noviembre">Noviembre</option>
+              <option value="Diciembre">Diciembre</option>
+            </select>
+          </div>
+        </div>
+        <iframe src="" frameborder="0" id="iframe"></iframe>
+      </div>
+    </div>
+    <script>
+      fetch("http://localhost:8080//traerNombresProveedores")
+        .then((response) => response.json())
+        .then((data) => cargarComboBox("proveedor", data));
+
+      function cargarComboBox(tipo, datas) {
+        for (var x = 0; x < datas.length; x++)
+          agregar(document.getElementById(tipo), datas[x]);
+      }
+
+      function agregar(select, val) {
+        const option = document.createElement("option");
+        const valor = val;
+        option.value = valor;
+        option.text = valor;
+        select.appendChild(option);
+      }
+
+      function traerCuenta() {
+        const proveedor = document.getElementById("proveedor").value;
+        const fecha = document.getElementById("fecha").value;
+        if (
+          proveedor != "Seleccione proveedor" &&
+          fecha != "Seleccione un mes"
+        ) {
+          var url = "http://localhost:8080//traerCuentaCobro";
+          var condicion = {
+            nombreProveedor: proveedor,
+            mes: fecha,
+          };
+          fetch(url, {
+            method: "POST",
+            body: JSON.stringify(condicion),
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
+            .then((response) => response.json())
+            .then((data) => crearPdf(data));
+        } else {
+          document.getElementById("iframe").src = "";
+        }
+      }
+
+      function crearPdf(data) {
+        const doc = new jsPDF();
+
+        doc.setFontSize(8);
+        doc.setFont("times");
+        doc.setFontType("bold");
+        doc.text(110, 20, "CUENTA DE COBRO: " + data.nombre, "center");
+        doc.text(
+          110,
+          30,
+          "JOURNEY MARKETING Y NEGOCIOS S.A.S. NIT 901.375.884-1",
+          "center"
+        );
+        doc.setFontType("normal");
+        doc.text(110, 35, "DEBE A:", "center");
+        doc.setFontType("bold");
+        doc.text(110, 38, document.getElementById("proveedor").value, "center");
+        doc.setFontType("normal");
+        doc.text(110, 45, "LA SUMA DE:", "center");
+        doc.text(110, 50, data.total.toString(), "center");
+        var today = new Date();
+        var dd = today.getDate();
+        var dia;
+        if (dd == 1) {
+          dia = "uno";
+        } else if (dd == 2) {
+          dia = "dos";
+        } else if (dd == 3) {
+          dia = "tres";
+        } else if (dd == 4) {
+          dia = "cuatro";
+        } else if (dd == 5) {
+          dia = "cinco";
+        } else if (dd == 6) {
+          dia = "seis";
+        } else if (dd == 7) {
+          dia = "siete";
+        } else if (dd == 8) {
+          dia = "ocho";
+        } else if (dd == 9) {
+          dia = "nueve";
+        } else if (dd == 10) {
+          dia = "diez";
+        } else if (dd == 11) {
+          dia = "once";
+        } else if (dd == 12) {
+          dia = "doce";
+        } else if (dd == 13) {
+          dia = "trece";
+        } else if (dd == 14) {
+          dia = "catorce";
+        } else if (dd == 15) {
+          dia = "quince";
+        } else if (dd == 16) {
+          dia = "dieciséis";
+        } else if (dd == 17) {
+          dia = "diecisiete";
+        } else if (dd == 18) {
+          dia = "dieciocho";
+        } else if (dd == 19) {
+          dia = "diecinueve";
+        } else if (dd == 20) {
+          dia = "veinte";
+        } else if (dd == 21) {
+          dia = "veintiun";
+        } else if (dd == 22) {
+          dia = "veintidos";
+        } else if (dd == 23) {
+          dia = "veintitres";
+        } else if (dd == 24) {
+          dia = "veinticuatro";
+        } else if (dd == 25) {
+          dia = "veinticinco";
+        } else if (dd == 26) {
+          dia = "venitiseis";
+        } else if (dd == 27) {
+          dia = "veintisiete";
+        } else if (dd == 28) {
+          dia = "veintiocho";
+        } else if (dd == 29) {
+          dia = "veintinueve";
+        } else if (dd == 30) {
+          dia = "treinta";
+        } else if (dd == 31) {
+          dia = "treinta y uno";
+        }
+        const mm = today.getMonth() + 1;
+        if (mm == 1) {
+          mes = "Enero";
+        } else if (mm == 2) {
+          mes = "Febrero";
+        } else if (mm == 3) {
+          mes = "Marzo";
+        } else if (mm == 4) {
+          mes = "Abril";
+        } else if (mm == 5) {
+          mes = "Mayo";
+        } else if (mm == 6) {
+          mes = "Junio";
+        } else if (mm == 7) {
+          mes = "Julio";
+        } else if (mm == 8) {
+          mes = "Agosto";
+        } else if (mm == 9) {
+          mes = "Septiembre";
+        } else if (mm == 10) {
+          mes = "Octubre";
+        } else if (mm == 11) {
+          mes = "Noviembre";
+        } else if (mm == 12) {
+          mes = "Diciembre";
+        }
+        doc.text(
+          15,
+          55,
+          "Se entrega a los " +
+            dia +
+            " (" +
+            dd +
+            ") días del mes de " +
+            mes +
+            " de " +
+            today.getFullYear() +
+            "."
+        );
+        var columns = ["Fecha", "Nombre", "Cantidad", "Valor"];
+        const datos = [];
+        for (let index = 0; index < data.solicitudes.length; index++) {
+          datos.push([
+            data.solicitudes[index].fecha,
+            data.solicitudes[index].nombre,
+            data.solicitudes[index].cantidad,
+            data.solicitudes[index].totalSolicitud,
+          ]);
+        }
+        doc.autoTable(columns, datos, {
+          margin: { top: 60 },
+          styles: { fontSize: 8 },
+        });
+
+        const posicion = 60 + datos.length * 10;
+        doc.text(15, posicion, "Cordialmente,");
+        doc.setFontType("bold");
+        doc.text(15, posicion + 5, "Sandra Milena Castellanos Carrillo");
+        doc.setFontType("normal");
+        doc.text(15, posicion + 8, "C.C. 52.989.909");
+        doc.text(15, posicion + 11, "Teléfono 317 661 9521");
+
+        const objectUrl = doc.output("bloburl");
+        document.getElementById("iframe").src = objectUrl;
+      }
+    </script>
+    <script src="fireBase.js"></script>
+    <script src="main.js"></script>
+  </body>
+</html>

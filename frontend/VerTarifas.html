@@ -8,15 +8,25 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<<<<<<< HEAD
     <link rel="stylesheet" href="style.css" />
+=======
+>>>>>>> master
     <script
       src="https://kit.fontawesome.com/64d58efce2.js"
       crossorigin="anonymous"
     ></script>
+<<<<<<< HEAD
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.2/jspdf.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.6/jspdf.plugin.autotable.js"></script>
 
     <title>Ver Tarifas</title>
+=======
+    <link rel="stylesheet" href="style.css" />
+    <title>Ingresar Sponsor</title>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-auth.js"></script>
+>>>>>>> master
   </head>
 
   <body>
@@ -31,7 +41,11 @@
           <p>INGRESAR SOLICITUD</p>
         </a>
         <a href="VerCuentaDeCobro.html">
+<<<<<<< HEAD
             <p>VER CUENTA DE COBRO</p>
+=======
+          <p>VER CUENTA DE COBRO</p>
+>>>>>>> master
         </a>
         <a href="VerOrdenDeServicio.html">
           <p>VER ORDEN DE SERVICIO</p>
@@ -39,6 +53,13 @@
         <a href="IngresarProveedor.html">
           <p>INGRESAR PROVEEDOR</p>
         </a>
+<<<<<<< HEAD
+=======
+        <a href="IngresarCliente.html">
+          <p>INGRESAR CLIENTE</p>
+        </a>
+
+>>>>>>> master
         <a href="IngresarSponsor.html">
           <p>INGRESAR SPONSOR</p>
         </a>
@@ -49,12 +70,20 @@
           <p>INGRESAR SERVICIOS</p>
         </a>
         <a href="VerProveedores.html">
+<<<<<<< HEAD
             <p>VER PROVEEDORES</p>
         </a>
         <a href="VerClientes.html">
             <p>VER CLIENTES</p>
         </a>
         
+=======
+          <p>VER PROVEEDORES</p>
+        </a>
+        <a href="VerClientes.html">
+          <p>VER CLIENTES</p>
+        </a>
+>>>>>>> master
         <div class="selected">VER TARIFAS</div>
 
         <a href="Comparar.html">
@@ -63,6 +92,7 @@
         <p></p>
         <button class="logout" onclick="mainApp.logout();">SALIR</button>
       </div>
+<<<<<<< HEAD
       
     <div class="grid-item">
         <div class="grid-info">
@@ -185,9 +215,246 @@
 
         const objectUrl = doc.output("bloburl");
         document.getElementById("iframe").src = objectUrl;
+=======
+
+      <div class="grid-item">
+        <div class="grid-info">
+          <div class="form">
+            <div class="form-text">Nombre</div>
+            <div id="errorNombre" class="error-text"></div>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input
+                type="text"
+                placeholder="Nombre"
+                id="Nombre"
+                onchange="nameValidation()"
+                disabled
+              />
+            </div>
+            <div class="form-text">Precio proveedor</div>
+            <div id="errorPrecioProveedor" class="error-text"></div>
+            <div class="input-field">
+              <i class="fas fa-calculator"></i>
+              <input
+                type="number"
+                placeholder="Precio Proveedor"
+                id="PrecioProveedor"
+                onchange="precioProveedorValidation()"
+                disabled
+              />
+            </div>
+            <div class="form-text">Precio cliente</div>
+            <div id="errorPrecioCliente" class="error-text"></div>
+            <div class="input-field">
+              <i class="fas fa-calculator"></i>
+              <input
+                type="number"
+                placeholder="Precio cliente"
+                id="PrecioCliente"
+                onchange="precioClienteValidation()"
+              />
+            </div>
+            <div class="arrow">
+              <i
+                class="fas fa-caret-left"
+                onclick="lastRegister()"
+                style="display: none"
+                id="left"
+              ></i>
+              <input
+                type="submit"
+                value="Modificar"
+                class="btn solid"
+                id="boton"
+                style="margin-right: 3px"
+                onclick="change()"
+              />
+              <input
+                type="submit"
+                value="Eliminar"
+                class="btn solid"
+                id="botonEliminar"
+                onclick="eliminar()"
+                style="margin-left: 3px"
+              />
+              <i
+                class="fas fa-caret-right"
+                onclick="nextRegister()"
+                id="right"
+              ></i>
+            </div>
+          </div>
+          <div class="circle">
+            <h1 id="title">VER<br />TARIFAS</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      let datos;
+      var registerPosition = 0;
+      fetch("http://localhost:8080//traerTodoEntregables")
+        .then((response) => response.json())
+        .then((data) => initialize(data));
+
+      function initialize(data) {
+        datos = data;
+        cargarDatos();
+      }
+
+      function cargarDatos() {
+        document.getElementById("Nombre").value =
+          datos[registerPosition].entregable;
+        document.getElementById("PrecioProveedor").value =
+          datos[registerPosition].precioProveedor;
+        document.getElementById("PrecioCliente").value =
+          datos[registerPosition].precioCliente;
+      }
+
+      let nombres;
+      fetch("http://localhost:8080//traerNombresEntregables")
+        .then((response) => response.json())
+        .then((data) => initialize2(data));
+
+      function initialize2(data) {
+        nombres = data;
+      }
+
+      function nameValidation() {
+        const name = document.getElementById("Nombre").value;
+        if (name == "") {
+          document.getElementById("errorNombre").innerHTML =
+            "Por favor ingrese un nombre";
+          return false;
+        } else {
+          for (let i = 0; i < nombres.length; i++) {
+            if (name == nombres[i]) {
+              document.getElementById("errorNombre").innerHTML =
+                "Este nombre ya existe, por favor digite otro";
+              return false;
+            }
+          }
+          document.getElementById("errorNombre").innerHTML = "";
+          return true;
+        }
+      }
+
+      function precioProveedorValidation() {
+        const name = document.getElementById("PrecioProveedor").value;
+        if (name == "") {
+          document.getElementById("errorPrecioProveedor").innerHTML =
+            "Por favor ingrese un precio";
+          return false;
+        } else {
+          document.getElementById("errorPrecioProveedor").innerHTML = "";
+          return true;
+        }
+      }
+
+      function precioClienteValidation() {
+        const name = document.getElementById("PrecioCliente").value;
+        if (name == "") {
+          document.getElementById("errorPrecioCliente").innerHTML =
+            "Por favor ingrese un precio";
+          return false;
+        } else {
+          document.getElementById("errorPrecioCliente").innerHTML = "";
+          return true;
+        }
+      }
+
+      function change() {
+        valor = document.getElementById("boton").value;
+        if (valor == "Modificar") {
+          document.getElementById("boton").value = "Aceptar";
+          document.getElementById("title").innerHTML = "MODIFICAR<br>TARIFAS";
+          document.getElementById("Nombre").disabled = false;
+          document.getElementById("PrecioCliente").disabled = false;
+          document.getElementById("PrecioProveedor").disabled = false;
+        } else {
+          const nameValidatio = nameValidation();
+          const proveedorValidatio = precioProveedorValidation();
+          const clienteValidatio = precioClienteValidation();
+          if (nameValidatio && clienteValidatio && proveedorValidatio) {
+            document.getElementById("boton").value = "Modificar";
+            document.getElementById("title").innerHTML = "VER<br>TARIFAS";
+            document.getElementById("Nombre").disabled = true;
+            document.getElementById("PrecioCliente").disabled = true;
+            document.getElementById("PrecioProveedor").disabled = true;
+            var url = "http://localhost:8080//modEntregable";
+            var data = {
+              idEntregable: datos[registerPosition].idEntregable,
+              entregable: document.getElementById("Nombre").value,
+              precioCliente: document.getElementById("PrecioCliente").value,
+              precioProveedor: document.getElementById("PrecioProveedor").value,
+            };
+            fetch(url, {
+              method: "POST",
+              body: JSON.stringify(data),
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            }).then(function (response) {
+              alert("Elemento modificado");
+              return response.json();
+            });
+          } else {
+            alert("Por favor llene todos los campos");
+          }
+        }
+      }
+
+      function nextRegister() {
+        registerPosition++;
+        document.getElementById("left").style.display = "inline";
+        cargarDatos();
+        if (registerPosition == datos.length - 1) {
+          document.getElementById("right").style.display = "none";
+        }
+      }
+
+      function eliminar() {
+        if (registerPosition == datos.length) {
+          registerPosition--;
+        }
+        var url = "http://localhost:8080//eliminarEntregable";
+        const id = datos[registerPosition].entregable;
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify(id),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        })
+          .then(function (response) {
+            alert("Elemento eliminado");
+            return response.json();
+          })
+          .then(function (datas) {
+            console.log(datas);
+            location.href = "VerTarifas.html";
+          });
+      }
+
+      function lastRegister() {
+        registerPosition--;
+        document.getElementById("right").style.display = "inline";
+        cargarDatos();
+        if (registerPosition == 0) {
+          document.getElementById("left").style.display = "none";
+        }
+>>>>>>> master
       }
     </script>
     <script src="fireBase.js"></script>
     <script src="main.js"></script>
+<<<<<<< HEAD
     </body>
     </html>
+=======
+  </body>
+</html>
+>>>>>>> master

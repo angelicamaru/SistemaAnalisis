@@ -62,7 +62,7 @@
       <div class="grid-info">
         <div class="form">
           <div class="Clientes">
-            <div class="clientes-select-field">
+            <div class="clientes-select-field"><br><br>
               <div class="select-field">
                 <i class="fas fa-user"></i>
                 <select name="cliente" id="cliente" onchange="traerClientes()">
@@ -71,16 +71,17 @@
                   </option>
                 </select>
               </div><br><br>
-              <div class="form-text">Nombre: </div><br>
-              <div class="form-text">Empresa: </div><br>
-              <div class="form-text">direccion: </div><br>
-              <div class="form-text">telefono: </div><br>
+              <div class="form-text">Nombre: </div>
+              <div class="form-text" id="Nombre"> </div><br>
+              <div class="form-text">Empresa: </div>
+              <div class="form-text" id="Empresa"> </div><br>
+              <div class="form-text">direccion: </div>
+              <div class="form-text" id="Direccion"> </div><br>
+              <div class="form-text">telefono: </div><br><br>
               <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()"
                 style="margin-right: 3px;">
               <input type="submit" value="Eliminar" class="btn solid" id="botonEliminar" onclick="eliminar()"
                 style="margin-left: 3px;">
-
-              <input type="submit" value="Eliminar" class="btn solid">
             </div>
             <iframe src="" frameborder="0" id="iframe"></iframe>
           </div>
@@ -99,14 +100,6 @@
       function cargarComboBox(tipo, datas) {
         for (var x = 0; x < datas.length; x++)
           agregar(document.getElementById(tipo), datas[x]);
-      }
-
-      function agregar(select, val) {
-        const option = document.createElement("option");
-        const valor = val;
-        option.value = valor;
-        option.text = valor;
-        select.appendChild(option);
       }
 
       function traerClientes() 
@@ -135,6 +128,139 @@
           document.getElementById("iframe").src = "";
         }
       }
+      function change() {
+      valor = document.getElementById("boton").value;
+      if (valor == "Modificar") {
+        document.getElementById("boton").value = "Aceptar"
+        document.getElementById("title").innerHTML = "MODIFICAR<br>SOLICITUD"
+        document.getElementById("Nombre").disabled = false
+        document.getElementById("Empresa").disabled = false
+        document.getElementById("Direccion").disabled = false
+        document.getElementById("Telefono").disabled = false
+      } else {
+        const nameValidatio = nameValidation()
+        const empresaValidatio = empresaValidation()
+        const direccionValidatio = direccionValidation()
+        const telefonoValidatio = telefonoValidation()
+        if (nameValidatio && entregableValidatio && ejecucionValidatio && fechaValidatio && servicioValidatio && sponsorValidatio && cantidadValidatio) {
+          document.getElementById("boton").value = "Modificar"
+          document.getElementById("title").innerHTML = "VER<br>SOLICITUD"
+          document.getElementById("Nombre").disabled = true
+          document.getElementById("Empresa").disabled = true
+          document.getElementById("Direccion").disabled = true
+          document.getElementById("Telefono").disabled = true
+          if (document.getElementById("nombre").value != "posicion") {
+            modificado.push([document.getElementById("nombre").value, "nombre"])
+          }
+          if (document.getElementById("entregable").value != "posicion") {
+            modificado.push([document.getElementById("entregable").value, "entregable"])
+          }
+          if (document.getElementById("ejecucion").value != "posicion") {
+            modificado.push([document.getElementById("ejecucion").value, "ejecucion"])
+          }
+          if (document.getElementById("sponsor").value != "posicion") {
+            modificado.push([document.getElementById("sponsor").value, "sponsor"])
+          }
+          if (document.getElementById("servicio").value != "posicion") {
+            modificado.push([document.getElementById("servicio").value, "servivio"])
+          }
+          if (document.getElementById("cantidad").value != "posicion") {
+            modificado.push([document.getElementById("cantidad").value, "cantidad"])
+          }
+          if (document.getElementById("fecha").value != "posicion") {
+            modificado.push([document.getElementById("fecha").value, "fecha"])
+          }
+          var url = "http://localhost:8080//";
+          var data = {
+            id = datos[registerPosition].id,
+            modificacion = modificado,
+          }
+          fetch(url, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
+            .then(function (response) {
+              alert("Elemento modificado")
+              return response.json();
+            });
+        } else {
+          alert("Por favor llene todos los campos")
+        }
+      }
+    }
+
+    function eliminar() {
+      if (registerPosition == datos.length) {
+        registerPosition--
+      }
+      var url = "http://localhost:8080//";
+      const id = datos[registerPosition].id
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify(id),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        alert("Elemento eliminado")
+        return response.json();
+      });
+
+      function nameValidation() {
+      const name = document.getElementById("Nombre").value;
+      if (name == "") {
+        document.getElementById("errorNombre").innerHTML =
+          "Por favor ingrese un nombre";
+        return false;
+      } else {
+        document.getElementById("errorNombre").innerHTML = "";
+        return true;
+      }
+    }
+
+    function empresaValidation() {
+      const name = document.getElementById("Empresa").value;
+      if (name == "Seleccione empresa") {
+        document.getElementById("errorEmpresa").innerHTML =
+          "Por favor seleccione una empresa";
+        return false;
+      } else {
+        document.getElementById("errorEmpresa").innerHTML = "";
+        return true;
+      }
+    }
+
+    function direccionValidation() {
+      const name = document.getElementById("Direccion").value;
+      if (name == "Seleccione direccion") {
+        document.getElementById("errorDireccion").innerHTML =
+          "Por favor seleccione una direccion";
+        return false;
+      } else {
+        document.getElementById("errorDireccion").innerHTML = "";
+        return true;
+      }
+    }
+
+    function telefonoValidation() {
+      const name = document.getElementById("Telefono").value;
+      if (name == "Seleccione telefono") {
+        document.getElementById("errorTelefono").innerHTML =
+          "Por favor seleccione una telefono";
+        return false;
+      } else {
+        document.getElementById("errorTelefono").innerHTML = "";
+        return true;
+      }
+    }
+
+/*
       function crearPdf(data) {
         const doc = new jsPDF();
 
@@ -187,7 +313,7 @@
 
         const objectUrl = doc.output("bloburl");
         document.getElementById("iframe").src = objectUrl;
-      }
+      }*/
     </script>
     <script src="fireBase.js"></script>
     <script src="main.js"></script>

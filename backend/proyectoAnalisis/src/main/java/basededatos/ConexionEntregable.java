@@ -74,7 +74,7 @@ public class ConexionEntregable {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				String nombre = rs.getString("entregable");
-				System.out.println(nombre);
+				
 				nombres.add(nombre);
 			}
 		} catch (SQLException sqle) {
@@ -97,8 +97,8 @@ public class ConexionEntregable {
 				String nombre = rs.getString("entregable");
                                 double precioProveedor = rs.getDouble("precioProveedor");
                                 double precioCliente = rs.getDouble("precioCliente");
-				System.out.println(nombre);
-				entregables.add(new Entregable(nombre, precioProveedor, precioCliente));
+                                int id = rs.getInt("idEntregable");
+				entregables.add(new Entregable(id,nombre, precioProveedor, precioCliente));
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
@@ -117,7 +117,7 @@ public class ConexionEntregable {
 				"SELECT idEntregable FROM Entregable WHERE entregable='" + nombre+"'")) {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-			System.out.println(rs.getInt("idEntregable"));
+			
 			id = rs.getInt("idEntregable");
 			}
 		} catch (SQLException sqle) {
@@ -133,7 +133,7 @@ public class ConexionEntregable {
 		conexion();
 
 		try (PreparedStatement stmt = con.prepareStatement(
-				"UPDATE cliente SET entregable = '"+entregableMod.getEntregable()+"', precioProveedor = '"+entregableMod.getPrecioProveedor()+"', precioCliente = '"+entregableMod.getPrecioProveedor()+ "' WHERE idEntregable ='"+entregableMod.getIdEntregable()+"'")){
+				"UPDATE entregable SET entregable = '"+entregableMod.getEntregable()+"', precioProveedor = '"+entregableMod.getPrecioProveedor()+"', precioCliente = '"+entregableMod.getPrecioProveedor()+ "' WHERE idEntregable ='"+entregableMod.getIdEntregable()+"'")){
 			stmt.executeUpdate();
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
@@ -148,6 +148,7 @@ public class ConexionEntregable {
         public void eliminarE(Entregable nombre) {
                 conexion();
 
+                System.out.println(nombre.getEntregable());
                 try (PreparedStatement stmt = con.prepareStatement("DELETE FROM Entregable WHERE entregable = '"+nombre.getEntregable()+"'")){
                         stmt.executeUpdate();
                 } catch (SQLException sqle) {

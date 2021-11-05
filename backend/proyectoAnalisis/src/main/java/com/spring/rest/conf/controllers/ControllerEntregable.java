@@ -56,6 +56,7 @@ public class ControllerEntregable {
 	// Eliminar Entregable
 	@PostMapping("/eliminarEntregable")
 	void deleteEntregable(@RequestBody Entregable nombreC) {
+		System.out.println(nombreC.getEntregable()+"entre");
 		entregable.eliminarC(nombreC);
 	}
 

@@ -135,7 +135,7 @@
             </div>
           </div>
           <div class="circle">
-            <h1>INGRESAR<br />Tarifas</h1>
+            <h1 id="title">VER<br />TARIFAS</h1>
           </div>
         </div>
       </div>
@@ -143,7 +143,7 @@
     <script>
       let datos;
       var registerPosition = 0;
-      fetch("http://localhost:8080//traerProveedores")
+      fetch("http://localhost:8080//traerTodoEntregables")
         .then((response) => response.json())
         .then((data) => initialize(data));
 
@@ -153,20 +153,20 @@
       }
 
       function cargarDatos() {
-        document.getElementById("nombre").value =
-          datos[registerPosition].nombre;
-        document.getElementById("telefono").value =
-          datos[registerPosition].telefono;
-        document.getElementById("correo").value =
-          datos[registerPosition].correo;
+        document.getElementById("Nombre").value =
+          datos[registerPosition].entregable;
+        document.getElementById("PrecioProveedor").value =
+          datos[registerPosition].precioProveedor;
+        document.getElementById("PrecioCliente").value =
+          datos[registerPosition].precioCliente;
       }
 
       let nombres;
-      fetch("http://localhost:8080//traerNombresTarifas")
+      fetch("http://localhost:8080//traerNombresEntregables")
         .then((response) => response.json())
-        .then((data) => initialize(data));
+        .then((data) => initialize2(data));
 
-      function initialize(data) {
+      function initialize2(data) {
         nombres = data;
       }
 
@@ -186,41 +186,6 @@
           }
           document.getElementById("errorNombre").innerHTML = "";
           return true;
-        }
-      }
-
-      function agregarRegistro() {
-        const nameValidatio = nameValidation();
-        const proveedorValidatio = precioProveedorValidation();
-        const clienteValidatio = precioClienteValidation();
-        const name = document.getElementById("Nombre").value;
-        const proveedor = document.getElementById("PrecioProveedor").value;
-        const cliente = document.getElementById("PrecioCliente").value;
-        if (nameValidatio) {
-          var url = "http://localhost:8080//añadirTarifa";
-          var data = {
-            nombre: name,
-            precioCliente: cliente,
-            precioProveedor: proveedor,
-          };
-          fetch(url, {
-            method: "POST",
-            body: JSON.stringify(data),
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-          })
-            .then(function (response) {
-              alert("Registro agregado");
-              return response.json();
-            })
-            .then(function (datas) {
-              console.log(datas);
-              location.href = "IngresarTarifa.html";
-            });
-        } else {
-          alert("Por favor llene todos los campos");
         }
       }
 
@@ -252,8 +217,8 @@
         valor = document.getElementById("boton").value;
         if (valor == "Modificar") {
           document.getElementById("boton").value = "Aceptar";
-          document.getElementById("title").innerHTML = "MODIFICAR<br>PROVEEDOR";
-          document.getElementById("nombre").disabled = false;
+          document.getElementById("title").innerHTML = "MODIFICAR<br>TARIFAS";
+          document.getElementById("Nombre").disabled = false;
           document.getElementById("PrecioCliente").disabled = false;
           document.getElementById("PrecioProveedor").disabled = false;
         } else {
@@ -262,14 +227,14 @@
           const clienteValidatio = precioClienteValidation();
           if (nameValidatio && clienteValidatio && proveedorValidatio) {
             document.getElementById("boton").value = "Modificar";
-            document.getElementById("title").innerHTML = "VER<br>Proveedor";
-            document.getElementById("nombre").disabled = true;
+            document.getElementById("title").innerHTML = "VER<br>TARIFAS";
+            document.getElementById("Nombre").disabled = true;
             document.getElementById("PrecioCliente").disabled = true;
             document.getElementById("PrecioProveedor").disabled = true;
-            var url = "http://localhost:8080//modificartarifas";
+            var url = "http://localhost:8080//modEntregable";
             var data = {
-              id: datos[registerPosition].id,
-              nombre: document.getElementById("nombre").value,
+              idEntregable: datos[registerPosition].idEntregable,
+              entregable: document.getElementById("Nombre").value,
               precioCliente: document.getElementById("PrecioCliente").value,
               precioProveedor: document.getElementById("PrecioProveedor").value,
             };
@@ -294,7 +259,7 @@
         registerPosition++;
         document.getElementById("left").style.display = "inline";
         cargarDatos();
-        if (registerPosition == datos.length) {
+        if (registerPosition == datos.length - 1) {
           document.getElementById("right").style.display = "none";
         }
       }
@@ -303,8 +268,8 @@
         if (registerPosition == datos.length) {
           registerPosition--;
         }
-        var url = "http://localhost:8080//eliminarTarifas";
-        const id = datos[registerPosition].id;
+        var url = "http://localhost:8080//eliminarEntregable";
+        const id = datos[registerPosition].entregable;
         fetch(url, {
           method: "POST",
           body: JSON.stringify(id),
@@ -312,11 +277,15 @@
             Accept: "application/json",
             "Content-Type": "application/json",
           },
-        }).then(function (response) {
-          alert("Elemento eliminado");
-          return response.json();
-        });
-        cargarDatos();
+        })
+          .then(function (response) {
+            alert("Elemento eliminado");
+            return response.json();
+          })
+          .then(function (datas) {
+            console.log(datas);
+            location.href = "VerTarifas.html";
+          });
       }
 
       function lastRegister() {

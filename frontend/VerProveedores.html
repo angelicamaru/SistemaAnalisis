@@ -272,7 +272,7 @@
         registerPosition++;
         document.getElementById("left").style.display = "inline";
         cargarDatos();
-        if (registerPosition < datos.length) {
+        if (registerPosition == datos.length - 1) {
           document.getElementById("right").style.display = "none";
         }
       }

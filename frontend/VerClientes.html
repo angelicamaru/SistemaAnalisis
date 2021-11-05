@@ -65,23 +65,6 @@
             <div class="clientes-select-field"><br><br>
               <div class="select-field">
                 <i class="fas fa-user"></i>
-<<<<<<< Updated upstream
-                <select name="cliente" id="cliente" onchange="traerClientes()">
-                  <option value="Seleccione cliente" style="color: #aaa; font-weight: 5000; font-size: large;">
-                    Seleccione el ID del cliente
-                  </option>
-                </select></div>
-              </div><br><br>
-              <div class="form-text">Nombre: </div>
-              <div class="form-text" id="Nombre"> </div><br>
-              <div class="form-text">Empresa: </div>
-              <div class="form-text" id="Empresa"> </div><br>
-              <div class="form-text">direccion: </div>
-              <div class="form-text" id="Direccion"> </div><br>
-              <div class="form-text">telefono: </div>
-              <div class="form-text" id="Correo"> </div><br>
-              <div class="form-text">Correo: </div><br><br>
-=======
                 <select name="cliente" id="cliente" onchange="cargarDatos()">
                    <option value="Seleccione cliente" style="color: #aaa; font-weight: 5000; font-size: large; ">
                     Seleccione el nombre del cliente
@@ -131,7 +114,6 @@
               </div> <br>
 
 
->>>>>>> Stashed changes
               <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()"
                 style="margin-right: 3px;">
               <input type="submit" value="Eliminar" class="btn solid" id="botonEliminar" onclick="eliminar()"
@@ -147,17 +129,6 @@
     </div>
 
     <script>
-<<<<<<< Updated upstream
-      fetch("http://localhost:8080//traerIDClientes")
-        .then((response) => response.json())
-        .then((data) => cargarComboBox("cliente", data));
-
-      function cargarComboBox(tipo, datas) {
-        for (var x = 0; x < datas.length; x++)
-          agregar(document.getElementById(tipo), datas[x]);
-      }
-
-=======
      /* fetch("http://localhost:8080//traerTodoCliente")
         .then((response) => response.json())
         .then((data) => cargarComboBox("cliente", data));
@@ -194,7 +165,6 @@
       }
 
 
->>>>>>> Stashed changes
       function traerClientes() 
       {
         const cliente = document.getElementById("cliente").value;
@@ -203,11 +173,7 @@
         ) {
           var url = "http://localhost:8080//traerClientes";
           var condicion = {
-<<<<<<< Updated upstream
-            idcliente: cliente
-=======
             idCliente: cliente
->>>>>>> Stashed changes
           };
 
           fetch(url, 
@@ -220,10 +186,6 @@
             },
           })
             .then((response) => response.json())
-<<<<<<< Updated upstream
-            .then((data) => crearPdf(data));
-=======
->>>>>>> Stashed changes
         } else {
           document.getElementById("iframe").src = "";
         }
@@ -272,11 +234,6 @@
           
           var url = "http://localhost:8080//modClientes";
           var data = {
-<<<<<<< Updated upstream
-            
-=======
-
->>>>>>> Stashed changes
             idCliente = datos[registerPosition].idCliente,
             nombre: document.getElementById("Nombre").value,
             empresa: document.getElementById("Empresa").value,
@@ -378,68 +335,13 @@
       } else {
         document.getElementById("errorCorreo").innerHTML = "";
         return true;
+        
       }
     }
-
-<<<<<<< Updated upstream
-/*
-      function crearPdf(data) {
-        const doc = new jsPDF();
-
-        doc.setFontSize(8);
-        doc.setFont("times");
-        doc.setFontType("bold");
-        doc.text(110, 20, "CLIENTE: " + data.idcliente, "center");
-        doc.text(
-          110,
-          30,
-          "JOURNEY MARKETING Y NEGOCIOS S.A.S. NIT 901.375.884-1",
-          "center"
-        );
-        doc.setFontType("normal");
-        doc.text(110, 35, "NOMBRE: "+ data.nombre, "center");
-        doc.setFontType("bold");
-        doc.text(110, 38, "EMPRESA: "+ data.empresa, "center");
-        doc.setFontType("normal");
-        doc.text(110, 45, "DIRECCIÓN: "+ data.direccion, "center");
-        doc.setFontType("bold");
-        doc.text(110, 38, "TELEFONO: "+ data.telefono, "center");
-        doc.setFontType("bold");
-        doc.text(110, 38, "CORREO: "+ data.correo, "center");
-        //doc.text(110, 50, data.empresa.toString(), "center");
-        
-        var columns = ["idCliente", "nombre", "empresa", "direccion", "telefono", "correo"];
-        const datos = [];
-        for (let index = 0; index < data.solicitudes.length; index++) {
-          datos.push([
-            data.solicitudes[index].idcliente,
-            data.solicitudes[index].nombre,
-            data.solicitudes[index].empresa,
-            data.solicitudes[index].direccion,
-            data.solicitudes[index].telefono,
-            data.solicitudes[index].correo,
-          ]);
-        }
-        doc.autoTable(columns, datos, {
-          margin: { top: 60 },
-          styles: { fontSize: 8 },
-        });
-
-        const posicion = 60 + datos.length * 10;
-        doc.text(15, posicion, "Cordialmente,");
-        doc.setFontType("bold");
-        doc.text(15, posicion + 5, "Sandra Milena Castellanos Carrillo");
-        doc.setFontType("normal");
-        doc.text(15, posicion + 8, "C.C. 52.989.909");
-        doc.text(15, posicion + 11, "Teléfono 317 661 9521");
-
-        const objectUrl = doc.output("bloburl");
-        document.getElementById("iframe").src = objectUrl;
-      }*/
-=======
+  }
 }
-    }
->>>>>>> Stashed changes
+
+    
     </script>
     <script src="fireBase.js"></script>
     <script src="main.js"></script>

@@ -106,7 +106,8 @@ public class ConexionCliente {
                                 String direccion = rs.getString("direccion");
                                 String telefono = rs.getString("telefono");
                                 String correo = rs.getString("correo");
-				clientes.add(new Cliente(nombre, empresa, direccion, telefono, correo));
+                                int idCliente = rs.getInt("idCliente");
+				clientes.add(new Cliente(idCliente,nombre, empresa, direccion, telefono, correo));
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());

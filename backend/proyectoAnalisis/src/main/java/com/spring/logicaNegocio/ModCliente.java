@@ -29,6 +29,15 @@ public class ModCliente {
 		return nombres;
 
 	}
+        
+        // Retorna toda la info. de clientes
+	public ArrayList<Cliente> traerTodo() {
+		con = new ConexionCliente();
+		ArrayList<Cliente> clientes = con.traerTodo();
+		con.desconectar();
+		return clientes;
+
+	}
 
 	// Retorna el id de cliente
 	public int id(String nombre) {

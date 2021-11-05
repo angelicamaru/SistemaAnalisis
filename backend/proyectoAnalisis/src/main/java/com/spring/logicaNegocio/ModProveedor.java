@@ -29,6 +29,15 @@ public class ModProveedor {
 		return nombres;
 
 	}
+        
+        // Devuelve la info. de todos los proveedores
+        public ArrayList<Proveedor> traerTodo() {
+		con = new ConexionProveedor();
+		ArrayList<Proveedor> proveedores = con.traerTodo();
+		con.desconectar();
+		return proveedores;
+
+	}
 
 	// Retorna el id de proveedor
 	public int id(String nombre) {

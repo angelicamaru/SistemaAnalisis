@@ -79,6 +79,29 @@ public class ConexionProveedor {
 		return nombres;
 
 	}
+        
+        // Traer todo
+	public ArrayList<Proveedor> traerTodo() {
+		conexion();
+
+		ArrayList<Proveedor> proveedores = new ArrayList<Proveedor>();
+
+		try (PreparedStatement stmt = con.prepareStatement("SELECT * FROM Proveedor")) {
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String nombre = rs.getString("nombre");
+                                String telefono = rs.getString("telefono");
+                                String correo = rs.getString("correo");
+				System.out.println(nombre);
+				proveedores.add(new Proveedor(nombre, telefono, correo));
+			}
+		} catch (SQLException sqle) {
+			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+		}
+		System.out.println(proveedores);
+		return proveedores;
+
+	}
 
 	// Traer id
 	public int id(String nombre) {

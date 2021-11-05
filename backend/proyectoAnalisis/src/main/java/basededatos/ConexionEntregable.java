@@ -84,6 +84,29 @@ public class ConexionEntregable {
 		return nombres;
 
 	}
+        
+        // Traer entregable
+	public ArrayList<Entregable> traerTodo() {
+		conexion();
+
+		ArrayList<Entregable> entregables = new ArrayList<Entregable>();
+
+		try (PreparedStatement stmt = con.prepareStatement("SELECT * FROM Entregable")) {
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String nombre = rs.getString("entregable");
+                                double precioProveedor = rs.getDouble("precioProveedor");
+                                double precioCliente = rs.getDouble("precioCliente");
+				System.out.println(nombre);
+				entregables.add(new Entregable(nombre, precioProveedor, precioCliente));
+			}
+		} catch (SQLException sqle) {
+			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+		}
+		System.out.println(entregables);
+		return entregables;
+
+	}
 
 	// Traer id
 	public int id(String nombre) {
@@ -121,16 +144,16 @@ public class ConexionEntregable {
 	}
 	
 		
-		//Eliminar cliente
-		public void eliminarE(Entregable nombre) {
-			conexion();
+        //Eliminar cliente
+        public void eliminarE(Entregable nombre) {
+                conexion();
 
-			try (PreparedStatement stmt = con.prepareStatement("DELETE FROM Entregable WHERE entregable = '"+nombre.getEntregable()+"'")){
-				stmt.executeUpdate();
-			} catch (SQLException sqle) {
-				System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
-			}
+                try (PreparedStatement stmt = con.prepareStatement("DELETE FROM Entregable WHERE entregable = '"+nombre.getEntregable()+"'")){
+                        stmt.executeUpdate();
+                } catch (SQLException sqle) {
+                        System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+                }
 
-		}
+        }
 
 }

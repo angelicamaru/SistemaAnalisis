@@ -31,6 +31,15 @@ public class ModEntregable {
 		return nombres;
 
 	}
+        
+        // Retorna la info. de entregables
+	public ArrayList<Entregable> traerTodo() {
+		con = new ConexionEntregable();
+		ArrayList<Entregable> entregables = con.traerTodo();
+		con.desconectar();
+		return entregables;
+
+	}
 
 	// Retorna el id de entregable
 	public int id(String nombre) {

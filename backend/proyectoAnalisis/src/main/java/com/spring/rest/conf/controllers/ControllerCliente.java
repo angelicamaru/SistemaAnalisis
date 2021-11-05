@@ -28,8 +28,15 @@ public class ControllerCliente {
 
 	// Traer nombres de clientes
 	@GetMapping("/traerNombresClientes")
-	ArrayList<String> traerSolicitudes() {
+	ArrayList<String> traerClientes() {
 		ArrayList<String> clientes = cliente.traerNombres();
+		return clientes;
+	}
+        
+        // Traer toda la info. de clientes
+	@GetMapping("/traerTodoClientes")
+	ArrayList<Cliente> traerTodo() {
+		ArrayList<Cliente> clientes = cliente.traerTodo();
 		return clientes;
 	}
 

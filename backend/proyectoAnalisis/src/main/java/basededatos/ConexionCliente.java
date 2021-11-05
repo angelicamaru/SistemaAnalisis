@@ -84,6 +84,30 @@ public class ConexionCliente {
 		return nombres;
 
 	}
+        
+        // Traer toda la info. de clientes
+	public ArrayList<Cliente> traerTodo() {
+		conexion();
+
+		ArrayList<Cliente> clientes = new ArrayList<Cliente>();
+
+		try (PreparedStatement stmt = con.prepareStatement("SELECT * FROM Cliente")) {
+			ResultSet rs = stmt.executeQuery();
+			while (rs.next()) {
+				String nombre = rs.getString("nombre");
+				String empresa = Boolean.toString(rs.getBoolean("empresa"));
+                                String direccion = rs.getString("direccion");
+                                String telefono = rs.getString("telefono");
+                                String correo = rs.getString("correo");
+				clientes.add(new Cliente(nombre, Integer.parseInt(empresa), direccion, telefono, correo));
+			}
+		} catch (SQLException sqle) {
+			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());
+		}
+		System.out.println(clientes);
+		return clientes;
+
+	}
 
 	// Traer id
 	public int id(String nombre) {

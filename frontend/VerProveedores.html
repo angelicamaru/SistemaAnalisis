@@ -62,12 +62,11 @@
         <button class="logout" onclick="mainApp.logout();">SALIR</button>
       </div>
       
-    <div class="grid-item">
+      <div class="grid-item">
         <div class="grid-info">
-            <div class= "form">
-                <h1 id="title" class="titleContent">VER PROVEEDORES</h1><br>
+          <div class="form">
                 <div class="Proveedores">
-                    <div class="Proveedores-select-field">
+                    <div class="Proveedores-select-field"><br><br>
                         <div class="select-field">
                         <i class="fas fa-user"></i>
                         <select name="proveedor" id="proveedor" onchange="traerProveedores()">
@@ -76,24 +75,32 @@
                             style="color: #aaa; font-weight: 5000; font-size: large;">
                             Seleccione el ID del proveedor
                         </option>
-                        </select></div><br><br><br><br>
-                        <div class="form-text">Nombre: </div><br>
-                        <div class="form-text">Empresa: </div><br>
-                        <div class="form-text">direccion: </div><br>
-                        <div class="form-text">telefono: </div><br>
+                        </select></div>
+                      </div><br><br>
+                      <div class="form-text">Nombre: </div>
+                      <div class="form-text" id="Nombre"> </div><br>
 
-                        <input type="submit" value="Modificar" class="btn solid">
-                        <div class="form-text">   </div>
-                        <input type="submit" value="Eliminar" class="btn solid">
+                      <div class="form-text">telefono: </div>
+                      <div class="form-text" id="Telefono"> </div><br>
+
+                      <div class="form-text">Correo: </div><br><br>
+                      <div class="form-text" id="Correo"> </div><br>
+
+
+                      <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()"
+                        style="margin-right: 3px;">
+                      <input type="submit" value="Eliminar" class="btn solid" id="botonEliminar" onclick="eliminar()"
+                        style="margin-left: 3px;">
                     </div>
-                </div>
                     <iframe src="" frameborder="0" id="iframe"></iframe>
                 </div>
+            </div>
+            <div class="circle">
+              <h1>VER<br>PROVEEDORES</h1>
             </div>
         </div>
       
     </div>
-    //font-weight: lighter;
 
     <script>
       fetch("http://localhost:8080//traerIDProveedores")
@@ -103,14 +110,6 @@
       function cargarComboBox(tipo, datas) {
         for (var x = 0; x < datas.length; x++)
           agregar(document.getElementById(tipo), datas[x]);
-      }
-
-      function agregar(select, val) {
-        const option = document.createElement("option");
-        const valor = val;
-        option.value = valor;
-        option.text = valor;
-        select.appendChild(option);
       }
 
       function traerProveedores() 
@@ -139,6 +138,119 @@
           document.getElementById("iframe").src = "";
         }
       }
+
+      function change() {
+      valor = document.getElementById("boton").value;
+      if (valor == "Modificar") {
+        document.getElementById("boton").value = "Aceptar"
+        document.getElementById("title").innerHTML = "MODIFICAR<br>SOLICITUD"
+        document.getElementById("Nombre").disabled = false
+        document.getElementById("Telefono").disabled = false
+        document.getElementById("Correo").disabled = false
+      } else {
+        const nameValidatio = nameValidation()
+        const telefonoValidatio = telefonoValidation()
+        const correoValidatio = correoValidation()
+        if (nameValidatio && entregableValidatio && ejecucionValidatio && fechaValidatio && servicioValidatio && sponsorValidatio && cantidadValidatio) {
+          document.getElementById("boton").value = "Modificar"
+          document.getElementById("title").innerHTML = "VER<br>SOLICITUD"
+          document.getElementById("Nombre").disabled = true
+          document.getElementById("Telefono").disabled = true
+          document.getElementById("Correo").disabled = true
+
+          if (document.getElementById("Nombre").value != "posicion") {
+            modificado.push([document.getElementById("Nombre").value, "Nombre"])
+          
+          }
+
+          if (document.getElementById("Telefono").value != "Telefono") {
+            modificado.push([document.getElementById("Telefono").value, "Telefono"])
+          }
+          if (document.getElementById("Correo").value != "Correo") {
+            modificado.push([document.getElementById("Correo").value, "Correo"])
+          }
+          
+          var url = "http://localhost:8080//";
+          var data = {
+            id = datos[registerPosition].id,
+            modificacion = modificado,
+          }
+          fetch(url, {
+            method: "POST",
+            body: JSON.stringify(data),
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
+            .then(function (response) {
+              alert("Elemento modificado")
+              return response.json();
+            });
+        } else {
+          alert("Por favor llene todos los campos")
+        }
+      }
+    
+
+    function eliminar() {
+      if (registerPosition == datos.length) {
+        registerPosition--
+      }
+      var url = "http://localhost:8080//";
+      const id = datos[registerPosition].id
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify(id),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      })
+      .then(function (response) {
+        alert("Elemento eliminado")
+        return response.json();
+      });
+
+      function nameValidation() {
+      const name = document.getElementById("Nombre").value;
+      if (name == "") {
+        document.getElementById("errorNombre").innerHTML =
+          "Por favor ingrese un nombre";
+        return false;
+      } else {
+        document.getElementById("errorNombre").innerHTML = "";
+        return true;
+      }
+    }
+
+    function telefonoValidation() {
+      const name = document.getElementById("Telefono").value;
+      if (name == "Seleccione telefono") {
+        document.getElementById("errorTelefono").innerHTML =
+          "Por favor seleccione una telefono";
+        return false;
+      } else {
+        document.getElementById("errorTelefono").innerHTML = "";
+        return true;
+      }
+    }
+
+    function correoValidation() {
+      const name = document.getElementById("Correo").value;
+      if (name == "Seleccione correo") {
+        document.getElementById("errorCorreo").innerHTML =
+          "Por favor seleccione un correo";
+        return false;
+      } else {
+        document.getElementById("errorCorreo").innerHTML = "";
+        return true;
+      }
+    }
+
+
+
+/*
       function crearPdf(data) {
         const doc = new jsPDF();
 
@@ -185,7 +297,7 @@
 
         const objectUrl = doc.output("bloburl");
         document.getElementById("iframe").src = objectUrl;
-      }
+      }*/
     </script>
     <script src="fireBase.js"></script>
     <script src="main.js"></script>

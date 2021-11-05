@@ -69,7 +69,7 @@
                   <option value="Seleccione cliente" style="color: #aaa; font-weight: 5000; font-size: large;">
                     Seleccione el ID del cliente
                   </option>
-                </select>
+                </select></div>
               </div><br><br>
               <div class="form-text">Nombre: </div>
               <div class="form-text" id="Nombre"> </div><br>
@@ -77,7 +77,9 @@
               <div class="form-text" id="Empresa"> </div><br>
               <div class="form-text">direccion: </div>
               <div class="form-text" id="Direccion"> </div><br>
-              <div class="form-text">telefono: </div><br><br>
+              <div class="form-text">telefono: </div>
+              <div class="form-text" id="Correo"> </div><br>
+              <div class="form-text">Correo: </div><br><br>
               <input type="submit" value="Modificar" class="btn solid" id="boton" onclick="change()"
                 style="margin-right: 3px;">
               <input type="submit" value="Eliminar" class="btn solid" id="botonEliminar" onclick="eliminar()"
@@ -128,6 +130,7 @@
           document.getElementById("iframe").src = "";
         }
       }
+      
       function change() {
       valor = document.getElementById("boton").value;
       if (valor == "Modificar") {
@@ -137,11 +140,13 @@
         document.getElementById("Empresa").disabled = false
         document.getElementById("Direccion").disabled = false
         document.getElementById("Telefono").disabled = false
+        document.getElementById("Correo").disabled = false
       } else {
         const nameValidatio = nameValidation()
         const empresaValidatio = empresaValidation()
         const direccionValidatio = direccionValidation()
         const telefonoValidatio = telefonoValidation()
+        const correoValidatio = correoValidation()
         if (nameValidatio && entregableValidatio && ejecucionValidatio && fechaValidatio && servicioValidatio && sponsorValidatio && cantidadValidatio) {
           document.getElementById("boton").value = "Modificar"
           document.getElementById("title").innerHTML = "VER<br>SOLICITUD"
@@ -149,27 +154,24 @@
           document.getElementById("Empresa").disabled = true
           document.getElementById("Direccion").disabled = true
           document.getElementById("Telefono").disabled = true
-          if (document.getElementById("nombre").value != "posicion") {
-            modificado.push([document.getElementById("nombre").value, "nombre"])
+          document.getElementById("Correo").disabled = true
+
+          if (document.getElementById("Nombre").value != "posicion") {
+            modificado.push([document.getElementById("Nombre").value, "Nombre"])
           }
-          if (document.getElementById("entregable").value != "posicion") {
-            modificado.push([document.getElementById("entregable").value, "entregable"])
+          if (document.getElementById("Empresa").value != "posicion") {
+            modificado.push([document.getElementById("Empresa").value, "Empresa"])
           }
-          if (document.getElementById("ejecucion").value != "posicion") {
-            modificado.push([document.getElementById("ejecucion").value, "ejecucion"])
+          if (document.getElementById("Direccion").value != "Direccion") {
+            modificado.push([document.getElementById("Direccion").value, "Direccion"])
           }
-          if (document.getElementById("sponsor").value != "posicion") {
-            modificado.push([document.getElementById("sponsor").value, "sponsor"])
+          if (document.getElementById("Telefono").value != "Telefono") {
+            modificado.push([document.getElementById("Telefono").value, "Telefono"])
           }
-          if (document.getElementById("servicio").value != "posicion") {
-            modificado.push([document.getElementById("servicio").value, "servivio"])
+          if (document.getElementById("Correo").value != "Correo") {
+            modificado.push([document.getElementById("Correo").value, "Correo"])
           }
-          if (document.getElementById("cantidad").value != "posicion") {
-            modificado.push([document.getElementById("cantidad").value, "cantidad"])
-          }
-          if (document.getElementById("fecha").value != "posicion") {
-            modificado.push([document.getElementById("fecha").value, "fecha"])
-          }
+          
           var url = "http://localhost:8080//";
           var data = {
             id = datos[registerPosition].id,
@@ -191,7 +193,7 @@
           alert("Por favor llene todos los campos")
         }
       }
-    }
+    
 
     function eliminar() {
       if (registerPosition == datos.length) {
@@ -256,6 +258,18 @@
         return false;
       } else {
         document.getElementById("errorTelefono").innerHTML = "";
+        return true;
+      }
+    }
+
+    function correoValidation() {
+      const name = document.getElementById("Correo").value;
+      if (name == "Seleccione correo") {
+        document.getElementById("errorCorreo").innerHTML =
+          "Por favor seleccione un correo";
+        return false;
+      } else {
+        document.getElementById("errorCorreo").innerHTML = "";
         return true;
       }
     }

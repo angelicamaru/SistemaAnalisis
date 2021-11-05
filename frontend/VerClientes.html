@@ -172,10 +172,14 @@
             modificado.push([document.getElementById("Correo").value, "Correo"])
           }
           
-          var url = "http://localhost:8080//";
+          var url = "http://localhost:8080//modClientes";
           var data = {
-            id = datos[registerPosition].id,
-            modificacion = modificado,
+            idCliente = datos[registerPosition].idCliente,
+            nombre: document.getElementById("Nombre").value,
+            empresa: document.getElementById("Empresa").value,
+            Direccion: document.getElementById("Direccion").value,
+            telefono: document.getElementById("Telefono").value,
+            correo: document.getElementById("Correo").value,
           }
           fetch(url, {
             method: "POST",

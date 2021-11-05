@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src="https://kit.fontawesome.com/64d58efce2.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css" />
+  <title>Ingresar Sponsor</title>
+  <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase-auth.js"></script>
+</head>
+
+<body>
+  <div class="grid-container">
+    <div class="grid-item-menu">
+      <p></p>
+      <a href="Index.html">
+        <p>HOME</p>
+      </a>
+      <p></p>
+      <a href="IngresarSolicitud.html">
+        <p>INGRESAR SOLICITUD</p>
+      </a>
+      <a href="VerCuentaDeCobro.html">
+        <p>VER CUENTA DE COBRO</p>
+      </a>
+      <a href="VerOrdenDeServicio.html">
+        <p>VER ORDEN DE SERVICIO</p>
+      </a>
+      <a href="IngresarProveedor.html">
+        <p>INGRESAR PROVEEDOR</p>
+      </a>
+      <a href="IngresarCliente.html">
+        <p>INGRESAR CLIENTE</p>
+      </a>
+      <a href="IngresarSponsor.html">
+        <p>INGRESAR SPONSOR</p>
+      </a>
+      <a href="IngresarTarifas.html">
+        <p>INGRESAR TARIFAS</p>
+      </a>
+      
+      <div class="selected">INGRESAR SERVICIOS</div>
+      <a href="VerProveedores.html">
+        <p>VER PROVEEDORES</p>
+      </a>
+      <a href="VerClientes.html">
+        <p>VER CLIENTES</p>
+      </a>
+      <a href="VerTarifas.html">
+        <p>VER TARIFAS</p>
+      </a>
+      <a href="Comparar.html">
+        <p>COMPARAR</p>
+      </a>
+      <p></p>
+      <button class="logout" onclick="mainApp.logout();">SALIR</button>
+    </div>
+
+    <div class="grid-item">
+      <div class="grid-info" style="margin-top: 10%">
+        <div class="form">
+          <div class="form-text">Nombre</div>
+          <div id="errorNombre" class="error-text"></div>
+          <div class="input-field">
+            <i class="fas fa-user"></i>
+            <input type="text" placeholder="Nombre" id="Nombre" onchange="nameValidation()" />
+          </div>
+
+          <input type="submit" value="Agregar" class="btn solid" onclick="agregarRegistro()" />
+        </div>
+        <div class="circle">
+          <h1>INGRESAR<br />Servicio</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script>
+    let nombres;
+    fetch("http://localhost:8080//traerNombresServicio")
+      .then((response) => response.json())
+      .then((data) => initialize(data));
+
+    function initialize(data) {
+      nombres = data;
+    }
+
+    function nameValidation() {
+      const name = document.getElementById("Nombre").value;
+      if (name == "") {
+        document.getElementById("errorNombre").innerHTML =
+          "Por favor ingrese un nombre";
+        return false;
+      } else {
+        for (let i = 0; i < nombres.length; i++) {
+          if (name == nombres[i]) {
+            document.getElementById("errorNombre").innerHTML =
+              "Este nombre ya existe, por favor digite otro";
+            return false;
+          }
+        }
+        document.getElementById("errorNombre").innerHTML = "";
+        return true;
+      }
+    }
+
+    function agregarRegistro() {
+      const nameValidatio = nameValidation();
+      const name = document.getElementById("Nombre").value;
+      if (nameValidatio) {
+        var url = "http://localhost:8080//añadirServicio";
+        var data = {
+          nombre: name,
+        };
+        fetch(url, {
+          method: "POST",
+          body: JSON.stringify(data),
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+          },
+        }).then(function (response) {
+          alert("Registro agregado");
+          return response.json();
+        })
+          .then(function (datas) {
+            console.log(datas);
+            location.href = "IngresarServicio.html";
+          });
+      } else {
+        alert("Por favor llene todos los campos");
+      }
+    }
+  </script>
+  <script src="fireBase.js"></script>
+  <script src="main.js"></script>
+</body>
+
+
+</html>

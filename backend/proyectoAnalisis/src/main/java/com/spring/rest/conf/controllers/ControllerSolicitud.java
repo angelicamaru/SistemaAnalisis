@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.entidades.Cliente;
 import com.entidades.CuentaCobro;
 import com.entidades.Solicitud;
+import com.entidades.SolicitudMapper;
 import com.spring.logicaNegocio.ModSolicitud;
 
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
@@ -23,7 +24,7 @@ public class ControllerSolicitud {
 
 	// Añadir nueva solicitud
 	@PostMapping("/añadirSolicitud")
-	void añadirSolicitud(@RequestBody Solicitud nuevaSolicitud) {
+	void añadirSolicitud(@RequestBody SolicitudMapper nuevaSolicitud) {
 		solicitud.añadirSolicitud(nuevaSolicitud);
 	}
 

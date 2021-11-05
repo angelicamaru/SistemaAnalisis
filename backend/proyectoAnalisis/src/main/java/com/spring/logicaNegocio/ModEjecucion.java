@@ -27,12 +27,13 @@ public class ModEjecucion {
 		}
 
 		// Retorna descripcion de ejecucion
-		public String descripcion(int idCliente, String mes) {
+		public String descripcion(String nombreCliente, String mes) {
 			con = new ConexionEjecucion();
+			ModCliente cliente = new ModCliente();
+			int idCliente = cliente.id(nombreCliente);
 			String descripcion = con.descripcion(idCliente, mes);
 			con.desconectar();
 			return descripcion;
-
 		}
 		
 		// Retorna el id de ejecucion

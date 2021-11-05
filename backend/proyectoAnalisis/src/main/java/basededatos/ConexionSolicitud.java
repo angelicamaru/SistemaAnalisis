@@ -49,6 +49,8 @@ public class ConexionSolicitud {
 
 	public void solicitudNueva(Solicitud solicitud) {
 		conexion();
+		System.out.println(solicitud.getIdEjecucion()+"entre");
+		
 		try (PreparedStatement stmt = con.prepareStatement(
 
 				"INSERT INTO solicitud VALUES (null,'" + solicitud.getNombre() + "','" + solicitud.getCantidad() + "','"

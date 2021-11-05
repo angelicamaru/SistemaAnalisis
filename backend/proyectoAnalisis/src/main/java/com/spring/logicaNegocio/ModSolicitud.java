@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import com.entidades.Solicitud;
+import com.entidades.SolicitudMapper;
 import com.entidades.Sponsor;
 
 import basededatos.ConexionCliente;
@@ -18,15 +19,35 @@ import basededatos.ConexionSponsor;
 public class ModSolicitud {
 	
 	//Objetos
-	Solicitud solicitud = new Solicitud();
+	Solicitud solicitud;
+	ModEntregable entregable;
+	ModEjecucion ejecucion;
+	ModCliente cliente;
+	ModSponsor sponsor;
+	ModServicio servicio;
+	ModCuentaCobro cuentaCobro;
 	ConexionSolicitud con;
 
 	//Metodos
 	
 	//Añadir solicitud
-	public void añadirSolicitud(Solicitud solicitudNueva) {
+	public void añadirSolicitud(SolicitudMapper nuevaSolicitud) {
 		con = new ConexionSolicitud();
-	    con.solicitudNueva(solicitudNueva);
+		System.out.println("ENTRE");
+		System.out.println(entregable.id(nuevaSolicitud.getNombreEntregable()));
+		
+		int idEntregable = entregable.id(nuevaSolicitud.getNombreEntregable());
+		int idCliente = cliente.id(nuevaSolicitud.getNombreCliente());
+		int idEjecucion = ejecucion.id(idCliente,"Enero");
+		int idSponsor = sponsor.id(nuevaSolicitud.getNombreSolicitud());
+		int idServicio = servicio.id(nuevaSolicitud.getNombreServicio());
+		int idCuentaCobro = cuentaCobro.id(1, "Enero");
+		
+		
+		solicitud = new Solicitud(nuevaSolicitud.getNombreSolicitud(),
+				nuevaSolicitud.getCantidad(),nuevaSolicitud.getFecha(),idEntregable,idEjecucion,idSponsor,idServicio,idCuentaCobro);
+		
+	    con.solicitudNueva(solicitud);
 	    con.desconectar();
 		
 	}

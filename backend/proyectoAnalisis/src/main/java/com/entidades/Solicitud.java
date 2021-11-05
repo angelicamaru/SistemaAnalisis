@@ -10,7 +10,7 @@ public class Solicitud {
 	private int idEntregable;
 	private int idEjecucion;
 	private int idSponsor;
-	private int idService; 
+	private int idService;
 	private int idCuentaCobro;
 	private double totalSolicitud;
 	

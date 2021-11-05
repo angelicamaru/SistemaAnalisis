@@ -25,12 +25,22 @@ public class ControllerEjecucion {
 			return existe;
 		}
 
-		// Traer nombre de ejecucion
+		/*// Traer nombre de ejecucion
 		@PostMapping("/traerNombreEjecucion")
-		String traerDescripcion(@RequestBody Ejecucion eje) {
-			String descripcion = ejecucion.descripcion(eje.getIdCliente(), eje.getMes());
+		String traerDescripcion(@RequestBody EjecucionMapper eje) {
+			String descripcion = ejecucion.descripcion(eje.getNombreCliente(), eje.getMes());
 			return descripcion;
+		}*/
+		
+		//Traer nombre de ejecucion
+		@PostMapping("/traerNombreEjecucion")
+		EjecucionMapper traerDescripcion(@RequestBody EjecucionMapper eje) {
+			String descripcion = ejecucion.descripcion(eje.getNombreCliente(), eje.getMes());
+			EjecucionMapper ejec = new EjecucionMapper(descripcion);
+			return ejec;
 		}
+		
+				
 
 		// Traer id de ejecucion
 		@PostMapping("/traerIdEjecucion")

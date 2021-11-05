@@ -16,6 +16,10 @@ public class EjecucionMapper {
 	public EjecucionMapper() {
 
 	}
+	
+	public EjecucionMapper(String descripcion) {
+		this.descripcion = descripcion;
+	}
 
 	public EjecucionMapper(String mes, int idCliente) {
 		this.mes = mes;

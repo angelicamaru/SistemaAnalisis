@@ -92,8 +92,9 @@ public class ConexionProveedor {
 				String nombre = rs.getString("nombre");
                                 String telefono = rs.getString("telefono");
                                 String correo = rs.getString("correo");
+                                int id = rs.getInt("idProveedor");
 				System.out.println(nombre);
-				proveedores.add(new Proveedor(nombre, telefono, correo));
+				proveedores.add(new Proveedor(id, nombre, telefono, correo));
 			}
 		} catch (SQLException sqle) {
 			System.out.println("Error en la ejecuciÃƒÂ³n:" + sqle.getErrorCode() + " " + sqle.getMessage());

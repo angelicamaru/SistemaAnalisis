@@ -163,11 +163,11 @@
         const telefono = document.getElementById("Telefono").value;
         const correo = document.getElementById("Correo").value;
         if (document.getElementById("Empresa").checked) {
-          tipo = true;
+          tipo = 1;
           typeValidation = true;
           document.getElementById("errorTipo").innerHTML = "";
         } else if (document.getElementById("Persona").checked) {
-          tipo = false;
+          tipo = 0;
           typeValidation = true;
           document.getElementById("errorTipo").innerHTML = "";
         } else {

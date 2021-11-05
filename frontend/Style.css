@@ -14,7 +14,7 @@ body {
 
 .login-container{
     display: grid;
-    grid-template-columns: 1fr  6fr;
+    grid-template-columns: 2fr  6fr;
     background-color:  #415a5a ;
 }
 

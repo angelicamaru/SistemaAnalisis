@@ -59,6 +59,13 @@ public class ModSolicitud {
 	    con.desconectar();
 		return solicitudes;
 	}
+	//Traer solicitudes ejecucion
+		public ArrayList<Solicitud> solicitudesEjec(int idEjecucion) {
+			con = new ConexionSolicitud();
+			ArrayList<Solicitud> solicitudes = con.solicitudesEjec(idEjecucion);
+		    con.desconectar();
+			return solicitudes;
+		}
 	
 	//Traer solicitudes con precio
 		public ArrayList<Solicitud> traerSolicitudesPrecio(int idCuentaCobro) {
@@ -67,6 +74,14 @@ public class ModSolicitud {
 		    con.desconectar();
 			return solicitudes;
 		}
+		
+		//Traer solicitudes con precio
+				public ArrayList<Solicitud> traerSolicitudesPrecioOrdenServicio(int idEjecucion) {
+					con = new ConexionSolicitud();
+					ArrayList<Solicitud> solicitudes = con.solicitudesPrecioEjecucion(idEjecucion);
+				    con.desconectar();
+					return solicitudes;
+				}
 	
 	// Mod solicitud
 		public void mod(Solicitud provMod) {

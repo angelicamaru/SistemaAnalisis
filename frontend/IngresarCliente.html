@@ -182,7 +182,6 @@
           addressValidatio &&
           typeValidation
         ) {
-
           console.log("hello!");
           var url = "http://localhost:8080/anadirCliente";
           var data = {
@@ -190,7 +189,7 @@
             telefono: telefono,
             correo: correo,
             direccion: direccion,
-            tipo: 0,
+            empresa: tipo,
           };
           fetch(url, {
             method: "POST",
@@ -199,13 +198,15 @@
               Accept: "application/json",
               "Content-Type": "application/json",
             },
-          }).then(function (response) {
-            alert("Registro agregado");
-            return response.json();
-          }).then(function (datas) {
-            console.log(datas);
-            location.href = "IngresarCliente.html";
-          });
+          })
+            .then(function (response) {
+              alert("Registro agregado");
+              return response.json();
+            })
+            .then(function (datas) {
+              console.log(datas);
+              location.href = "IngresarCliente.html";
+            });
         } else {
           alert("Por favor llene todos los campos");
         }

@@ -121,10 +121,10 @@ public class ConexionEjecucion {
 	public double total(int id) {
 		double t=0;
 		System.out.println("SELECT SUM(entregable.precioCliente*solicitud.cantidad) as total from entregable inner join solicitud on Entregable.idEntregable "
-				+ " = solicitud.idEntregable where solicitud.idCuentaCobro = "+id+")"); 
+				+ " = solicitud.idEntregable where solicitud.idEjecucion = "+id+")"); 
 			
 		try (PreparedStatement stmt = con.prepareStatement("SELECT SUM(entregable.precioCliente*solicitud.cantidad) as total from entregable inner join solicitud on Entregable.idEntregable "
-				+ " = solicitud.idEntregable where solicitud.idCuentaCobro = "+id)) {
+				+ " = solicitud.idEntregable where solicitud.idEjecucion = "+id)) {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				System.out.println(rs);
@@ -142,10 +142,10 @@ public class ConexionEjecucion {
 	public double totalSolicitud(int id) {
 		double t=0;
 		System.out.println("SELECT SUM(entregable.precioCliente*solicitud.cantidad) as total from entregable inner join solicitud on Entregable.idEntregable "
-				+ " = solicitud.idEntregable where solicitud.idCuentaCobro = "+id+")"); 
+				+ " = solicitud.idEntregable where solicitud.idEjecucion = "+id+")"); 
 			
 		try (PreparedStatement stmt = con.prepareStatement("SELECT SUM(entregable.precioCliente*solicitud.cantidad) as total from entregable inner join solicitud on Entregable.idEntregable "
-				+ " = solicitud.idEntregable where solicitud.idCuentaCobro = "+id)) {
+				+ " = solicitud.idEntregable where solicitud.idEjecucion = "+id)) {
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				System.out.println(rs);
@@ -159,5 +159,8 @@ public class ConexionEjecucion {
 		return t;
 	}
 	
+	
+	
+		
 
 }

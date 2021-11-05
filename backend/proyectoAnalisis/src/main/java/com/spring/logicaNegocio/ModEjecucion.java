@@ -63,13 +63,15 @@ public class ModEjecucion {
 			
 			int idCliente = cliente.id(nombreCliente);
 			
-			int id = con.id(idCliente, mes);
+			int idEjecucion = con.id(idCliente, mes);//idEjecucion
+			System.out.println(idEjecucion+"entre qua");
+			
 			String descripcion = con.descripcion(idCliente, mes);
-			ArrayList<Solicitud> solicitudes = solicitud.traerSolicitudesPrecio(id);	
-			double total = con.total(id);
+			ArrayList<Solicitud> solicitudes = solicitud.traerSolicitudesPrecioOrdenServicio(idEjecucion);	
+			double total = con.total(idEjecucion);
 			
 			System.out.println(total);
-			Ejecucion eje = new Ejecucion(id,descripcion,mes, idCliente,solicitudes,total);
+			Ejecucion eje = new Ejecucion(idEjecucion,descripcion,mes, idCliente,solicitudes,total);
 			con.desconectar();
 			return eje;
 		}
